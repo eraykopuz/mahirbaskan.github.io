@@ -8,15 +8,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Modern Renk Paleti: 
-         * Primary: #004d99 (Lacivert) 
-         * Accent: #FFB300 (Daha canlı sarı/turuncu) 
-         * Background: #EFEFEF (Açık Gri)
-        */
+        /* Modern Renk Paleti: Lacivert (#004d99) ve Canlı Sarı (#FFB300) */
 
         /* Genel Ayarlar */
         body {
-            font-family: 'Montserrat', sans-serif; /* Yeni modern font */
+            font-family: 'Montserrat', sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
@@ -35,11 +31,11 @@
             color: white;
             padding: 20px 0;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Derin gölge */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
         header h1 {
-            color: white; /* Başlık rengi beyaz yapıldı */
+            color: white;
             margin-bottom: 0.2em;
             font-size: 2.5em;
         }
@@ -53,13 +49,13 @@
         }
 
         nav button {
-            background: #FFB300; /* Daha canlı sarı/turuncu */
+            background: #FFB300;
             color: #004d99;
             border: none;
             padding: 10px 15px;
             margin: 5px;
             cursor: pointer;
-            border-radius: 25px; /* Yuvarlak kenarlar */
+            border-radius: 25px;
             transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
             font-weight: 600;
             font-size: 0.9em;
@@ -70,7 +66,7 @@
 
         nav button:hover {
             background-color: #e6a200;
-            transform: translateY(-3px); /* Hafif yukarı kayma efekti */
+            transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.2);
         }
 
@@ -80,8 +76,8 @@
             max-width: 960px;
             margin: 30px auto;
             background: white;
-            border-radius: 12px; /* Yumuşak köşeler */
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15); /* Modern kutu gölgesi */
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
 
         section {
@@ -102,14 +98,14 @@
         table {
             min-width: 600px;
             width: 100%;
-            border-radius: 8px; /* Tabloya da yuvarlak köşeler */
-            overflow: hidden; /* Köşelerin görünmesi için */
+            border-radius: 8px;
+            overflow: hidden;
         }
         th, td {
-            border: none; /* Kenarlıklar kaldırıldı */
-            padding: 15px 12px; /* Daha fazla boşluk */
+            border: none;
+            padding: 15px 12px;
             text-align: left;
-            border-bottom: 1px solid #eee; /* Yumuşak ayırıcı */
+            border-bottom: 1px solid #eee;
         }
         th {
             background-color: #004d99;
@@ -121,6 +117,12 @@
         }
         
         /* Form Stili */
+        #requestForm label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #004d99;
+        }
         #requestForm input[type="text"],
         #requestForm input[type="email"],
         #requestForm textarea {
@@ -128,18 +130,18 @@
             padding: 12px;
             margin-top: 5px;
             border: 1px solid #ccc;
-            border-radius: 8px; /* Yuvarlak form alanları */
+            border-radius: 8px;
             box-sizing: border-box; 
             font-size: 1em;
             transition: border-color 0.3s;
         }
         #requestForm input:focus, #requestForm textarea:focus {
-            border-color: #FFB300; /* Odaklanınca renk değiştirme */
+            border-color: #FFB300;
             outline: none;
         }
 
         #requestForm button[type="submit"] {
-            background-color: #4CAF50; /* Yeşil */
+            background-color: #4CAF50;
             color: white;
             padding: 12px 25px;
             border: none;
@@ -173,6 +175,129 @@
             nav button {
                 padding: 8px 10px;
                 font-size: 0.85em;
+            }
+        }
+        
+        /* --- AI ASSISTANT WIDGET STİLLERİ --- */
+        #ai-assistant-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #004d99; /* Lacivert */
+            color: white;
+            padding: 15px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 77, 153, 0.4);
+            font-weight: 600;
+            z-index: 1000;
+            transition: transform 0.2s;
+        }
+
+        #ai-assistant-button:hover {
+            transform: scale(1.05);
+        }
+
+        #ai-assistant-container {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        #ai-header {
+            padding: 10px;
+            background: #FFB300; /* Sarı */
+            color: #004d99;
+            font-weight: 700;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #ai-close-button {
+            cursor: pointer;
+            font-size: 1.2em;
+            padding: 0 5px;
+        }
+
+        #ai-chat-box {
+            flex-grow: 1;
+            padding: 10px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #ai-input-area {
+            display: flex;
+            border-top: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        #ai-user-input {
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
+
+        #ai-send-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        #ai-send-button:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .ai-message {
+            background-color: #e6e6fa; /* AI mesajları */
+            padding: 8px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            max-width: 80%;
+            align-self: flex-start;
+            text-align: left;
+        }
+
+        .user-message {
+            background-color: #d1f7c4; /* Kullanıcı mesajları */
+            margin-left: auto;
+            align-self: flex-end;
+            text-align: right;
+        }
+
+        @media (max-width: 600px) {
+            #ai-assistant-container {
+                bottom: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
+                max-height: 80vh;
+                border-radius: 0;
+            }
+            #ai-assistant-button {
+                bottom: 10px;
+                right: 10px;
             }
         }
     </style>
@@ -272,6 +397,23 @@
         <p>&copy; 2025 Mahir Saruhan Okul Başkanlığı Kampanyası | #MahirKazandırır</p>
     </footer>
 
+    <div id="ai-assistant-button">
+        📚 AI Ödev Yardımcısı
+    </div>
+
+    <div id="ai-assistant-container" class="hidden">
+        <div id="ai-header">
+            Mahir'in AI Yardımcısı
+            <span id="ai-close-button">X</span>
+        </div>
+        <div id="ai-chat-box">
+            <div class="ai-message">Merhaba! Ben Mahir Saruhan'ın AI asistanıyım. Hangi ders hakkında yardıma ihtiyacın var?</div>
+        </div>
+        <div id="ai-input-area">
+            <input type="text" id="ai-user-input" placeholder="Sorunuzu buraya yazın (Örn: Pisagor teoremi nedir?)">
+            <button id="ai-send-button">Gönder</button>
+        </div>
+    </div>
     <script>
         function showSection(sectionId) {
             document.querySelectorAll('main section').forEach(section => {
@@ -289,6 +431,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             showSection('home');
             
+            // FORM SPREE KODLARI
             const form = document.getElementById('requestForm');
             const statusMessage = document.getElementById('formStatus');
 
@@ -321,6 +464,91 @@
 
                 setTimeout(() => { statusMessage.textContent = ''; }, 6000);
             });
+
+
+            // ==========================================================
+            // *** AI ÖDEV YARDIMCISI KODU BAŞLANGIÇ ***
+            // ==========================================================
+            
+            const aiButton = document.getElementById('ai-assistant-button');
+            const aiContainer = document.getElementById('ai-assistant-container');
+            const aiClose = document.getElementById('ai-close-button');
+            const chatBox = document.getElementById('ai-chat-box');
+            const userInput = document.getElementById('ai-user-input');
+            const sendButton = document.getElementById('ai-send-button');
+
+            // 1. Tıklama Olayları
+            aiButton.addEventListener('click', () => {
+                aiContainer.classList.toggle('hidden');
+                userInput.focus(); // Açılınca input'a odaklan
+            });
+
+            aiClose.addEventListener('click', () => {
+                aiContainer.classList.add('hidden');
+            });
+
+            // 2. Mesaj Ekleme Fonksiyonu
+            function addMessage(text, isUser = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = isUser ? 'ai-message user-message' : 'ai-message';
+                messageDiv.textContent = text;
+                chatBox.appendChild(messageDiv);
+                chatBox.scrollTop = chatBox.scrollHeight; // En alta kaydır
+            }
+
+            // 3. Gönderme Fonksiyonu
+            async function sendMessage() {
+                const prompt = userInput.value.trim();
+                if (prompt === "") return;
+
+                addMessage(prompt, true); // Kullanıcı mesajını ekle
+                userInput.value = "";
+                sendButton.disabled = true; // Göndermeyi engelle
+                
+                // Yükleniyor mesajı
+                addMessage("Yapay zeka düşünüyor...", false); 
+                const loadingMessage = chatBox.lastChild;
+
+                try {
+                    // VERCEL SERVERLESS FUNCTION çağrısı: /api/gemini
+                    const response = await fetch('/api/gemini', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ prompt: prompt }),
+                    });
+
+                    const data = await response.json();
+
+                    // Yükleniyor mesajını kaldır ve cevabı ekle
+                    chatBox.removeChild(loadingMessage);
+                    if (response.ok) {
+                        addMessage(data.answer, false);
+                    } else {
+                        addMessage(`Hata: ${data.error || 'Cevap alınamadı. (API Anahtarını kontrol edin.)'}`, false);
+                    }
+                } catch (error) {
+                    // API sunucusuna hiç ulaşılamazsa
+                    chatBox.removeChild(loadingMessage);
+                    addMessage("Sunucu hatası. Projenizin Node.js ve Gemini fonksiyonunun çalıştığından emin olun.", false);
+                } finally {
+                    sendButton.disabled = false;
+                    userInput.focus();
+                }
+            }
+
+            // Enter tuşu ve Gönder butonu olayları
+            sendButton.addEventListener('click', sendMessage);
+            userInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
+            // ==========================================================
+            // *** AI ÖDEV YARDIMCISI KODU BİTİŞ ***
+            // ==========================================================
         });
     </script>
 </body>
