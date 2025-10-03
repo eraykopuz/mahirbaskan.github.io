@@ -88,7 +88,7 @@
             border-bottom: none;
         }
 
-        .hidden { display: none; }
+        .hidden { display: none !important; } /* !important eklenerek öncelik artırıldı */
         .active { display: block; }
 
         /* Vaatler Tablosu Stili */
@@ -167,17 +167,6 @@
             margin-top: 30px;
         }
         
-        /* Mobil Ekranlar İçin Özel Ayarlar */
-        @media (max-width: 600px) {
-            header h1 { font-size: 2em; }
-            header h3 { font-size: 1em; }
-            main { padding: 15px; margin: 15px auto; }
-            nav button {
-                padding: 8px 10px;
-                font-size: 0.85em;
-            }
-        }
-        
         /* --- AI ASSISTANT WIDGET STİLLERİ --- */
         #ai-assistant-button {
             position: fixed;
@@ -208,7 +197,7 @@
             border: 1px solid #ddd;
             border-radius: 10px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-            display: flex;
+            display: none; /* BAŞLANGIÇTA GİZLİ */
             flex-direction: column;
             z-index: 1000;
         }
@@ -401,7 +390,7 @@
         📚 AI Ödev Yardımcısı
     </div>
 
-    <div id="ai-assistant-container" class="hidden">
+    <div id="ai-assistant-container" style="display: none;"> 
         <div id="ai-header">
             Mahir'in AI Yardımcısı
             <span id="ai-close-button">X</span>
@@ -414,6 +403,7 @@
             <button id="ai-send-button">Gönder</button>
         </div>
     </div>
+    
     <script>
         function showSection(sectionId) {
             document.querySelectorAll('main section').forEach(section => {
@@ -467,7 +457,7 @@
 
 
             // ==========================================================
-            // *** AI ÖDEV YARDIMCISI KODU BAŞLANGIÇ ***
+            // *** AI ÖDEV YARDIMCISI KODU BAŞLANGIÇ (GÜNCELLENMİŞ) ***
             // ==========================================================
             
             const aiButton = document.getElementById('ai-assistant-button');
@@ -477,15 +467,22 @@
             const userInput = document.getElementById('ai-user-input');
             const sendButton = document.getElementById('ai-send-button');
 
-            // 1. Tıklama Olayları
+            // 1. Tıklama Olayları (display stilini kullanıyoruz)
             aiButton.addEventListener('click', () => {
-                aiContainer.classList.toggle('hidden');
-                userInput.focus(); // Açılınca input'a odaklan
+                // Konteyner gizli ise (display: none), göster (display: flex)
+                if (aiContainer.style.display === 'none' || aiContainer.style.display === '') {
+                    aiContainer.style.display = 'flex';
+                    userInput.focus(); // Açılınca input'a odaklan
+                } else {
+                    aiContainer.style.display = 'none';
+                }
             });
 
+            // HATA ÇÖZÜMÜ BURADA: Kapatma butonu sadece gizle komutunu çalıştıracak.
             aiClose.addEventListener('click', () => {
-                aiContainer.classList.add('hidden');
+                aiContainer.style.display = 'none';
             });
+            // HATA ÇÖZÜMÜ BİTİŞ
 
             // 2. Mesaj Ekleme Fonksiyonu
             function addMessage(text, isUser = false) {
