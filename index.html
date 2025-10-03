@@ -526,10 +526,11 @@
                     if (response.ok) {
                         addMessage(data.answer, false);
                     } else {
+                        // Backend'den gelen hata mesajı (eğer backend çalışıyorsa)
                         addMessage(`Hata: ${data.error || 'Cevap alınamadı. (API Anahtarını kontrol edin.)'}`, false);
                     }
                 } catch (error) {
-                    // API sunucusuna hiç ulaşılamazsa
+                    // API sunucusuna hiç ulaşılamazsa (asıl "Sunucu hatası" burasıdır)
                     chatBox.removeChild(loadingMessage);
                     addMessage("Sunucu hatası. Projenizin Node.js ve Gemini fonksiyonunun çalıştığından emin olun.", false);
                 } finally {
