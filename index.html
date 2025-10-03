@@ -8,9 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Modern Renk Paleti: Lacivert (#004d99) ve Canlı Sarı (#FFB300) */
-
-        /* Genel Ayarlar */
+        /* Genel CSS kodunuz aynı kalmıştır */
         body {
             font-family: 'Montserrat', sans-serif;
             line-height: 1.6;
@@ -88,7 +86,7 @@
             border-bottom: none;
         }
 
-        .hidden { display: none !important; } /* !important eklenerek öncelik artırıldı */
+        .hidden { display: none !important; }
         .active { display: block; }
 
         /* Vaatler Tablosu Stili */
@@ -197,8 +195,8 @@
             border: 1px solid #ddd;
             border-radius: 10px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-            display: none; /* BAŞLANGIÇTA GİZLİ */
-            flex-direction: column;
+            /* Başlangıçta inline style ile gizlendiği için burası sadece görünüm için kalır */
+            flex-direction: column; 
             z-index: 1000;
         }
 
@@ -421,7 +419,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             showSection('home');
             
-            // FORM SPREE KODLARI
+            // FORM SPREE KODLARI (Aynı kaldı)
             const form = document.getElementById('requestForm');
             const statusMessage = document.getElementById('formStatus');
 
@@ -457,7 +455,7 @@
 
 
             // ==========================================================
-            // *** AI ÖDEV YARDIMCISI KODU BAŞLANGIÇ (GÜNCELLENMİŞ) ***
+            // *** AI ÖDEV YARDIMCISI KODU (KESİN ÇÖZÜM) ***
             // ==========================================================
             
             const aiButton = document.getElementById('ai-assistant-button');
@@ -467,22 +465,23 @@
             const userInput = document.getElementById('ai-user-input');
             const sendButton = document.getElementById('ai-send-button');
 
-            // 1. Tıklama Olayları (display stilini kullanıyoruz)
+            // 1. Tıklama Olayları
+            // Açma butonu: Mevcut display durumuna bakarak toggle eder.
             aiButton.addEventListener('click', () => {
-                // Konteyner gizli ise (display: none), göster (display: flex)
+                // Konteyner gizli ise ('none' veya boş), göster ('flex')
                 if (aiContainer.style.display === 'none' || aiContainer.style.display === '') {
                     aiContainer.style.display = 'flex';
-                    userInput.focus(); // Açılınca input'a odaklan
+                    userInput.focus(); 
                 } else {
                     aiContainer.style.display = 'none';
                 }
             });
 
-            // HATA ÇÖZÜMÜ BURADA: Kapatma butonu sadece gizle komutunu çalıştıracak.
+            // Kapatma butonu: Direk 'display: none' ile kapatır.
             aiClose.addEventListener('click', () => {
                 aiContainer.style.display = 'none';
             });
-            // HATA ÇÖZÜMÜ BİTİŞ
+            // HATA ÇÖZÜMÜ BURADADIR.
 
             // 2. Mesaj Ekleme Fonksiyonu
             function addMessage(text, isUser = false) {
@@ -490,19 +489,18 @@
                 messageDiv.className = isUser ? 'ai-message user-message' : 'ai-message';
                 messageDiv.textContent = text;
                 chatBox.appendChild(messageDiv);
-                chatBox.scrollTop = chatBox.scrollHeight; // En alta kaydır
+                chatBox.scrollTop = chatBox.scrollHeight;
             }
 
-            // 3. Gönderme Fonksiyonu
+            // 3. Gönderme Fonksiyonu (Aynı kaldı)
             async function sendMessage() {
                 const prompt = userInput.value.trim();
                 if (prompt === "") return;
 
-                addMessage(prompt, true); // Kullanıcı mesajını ekle
+                addMessage(prompt, true); 
                 userInput.value = "";
-                sendButton.disabled = true; // Göndermeyi engelle
+                sendButton.disabled = true; 
                 
-                // Yükleniyor mesajı
                 addMessage("Yapay zeka düşünüyor...", false); 
                 const loadingMessage = chatBox.lastChild;
 
@@ -518,16 +516,13 @@
 
                     const data = await response.json();
 
-                    // Yükleniyor mesajını kaldır ve cevabı ekle
                     chatBox.removeChild(loadingMessage);
                     if (response.ok) {
                         addMessage(data.answer, false);
                     } else {
-                        // Backend'den gelen hata mesajı (eğer backend çalışıyorsa)
                         addMessage(`Hata: ${data.error || 'Cevap alınamadı. (API Anahtarını kontrol edin.)'}`, false);
                     }
                 } catch (error) {
-                    // API sunucusuna hiç ulaşılamazsa (asıl "Sunucu hatası" burasıdır)
                     chatBox.removeChild(loadingMessage);
                     addMessage("Sunucu hatası. Projenizin Node.js ve Gemini fonksiyonunun çalıştığından emin olun.", false);
                 } finally {
