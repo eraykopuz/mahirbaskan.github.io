@@ -4,8 +4,8 @@
   "description": "Mahir Saruhan'ın kampanya sitesi için yapay zeka asistanı backend yapılandırması",
   "main": "api/gemini.js",
   "dependencies": {
-    "node-fetch": "^3.3.2",
-    "@google/generative-ai": "^0.1.0"  <-- BU SATIR GÜNCELLENDİ
+    "node-fetch": "^3.3.2",  <-- BURADA VİRGÜL OLMALI
+    "@google/generative-ai": "^0.1.0"
   },
   "scripts": {
     "start": "echo 'Sadece statik dosyalar ve API fonksiyonları çalışacak.'"
