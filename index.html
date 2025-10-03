@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahir Saruhan - Okul Başkanlığı Adayı</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Modern Renk Paleti: 
+         * Primary: #004d99 (Lacivert) 
+         * Accent: #FFB300 (Daha canlı sarı/turuncu) 
+         * Background: #EFEFEF (Açık Gri)
+        */
+
+        /* Genel Ayarlar */
+        body {
+            font-family: 'Montserrat', sans-serif; /* Yeni modern font */
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #EFEFEF; 
+            color: #333;
+        }
+        
+        h1, h2, h3 {
+            color: #004d99;
+            font-weight: 700;
+        }
+
+        /* Başlık ve Navigasyon Alanı */
+        header {
+            background: #004d99;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Derin gölge */
+        }
+
+        header h1 {
+            color: white; /* Başlık rengi beyaz yapıldı */
+            margin-bottom: 0.2em;
+            font-size: 2.5em;
+        }
+
+        /* Navigasyon Butonları */
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 10px 5px 0 5px;
+        }
+
+        nav button {
+            background: #FFB300; /* Daha canlı sarı/turuncu */
+            color: #004d99;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 25px; /* Yuvarlak kenarlar */
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+            font-weight: 600;
+            font-size: 0.9em;
+            flex-grow: 1;
+            max-width: 45%; 
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+
+        nav button:hover {
+            background-color: #e6a200;
+            transform: translateY(-3px); /* Hafif yukarı kayma efekti */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Ana İçerik Alanı */
+        main {
+            padding: 30px;
+            max-width: 960px;
+            margin: 30px auto;
+            background: white;
+            border-radius: 12px; /* Yumuşak köşeler */
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15); /* Modern kutu gölgesi */
+        }
+
+        section {
+            padding: 25px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        section:last-child {
+            border-bottom: none;
+        }
+
+        .hidden { display: none; }
+        .active { display: block; }
+
+        /* Vaatler Tablosu Stili */
+        .table-container {
+            overflow-x: auto;
+        }
+        table {
+            min-width: 600px;
+            width: 100%;
+            border-radius: 8px; /* Tabloya da yuvarlak köşeler */
+            overflow: hidden; /* Köşelerin görünmesi için */
+        }
+        th, td {
+            border: none; /* Kenarlıklar kaldırıldı */
+            padding: 15px 12px; /* Daha fazla boşluk */
+            text-align: left;
+            border-bottom: 1px solid #eee; /* Yumuşak ayırıcı */
+        }
+        th {
+            background-color: #004d99;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        /* Form Stili */
+        #requestForm input[type="text"],
+        #requestForm input[type="email"],
+        #requestForm textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 8px; /* Yuvarlak form alanları */
+            box-sizing: border-box; 
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        #requestForm input:focus, #requestForm textarea:focus {
+            border-color: #FFB300; /* Odaklanınca renk değiştirme */
+            outline: none;
+        }
+
+        #requestForm button[type="submit"] {
+            background-color: #4CAF50; /* Yeşil */
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px; 
+            cursor: pointer;
+            font-size: 1.1em;
+            margin-top: 20px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        #requestForm button[type="submit"]:hover {
+            background-color: #45a049;
+            box-shadow: 0 4px 8px rgba(0, 160, 0, 0.2);
+        }
+
+        /* Alt Bilgi */
+        footer {
+            text-align: center;
+            padding: 1.5em 0;
+            background: #333;
+            color: white;
+            margin-top: 30px;
+        }
+        
+        /* Mobil Ekranlar İçin Özel Ayarlar */
+        @media (max-width: 600px) {
+            header h1 { font-size: 2em; }
+            header h3 { font-size: 1em; }
+            main { padding: 15px; margin: 15px auto; }
+            nav button {
+                padding: 8px 10px;
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Mahir Saruhan</h1>
+        <h3>Okul Başkanlığı Adayı</h3>
+        <nav>
+            <button onclick="showSection('home')">Ana Sayfa</button>
+            <button onclick="showSection('why-us')">Neden Bizi Seçmelisiniz</button>
+            <button onclick="showSection('promises')">Vaatler</button>
+            <button onclick="showSection('requests')">İstek/Dilekçe Kutusu</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="active">
+            <h2>Okulumuzun Geleceği İçin Mahir Saruhan!</h2>
+            <p>Mahir Saruhan'ın vizyonu, okulumuzu daha iyi, daha öğrenci dostu ve daha başarılı bir yer yapmaktır. Okulumuzun karşılaştığı zorluklara **yenilikçi çözümler** sunuyor ve her öğrencinin sesini duyurmayı hedefliyor. **Değişim için oy verin!**</p>
+            <hr>
+            <h3>Kısa Özet: Neden Mahir?</h3>
+            <p>Mahir'in en güçlü yönleri; **Liderlik**, **Çözüm Odaklılık** ve **Gerçekçi Vaatler** sunmasıdır. Detaylı bilgi için üst menüdeki "Neden Bizi Seçmelisiniz" sekmesini ziyaret edin.</p>
+        </section>
+
+        <section id="why-us" class="hidden">
+            <h2>Neden Mahir Saruhan'ı Desteklemelisiniz?</h2>
+            <p>Mahir Saruhan, okul topluluğuna değer katan, kanıtlanmış özelliklere sahiptir:</p>
+            <ul>
+                <li>**Güçlü Liderlik:** Kulüp başkanlığı deneyimiyle projeleri başarıyla yönetmiştir.</li>
+                <li>**Empati:** Öğrenci sorunlarını dinler ve çözüm odaklı yaklaşır.</li>
+                <li>**Çalışkanlık:** Vaatlerini sonuna kadar takip eder ve gerçekleştirmek için çabalar.</li>
+                <li>**Gerçekçi Vizyon:** Uygulanabilir, somut projelere sahiptir.</li>
+            </ul>
+        </section>
+
+        <section id="promises" class="hidden">
+            <h2>Mahir Saruhan'ın Temel Vaatleri</h2>
+            <p>Aşağıdaki tablo, Mahir Saruhan'ın taahhüt ettiği vaatleri ve bu vaatlerin kampanya sürecindeki mevcut durumlarını göstermektedir.</p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Vaat</th>
+                            <th>Detay</th>
+                            <th>Durum</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Suya Kolay Ulaşım</td>
+                            <td>Suların ucuzlaması veya bedava olması</td>
+                            <td>☐ Planlama Aşamasında</td>
+                        </tr>
+                        <tr>
+                            <td>Self Id Haftalık Ödül Sistemi</td>
+                            <td>Ders Çalışmayı eğlenceli hale getirmek için Self Id sisteminde haftanın en çok puan alan kişisine sürpriz hediyeler </td>
+                            <td>Planlama Aşamasında</td>
+                        </tr>
+                        <tr>
+                            <td>Öğrenci Görüş Hattı</td>
+                            <td>Anonim şikayet ve öneri hattının kurulması.</td>
+                            <td>☐ Devam Ediyor</td>
+                        </tr>
+                        <tr>
+                            <td>Geri Dönüşüm Projesi</td>
+                            <td>Tüm sınıflara ve koridorlara geri dönüşüm kutularının yerleştirilmesi.</td>
+                            <td>☐ Vaat Edildi</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="requests" class="hidden">
+            <h2>İsteklerinizi Doğrudan Mahir'e Ulaştırın</h2>
+            <p>Görüş, öneri veya şikayetlerinizi bizimle paylaşın. Tüm mesajlar bizzat Mahir Saruhan tarafından incelenecektir.</p>
+            
+            <form id="requestForm" action="https://formspree.io/f/xdkwzjgn" method="POST">
+                <label for="name">Adınız (İsteğe Bağlı):</label>
+                <input type="text" id="name" name="Ad" placeholder="Adınız Soyadınız">
+
+                <label for="email">E-posta Adresiniz (Zorunlu Değil):</label>
+                <input type="email" id="email" name="Gonderen_Mail_Adresi" placeholder="ornek@mail.com">
+
+                <label for="message">Mesajınız (Zorunlu):</label>
+                <textarea id="message" name="Dilekce_Metni" rows="6" required placeholder="Tüm dilek ve önerilerinizi buraya yazabilirsiniz."></textarea>
+
+                <button type="submit">Gönder</button>
+            </form>
+            <p id="formStatus" style="margin-top: 15px; font-weight: bold;"></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Mahir Saruhan Okul Başkanlığı Kampanyası | #MahirKazandırır</p>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('main section').forEach(section => {
+                section.classList.add('hidden');
+                section.classList.remove('active');
+            });
+
+            const activeSection = document.getElementById(sectionId);
+            if (activeSection) {
+                activeSection.classList.remove('hidden');
+                activeSection.classList.add('active');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('home');
+            
+            const form = document.getElementById('requestForm');
+            const statusMessage = document.getElementById('formStatus');
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault(); 
+                
+                const data = new FormData(e.target);
+                
+                try {
+                    const response = await fetch(e.target.action, {
+                        method: form.method,
+                        body: data,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        statusMessage.style.color = 'green';
+                        statusMessage.textContent = 'Mesajınız Mahir Saruhan’a başarıyla iletildi! Teşekkür ederiz.';
+                        form.reset(); 
+                    } else {
+                        statusMessage.style.color = 'red';
+                        statusMessage.textContent = 'Gönderimde bir hata oluştu. Lütfen bağlantınızı kontrol edin.';
+                    }
+                } catch (error) {
+                    statusMessage.style.color = 'red';
+                    statusMessage.textContent = 'Bağlantı hatası.';
+                }
+
+                setTimeout(() => { statusMessage.textContent = ''; }, 6000);
+            });
+        });
+    </script>
+</body>
+</html>
