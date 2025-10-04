@@ -6,6 +6,7 @@
     <title>Mahir Saruhan - Okul Başkanlığı Adayı</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
         /* Genel CSS kodunuz */
@@ -95,21 +96,20 @@
         .hidden { display: none !important; }
         .active { display: block; }
         
-        /* Form, Tablo ve Footer Stilleri */
+        /* Tablo Stilleri */
         .table-container { 
             overflow-x: auto; 
         }
         
-        /* === DÜZELTİLMİŞ KISIM: TABLO VE KENAR ÇİZGİLERİ === */
         table {
             width: 100%;
-            border-collapse: collapse; /* Kenar çizgilerini birleştirmek için */
+            border-collapse: collapse; 
             border-radius: 8px;
             overflow: hidden;
-            border: 1px solid #ddd; /* Tablo dış çerçevesi */
+            border: 1px solid #ddd;
         }
         th, td {
-            border: 1px solid #e0e0e0; /* Hücre kenar çizgileri */
+            border: 1px solid #e0e0e0;
             padding: 15px 12px;
             text-align: left;
         }
@@ -117,16 +117,96 @@
             background-color: #004d99;
             color: white;
             font-weight: 600;
-            border-color: #003366; /* Başlık kenarları için daha koyu renk */
+            border-color: #003366; 
         }
         tr:nth-child(even) {
             background-color: #f9f9f9;
         }
-        /* === DÜZELTİLMİŞ KISIM SONU === */
         
         footer { text-align: center; padding: 1.5em 0; background: #333; color: white; margin-top: 30px; }
         
+        /* --- DİLEKÇE KUTUSU (YENİ) --- */
+        #requests h2, #requests p {
+            text-align: center;
+        }
+
+        #requestForm {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
         
+        .form-group {
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+            transition: color 0.3s;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 12px 12px 45px; /* İkon için ekstra boşluk */
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1em;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            box-sizing: border-box;
+            background-color: #f8f8f8;
+        }
+
+        .form-group textarea {
+            padding-left: 15px; /* Textarea için ikon yok, boşluk düzeltildi */
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #004d99;
+            box-shadow: 0 0 8px rgba(0, 77, 153, 0.2);
+        }
+
+        #requestForm button {
+            background-color: #FFB300;
+            color: #004d99;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        #requestForm button:hover {
+            background-color: #e6a200;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        #formStatus {
+            text-align: center;
+        }
+
         /* --- AI ASSISTANT STİLLERİ --- */
         #ai-assistant {
             display: none; 
@@ -276,14 +356,22 @@
             <p>Görüş, öneri veya şikayetlerinizi bizimle paylaşın. Tüm mesajlar bizzat Mahir Saruhan tarafından incelenecektir.</p>
             
             <form id="requestForm" action="https://formspree.io/f/xdkwzjgn" method="POST">
-                <label for="name">Adınız (İsteğe Bağlı):</label>
-                <input type="text" id="name" name="Ad" placeholder="Adınız Soyadınız">
+                <div class="form-group">
+                    <i class="fas fa-user"></i>
+                    <label for="name">Adınız (İsteğe Bağlı):</label>
+                    <input type="text" id="name" name="Ad" placeholder="Adınız Soyadınız">
+                </div>
 
-                <label for="email">E-posta Adresiniz (Zorunlu Değil):</label>
-                <input type="email" id="email" name="Gonderen_Mail_Adresi" placeholder="ornek@mail.com">
-
-                <label for="message">Mesajınız (Zorunlu):</label>
-                <textarea id="message" name="Dilekce_Metni" rows="6" required placeholder="Tüm dilek ve önerilerinizi buraya yazabilirsiniz."></textarea>
+                <div class="form-group">
+                    <i class="fas fa-envelope"></i>
+                    <label for="email">E-posta Adresiniz (Zorunlu Değil):</label>
+                    <input type="email" id="email" name="Gonderen_Mail_Adresi" placeholder="ornek@mail.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Mesajınız (Zorunlu):</label>
+                    <textarea id="message" name="Dilekce_Metni" rows="6" required placeholder="Tüm dilek ve önerilerinizi buraya yazabilirsiniz."></textarea>
+                </div>
 
                 <button type="submit">Gönder</button>
             </form>
