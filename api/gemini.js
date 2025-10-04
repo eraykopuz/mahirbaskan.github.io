@@ -28,37 +28,24 @@ export default async function handler(req, res) {
     const genAI = new GoogleGenerativeAI(apiKey);
     
     const model = genAI.getGenerativeModel({ 
-      model: 'gemini-2.5-flash',
+      model: 'gemini-2.0-flash-exp',
+      systemInstruction: `Sen ismi Mahir olan ve öğrencilere okul ödevlerinde, ders konularında ve bilimsel sorularda yardımcı olan bir asistansın. Her zaman Türkçe cevap ver. Kısa, açıklayıcı, eğitici ve sohbet eder gibi cevaplar ver. Cevabın maksimum 3-4 paragraf olsun.`,
       generationConfig: {
         temperature: 0.7,
         maxOutputTokens: 1000,
       }
     });
 
-    // Sistem talimatı
-    const systemInstruction = `Sen ismi Mahir olan ve öğrencilere okul ödevlerinde, ders konularında ve bilimsel sorularda yardımcı olan bir asistansın. Her zaman Türkçe cevap ver. Kısa, açıklayıcı, eğitici ve sohbet eder gibi cevaplar ver. Cevabın maksimum 3-4 paragraf olsun.`;
-
-    // Chat başlat
+    // Chat başlat - önceki konuşma geçmişi ile
     const chat = model.startChat({
-      history: [
-        {
-          role: "user",
-          parts: [{ text: systemInstruction }],
-        },
-        {
-          role: "model",
-          parts: [{ text: "Merhaba! Ben Mahir. Sana okul ödevlerinde ve ders konularında yardımcı olmak için buradayım. Ne öğrenmek istersin?" }],
-        },
-        // Önceki konuşmaları ekle
-        ...conversationHistory
-      ],
+      history: conversationHistory,
     });
 
     // Yeni mesajı gönder
     const result = await chat.sendMessage(prompt);
     const text = result.response.text();
 
-    // Güncellenmiş konuşma geçmişini döndür
+    // Güncellenmiş konuşma geçmişini oluştur
     const updatedHistory = [
       ...conversationHistory,
       {
@@ -95,4 +82,3 @@ export default async function handler(req, res) {
     });
   }
 }
-
