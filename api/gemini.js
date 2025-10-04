@@ -1,40 +1,81 @@
 // api/gemini.js
+// Vercel Serverless Function için Gemini API entegrasyonu
 
-// Yeni SDK yapısına uygun şekilde 'GoogleGenerativeAI' kullanılmıştır.
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-// Vercel'den güvenli bir şekilde GEMINI_API_KEY'i alır.
-const ai = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+// Vercel environment variable'dan API anahtarını al
+const apiKey = process.env.GEMINI_API_KEY;
 
-// Vercel'in "/api/gemini" adresinden gelen istekleri işleyecek ana fonksiyon
-export default async function (req, res) {
-  // Yalnızca POST metodu ile gelen istekleri kabul et
-  if (req.method !== 'POST') {
-    return res.status(405).send('Method Not Allowed');
-  }
+// API anahtarı kontrolü
+if (!apiKey) {
+  console.error('GEMINI_API_KEY environment variable is not set!');
+}
 
-  // Kullanıcının sorusunu isteğin gövdesinden (body) al
-  const { prompt } = req.body;
+export default async function handler(req, res) {
+  // Sadece POST isteklerini kabul et
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method Not Allowed' });
+  }
 
-  if (!prompt) {
-    return res.status(400).send('Prompt is required');
-  }
+  // Request body'den prompt'u al
+  const { prompt } = req.body;
 
-  try {
-    // Gemini modelini çağırın
-    const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash", // Hızlı ve ekonomik model
-      // AI'ya rol veriyoruz:
-      contents: [{ role: "user", parts: [{ text: "Sen öğrencilere okul ödevlerinde, ders konularında ve bilimsel sorularda yardımcı olan bir asistansın. Her zaman Türkçe cevap ver. Kısa, açıklayıcı ve eğitici cevaplar ver. Soru: " + prompt }] }],
-    });
+  if (!prompt || prompt.trim() === '') {
+    return res.status(400).json({ error: 'Prompt gereklidir' });
+  }
 
-    // Gelen metni kullanıcıya JSON olarak gönder
-    res.status(200).json({
-      answer: response.text,
-    });
-  } catch (error) {
-    console.error("Gemini API Error:", error);
-    // Eğer hata yakalanırsa, frontend'e temiz bir 500 hatası gönder.
-    res.status(500).json({ error: "Yapay zeka servisine erişilemiyor. (API anahtarını kontrol edin.)" });
-  }
+  // API anahtarı yoksa hata dön
+  if (!apiKey) {
+    return res.status(500).json({ 
+      error: 'API anahtarı yapılandırılmamış. Vercel Dashboard\'dan GEMINI_API_KEY ekleyin.' 
+    });
+  }
+
+  try {
+    // GoogleGenerativeAI instance oluştur
+    const genAI = new GoogleGenerativeAI(apiKey);
+    
+    // Model seç (gemini-1.5-flash hızlı ve ücretsiz)
+    const model = genAI.getGenerativeModel({ 
+      model: 'gemini-1.5-flash',
+      generationConfig: {
+        temperature: 0.7,
+        maxOutputTokens: 1000,
+      }
+    });
+
+    // Sistem prompt'u ile kullanıcı sorusunu birleştir
+    const fullPrompt = `Sen öğrencilere okul ödevlerinde, ders konularında ve bilimsel sorularda yardımcı olan bir asistansın. Her zaman Türkçe cevap ver. Kısa, açıklayıcı ve eğitici cevaplar ver. Cevabın maksimum 3-4 paragraf olsun.
+
+Öğrenci Sorusu: ${prompt}`;
+
+    // API'ye istek gönder
+    const result = await model.generateContent(fullPrompt);
+    const response = result.response;
+    const text = response.text();
+
+    // Başarılı cevabı döndür
+    return res.status(200).json({ 
+      answer: text 
+    });
+
+  } catch (error) {
+    console.error('Gemini API Error:', error);
+    
+    // Detaylı hata mesajı (production'da kaldırılabilir)
+    let errorMessage = 'Yapay zeka servisine erişilemiyor.';
+    
+    if (error.message?.includes('API_KEY')) {
+      errorMessage = 'API anahtarı geçersiz. Vercel Dashboard\'dan kontrol edin.';
+    } else if (error.message?.includes('quota')) {
+      errorMessage = 'API kotası doldu. Lütfen daha sonra tekrar deneyin.';
+    } else if (error.message?.includes('model')) {
+      errorMessage = 'Model bulunamadı. Model adını kontrol edin.';
+    }
+
+    return res.status(500).json({ 
+      error: errorMessage,
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
+  }
 }
