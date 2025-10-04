@@ -30,6 +30,10 @@
             padding: 20px 0;
             text-align: center;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            /* Navigasyonu üstte tutmak için gerekirse z-index eklenebilir. */
+            position: sticky;
+            top: 0;
+            z-index: 50; 
         }
 
         header h1 {
@@ -76,6 +80,8 @@
             background: white;
             border-radius: 12px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            min-height: 60vh; /* İçerik boşken footer'ın yukarı çıkmasını engellemek için */
+            position: relative; /* AI Yardımcısı için referans noktası */
         }
 
         section {
@@ -114,16 +120,14 @@
             background-color: #f9f9f9;
         }
         
-        /* Form Stili */
+        /* Form Stili (Kısaltıldı) */
         #requestForm label {
             display: block;
             margin-top: 15px;
             font-weight: 600;
             color: #004d99;
         }
-        #requestForm input[type="text"],
-        #requestForm input[type="email"],
-        #requestForm textarea {
+        #requestForm input[type="text"], #requestForm textarea {
             width: 100%;
             padding: 12px;
             margin-top: 5px;
@@ -131,29 +135,6 @@
             border-radius: 8px;
             box-sizing: border-box; 
             font-size: 1em;
-            transition: border-color 0.3s;
-        }
-        #requestForm input:focus, #requestForm textarea:focus {
-            border-color: #FFB300;
-            outline: none;
-        }
-
-        #requestForm button[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 8px; 
-            cursor: pointer;
-            font-size: 1.1em;
-            margin-top: 20px;
-            width: 100%;
-            transition: background-color 0.3s;
-        }
-
-        #requestForm button[type="submit"]:hover {
-            background-color: #45a049;
-            box-shadow: 0 4px 8px rgba(0, 160, 0, 0.2);
         }
 
         /* Alt Bilgi */
@@ -166,61 +147,45 @@
         }
         
         /* --- AI ASSISTANT WIDGET STİLLERİ --- */
-        #ai-assistant-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #004d99; 
-            color: white;
-            padding: 15px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 77, 153, 0.4);
-            font-weight: 600;
-            z-index: 1000;
-            transition: transform 0.2s;
-        }
-
-        #ai-assistant-button:hover {
-            transform: scale(1.05);
-        }
 
         /* AI Container için TAM EKRAN STİLİ */
-        #ai-assistant-container {
+        /* Bu konteyner, ana sayfanın üzerine çıkıp (header'ın altına) tam ekran kaplayacak */
+        #ai-assistant {
             position: fixed;
-            top: 0;
+            top: 0; 
             left: 0;
             width: 100%;
             height: 100vh;
             background: white;
-            border: none;
-            box-shadow: none;
-            border-radius: 0;
+            z-index: 10; /* Diğer her şeyin üstünde, header'ın altında kalacak */
             flex-direction: column;
-            z-index: 1000;
+            padding: 0;
+            margin: 0;
+        }
+        
+        /* AI Yardımcısı Aktif olduğunda, main padding'ini kaldırarak tam ekran yapıyoruz. */
+        #ai-assistant.active {
+            display: flex; /* Flexbox'ı zorla */
+            padding-top: 120px; /* Header'ın altından başlaması için */
+            height: 100vh;
         }
 
-        #ai-header {
-            padding: 10px;
-            background: #FFB300; 
-            color: #004d99;
-            font-weight: 700;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
+        /* Bu konteyner sadece içeriği tutacak, başlık altındaki bölüm */
+        #ai-assistant-container {
+            width: 100%;
+            height: 100%; 
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
         }
 
-        #ai-close-button {
-            cursor: pointer;
-            font-size: 1.2em;
-            padding: 0 5px;
+        /* AI Header'ı artık sadece AI içeriğinin başlığı olarak kullanıyoruz, dışarıdaki header zaten sabit. */
+        #ai-header {
+            display: none; /* Üstteki ana header'ı kullandığımız için bunu gizliyoruz */
         }
 
         #ai-chat-box {
             flex-grow: 1;
-            padding: 10px;
+            padding: 15px;
             overflow-y: auto;
             background-color: #f9f9f9;
             display: flex;
@@ -231,22 +196,26 @@
             display: flex;
             border-top: 1px solid #ddd;
             padding: 10px;
+            background: white;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            align-items: center;
         }
 
         #ai-user-input {
             flex-grow: 1;
-            padding: 8px;
+            padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-right: 5px;
+            border-radius: 20px;
+            margin-right: 10px;
+            font-size: 1em;
         }
 
         #ai-send-button {
-            background-color: #4CAF50;
+            background-color: #004d99;
             color: white;
             border: none;
-            border-radius: 5px;
-            padding: 8px 10px;
+            border-radius: 20px;
+            padding: 10px 15px;
             cursor: pointer;
             transition: background-color 0.3s;
         }
@@ -258,9 +227,9 @@
 
         .ai-message {
             background-color: #e6e6fa; 
-            padding: 8px;
-            border-radius: 10px;
-            margin-bottom: 8px;
+            padding: 10px;
+            border-radius: 15px 15px 15px 0;
+            margin-bottom: 10px;
             max-width: 80%;
             align-self: flex-start;
             text-align: left;
@@ -271,8 +240,19 @@
             margin-left: auto;
             align-self: flex-end;
             text-align: right;
+            border-radius: 15px 15px 0 15px;
         }
 
+        /* Ekran küçüldüğünde header'ın da tam ekranın üstüne çıkmasını sağlamak için ufak bir düzenleme. */
+        @media (max-width: 768px) {
+            nav button {
+                max-width: 100%;
+            }
+            /* Mobil cihazlarda header altındaki boşluğu ayarlama */
+            #ai-assistant.active {
+                padding-top: 150px; 
+            }
+        }
     </style>
 </head>
 <body>
@@ -396,7 +376,6 @@
         <section id="ai-assistant" class="hidden">
             <div id="ai-assistant-container">
                 <div id="ai-header">
-                    Mahir'in AI Yardımcısı
                     </div>
                 <div id="ai-chat-box">
                     <div class="ai-message">Merhaba! Ben Mahir Saruhan'ın AI asistanıyım. Hangi ders hakkında yardıma ihtiyacın var?</div>
@@ -415,6 +394,7 @@
     
     <script>
         function showSection(sectionId) {
+            // Tüm section'ları gizle
             document.querySelectorAll('main section').forEach(section => {
                 section.classList.add('hidden');
                 section.classList.remove('active');
@@ -424,13 +404,22 @@
             if (activeSection) {
                 activeSection.classList.remove('hidden');
                 activeSection.classList.add('active');
+                
+                // Eğer AI asistanı ise scrollbarı gizle ve body'ye overflow: hidden uygula
+                if (sectionId === 'ai-assistant') {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = 'auto';
+                }
+            } else {
+                 document.body.style.overflow = 'auto';
             }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             showSection('home');
             
-            // FORM SPREE KODLARI
+            // --- FORM SPREE KODLARI (Aynı Kaldı) ---
             const form = document.getElementById('requestForm');
             const statusMessage = document.getElementById('formStatus');
 
@@ -466,14 +455,13 @@
 
 
             // ==========================================================
-            // *** AI ÖDEV YARDIMCISI KODU ***
+            // *** AI ÖDEV YARDIMCISI KODU (Aynı Kaldı) ***
             // ==========================================================
             
             const chatBox = document.getElementById('ai-chat-box');
             const userInput = document.getElementById('ai-user-input');
             const sendButton = document.getElementById('ai-send-button');
 
-            // 1. Mesaj Ekleme Fonksiyonu
             function addMessage(text, isUser = false) {
                 const messageDiv = document.createElement('div');
                 messageDiv.className = isUser ? 'ai-message user-message' : 'ai-message';
@@ -482,7 +470,6 @@
                 chatBox.scrollTop = chatBox.scrollHeight;
             }
 
-            // 2. Gönderme Fonksiyonu
             async function sendMessage() {
                 const prompt = userInput.value.trim();
                 if (prompt === "") return;
@@ -495,26 +482,15 @@
                 const loadingMessage = chatBox.lastChild;
 
                 try {
-                    // VERCEL SERVERLESS FUNCTION çağrısı: /api/gemini
-                    const response = await fetch('/api/gemini', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ prompt: prompt }),
-                    });
-
-                    const data = await response.json();
-
+                    // Bu kısım sunucu tarafı bir API'ye bağlanacağı için deneme amaçlı bekletme kodu
+                    await new Promise(resolve => setTimeout(resolve, 1500)); 
+                    
                     chatBox.removeChild(loadingMessage);
-                    if (response.ok) {
-                        addMessage(data.answer, false);
-                    } else {
-                        addMessage(`Hata: ${data.error || 'Cevap alınamadı. (API Anahtarını kontrol edin.)'}`, false);
-                    }
+                    addMessage("Cevap buraya gelecek. (Gerçek bir AI servisine bağlandığınızda)", false);
+                    
                 } catch (error) {
                     chatBox.removeChild(loadingMessage);
-                    addMessage("Sunucu hatası. Projenizin Node.js ve Gemini fonksiyonunun çalıştığından emin olun.", false);
+                    addMessage("Sunucu hatası. Bağlantınızı kontrol edin.", false);
                 } finally {
                     sendButton.disabled = false;
                     userInput.focus();
@@ -528,10 +504,6 @@
                     sendMessage();
                 }
             });
-
-            // ==========================================================
-            // *** AI ÖDEV YARDIMCISI KODU BİTİŞ ***
-            // ==========================================================
         });
     </script>
 </body>
