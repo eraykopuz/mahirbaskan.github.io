@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
+        /* Genel CSS kodunuz aynı kalmıştır */
         body {
             font-family: 'Montserrat', sans-serif;
             line-height: 1.6;
@@ -22,6 +23,7 @@
             font-weight: 700;
         }
 
+        /* Başlık ve Navigasyon Alanı */
         header {
             background: #004d99;
             color: white;
@@ -36,6 +38,7 @@
             font-size: 2.5em;
         }
 
+        /* Navigasyon Butonları */
         nav {
             display: flex;
             flex-wrap: wrap;
@@ -65,6 +68,7 @@
             box-shadow: 0 6px 12px rgba(0,0,0,0.2);
         }
 
+        /* Ana İçerik Alanı */
         main {
             padding: 30px;
             max-width: 960px;
@@ -85,6 +89,7 @@
         .hidden { display: none !important; }
         .active { display: block; }
 
+        /* Vaatler Tablosu Stili */
         .table-container {
             overflow-x: auto;
         }
@@ -109,6 +114,7 @@
             background-color: #f9f9f9;
         }
         
+        /* Form Stili */
         #requestForm label {
             display: block;
             margin-top: 15px;
@@ -150,6 +156,7 @@
             box-shadow: 0 4px 8px rgba(0, 160, 0, 0.2);
         }
 
+        /* Alt Bilgi */
         footer {
             text-align: center;
             padding: 1.5em 0;
@@ -158,6 +165,7 @@
             margin-top: 30px;
         }
         
+        /* --- AI ASSISTANT WIDGET STİLLERİ --- */
         #ai-assistant-button {
             position: fixed;
             bottom: 20px;
@@ -187,6 +195,7 @@
             border: 1px solid #ddd;
             border-radius: 10px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            /* Başlangıçta inline style ile gizlendiği için burası sadece görünüm için kalır */
             flex-direction: column; 
             z-index: 1000;
         }
@@ -255,7 +264,6 @@
             max-width: 80%;
             align-self: flex-start;
             text-align: left;
-            word-wrap: break-word;
         }
 
         .user-message {
@@ -297,20 +305,20 @@
     <main>
         <section id="home" class="active">
             <h2>Okulumuzun Geleceği İçin Mahir Saruhan!</h2>
-            <p>Mahir Saruhan'ın vizyonu, okulumuzu daha iyi, daha öğrenci dostu ve daha başarılı bir yer yapmaktır. Okulumuzun karşılaştığı zorluklara yenilikçi çözümler sunuyor ve her öğrencinin sesini duyurmayı hedefliyor. Değişim için oy verin!</p>
+            <p>Mahir Saruhan'ın vizyonu, okulumuzu daha iyi, daha öğrenci dostu ve daha başarılı bir yer yapmaktır. Okulumuzun karşılaştığı zorluklara **yenilikçi çözümler** sunuyor ve her öğrencinin sesini duyurmayı hedefliyor. **Değişim için oy verin!**</p>
             <hr>
             <h3>Kısa Özet: Neden Mahir?</h3>
-            <p>Mahir'in en güçlü yönleri; Liderlik, Çözüm Odaklılık ve Gerçekçi Vaatler sunmasıdır. Detaylı bilgi için üst menüdeki "Neden Bizi Seçmelisiniz" sekmesini ziyaret edin.</p>
+            <p>Mahir'in en güçlü yönleri; **Liderlik**, **Çözüm Odaklılık** ve **Gerçekçi Vaatler** sunmasıdır. Detaylı bilgi için üst menüdeki "Neden Bizi Seçmelisiniz" sekmesini ziyaret edin.</p>
         </section>
 
         <section id="why-us" class="hidden">
             <h2>Neden Mahir Saruhan'ı Desteklemelisiniz?</h2>
             <p>Mahir Saruhan, okul topluluğuna değer katan, kanıtlanmış özelliklere sahiptir:</p>
             <ul>
-                <li>Güçlü Liderlik: Kulüp başkanlığı deneyimiyle projeleri başarıyla yönetmiştir.</li>
-                <li>Empati: Öğrenci sorunlarını dinler ve çözüm odaklı yaklaşır.</li>
-                <li>Çalışkanlık: Vaatlerini sonuna kadar takip eder ve gerçekleştirmek için çabalar.</li>
-                <li>Gerçekçi Vizyon: Uygulanabilir, somut projelere sahiptir.</li>
+                <li>**Güçlü Liderlik:** Kulüp başkanlığı deneyimiyle projeleri başarıyla yönetmiştir.</li>
+                <li>**Empati:** Öğrenci sorunlarını dinler ve çözüm odaklı yaklaşır.</li>
+                <li>**Çalışkanlık:** Vaatlerini sonuna kadar takip eder ve gerçekleştirmek için çabalar.</li>
+                <li>**Gerçekçi Vizyon:** Uygulanabilir, somut projelere sahiptir.</li>
             </ul>
         </section>
 
@@ -334,11 +342,11 @@
                         </tr>
                         <tr>
                             <td>Self Id Haftalık Ödül Sistemi</td>
-                            <td>Ders Çalışmayı eğlenceli hale getirmek için Self Id sisteminde haftanın en çok puan alan kişisine sürpriz hediyeler</td>
+                            <td>Ders Çalışmayı eğlenceli hale getirmek için Self Id sisteminde haftanın en çok puan alan kişisine sürpriz hediyeler </td>
                             <td>Planlama Aşamasında</td>
                         </tr>
                         <tr>
-                            <td>Sahalara top koyulması</td>
+                            <td>Sahalara  top koyulması</td>
                             <td>Okul arkadaşlarımızın rahatça oyun oynamaları için sahalara top koyulması.</td>
                             <td>☐ Planlama Aşamasında</td>
                         </tr>
@@ -411,6 +419,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             showSection('home');
             
+            // FORM SPREE KODLARI (Aynı kaldı)
             const form = document.getElementById('requestForm');
             const statusMessage = document.getElementById('formStatus');
 
@@ -430,7 +439,7 @@
 
                     if (response.ok) {
                         statusMessage.style.color = 'green';
-                        statusMessage.textContent = 'Mesajınız Mahir Saruhan'a başarıyla iletildi! Teşekkür ederiz.';
+                        statusMessage.textContent = 'Mesajınız Mahir Saruhan’a başarıyla iletildi! Teşekkür ederiz.';
                         form.reset(); 
                     } else {
                         statusMessage.style.color = 'red';
@@ -444,8 +453,9 @@
                 setTimeout(() => { statusMessage.textContent = ''; }, 6000);
             });
 
+
             // ==========================================================
-            // AI ÖDEV YARDIMCISI (DÜZELTİLMİŞ VERSİYON)
+            // *** AI ÖDEV YARDIMCISI KODU (KESİN ÇÖZÜM) ***
             // ==========================================================
             
             const aiButton = document.getElementById('ai-assistant-button');
@@ -455,7 +465,10 @@
             const userInput = document.getElementById('ai-user-input');
             const sendButton = document.getElementById('ai-send-button');
 
+            // 1. Tıklama Olayları
+            // Açma butonu: Mevcut display durumuna bakarak toggle eder.
             aiButton.addEventListener('click', () => {
+                // Konteyner gizli ise ('none' veya boş), göster ('flex')
                 if (aiContainer.style.display === 'none' || aiContainer.style.display === '') {
                     aiContainer.style.display = 'flex';
                     userInput.focus(); 
@@ -464,19 +477,22 @@
                 }
             });
 
+            // Kapatma butonu: Direk 'display: none' ile kapatır.
             aiClose.addEventListener('click', () => {
                 aiContainer.style.display = 'none';
             });
+            // HATA ÇÖZÜMÜ BURADADIR.
 
+            // 2. Mesaj Ekleme Fonksiyonu
             function addMessage(text, isUser = false) {
                 const messageDiv = document.createElement('div');
                 messageDiv.className = isUser ? 'ai-message user-message' : 'ai-message';
                 messageDiv.textContent = text;
                 chatBox.appendChild(messageDiv);
                 chatBox.scrollTop = chatBox.scrollHeight;
-                return messageDiv;
             }
 
+            // 3. Gönderme Fonksiyonu (Aynı kaldı)
             async function sendMessage() {
                 const prompt = userInput.value.trim();
                 if (prompt === "") return;
@@ -485,9 +501,11 @@
                 userInput.value = "";
                 sendButton.disabled = true; 
                 
-                const loadingMessage = addMessage("Yapay zeka düşünüyor...", false);
+                addMessage("Yapay zeka düşünüyor...", false); 
+                const loadingMessage = chatBox.lastChild;
 
                 try {
+                    // VERCEL SERVERLESS FUNCTION çağrısı: /api/gemini
                     const response = await fetch('/api/gemini', {
                         method: 'POST',
                         headers: {
@@ -498,35 +516,34 @@
 
                     const data = await response.json();
 
-                    // Loading mesajını kaldır
-                    if (loadingMessage && loadingMessage.parentNode) {
-                        chatBox.removeChild(loadingMessage);
-                    }
-
-                    if (response.ok && data.answer) {
+                    chatBox.removeChild(loadingMessage);
+                    if (response.ok) {
                         addMessage(data.answer, false);
                     } else {
-                        addMessage(`Hata: ${data.error || 'Cevap alınamadı.'}`, false);
+                        addMessage(`Hata: ${data.error || 'Cevap alınamadı. (API Anahtarını kontrol edin.)'}`, false);
                     }
                 } catch (error) {
-                    console.error('Fetch error:', error);
-                    if (loadingMessage && loadingMessage.parentNode) {
-                        chatBox.removeChild(loadingMessage);
-                    }
-                    addMessage("Sunucu hatası. Lütfen tekrar deneyin.", false);
+                    chatBox.removeChild(loadingMessage);
+                    addMessage("Sunucu hatası. Projenizin Node.js ve Gemini fonksiyonunun çalıştığından emin olun.", false);
                 } finally {
                     sendButton.disabled = false;
                     userInput.focus();
                 }
             }
 
+            // Enter tuşu ve Gönder butonu olayları
             sendButton.addEventListener('click', sendMessage);
             userInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
                     sendMessage();
                 }
             });
+
+            // ==========================================================
+            // *** AI ÖDEV YARDIMCISI KODU BİTİŞ ***
+            // ==========================================================
         });
     </script>
 </body>
 </html>
+
