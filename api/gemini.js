@@ -37,7 +37,7 @@ export default async function handler(req, res) {
     
     // Gemini 2.5 Pro - En güncel ve güçlü model
     const model = genAI.getGenerativeModel({ 
-      model: 'gemini-2.5-pro',
+      model: 'gemini-2.5-flash',
       generationConfig: {
         temperature: 0.7,
         maxOutputTokens: 1000,
