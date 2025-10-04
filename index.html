@@ -185,18 +185,18 @@
             transform: scale(1.05);
         }
 
+        /* AI Container için TAM EKRAN STİLİ */
         #ai-assistant-container {
             position: fixed;
-            bottom: 90px;
-            right: 20px;
-            width: 300px;
-            height: 400px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
             background: white;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-            /* Başlangıçta inline style ile gizlendiği için burası sadece görünüm için kalır */
-            flex-direction: column; 
+            border: none;
+            box-shadow: none;
+            border-radius: 0;
+            flex-direction: column;
             z-index: 1000;
         }
 
@@ -273,21 +273,6 @@
             text-align: right;
         }
 
-        /* Tam Ekran Özelliği için Media Query */
-        @media (max-width: 600px) {
-            #ai-assistant-container {
-                bottom: 0;
-                right: 0;
-                width: 100%;
-                height: 100vh; /* Tam ekran yüksekliği */
-                max-height: 100vh; /* Maksimum yüksekliği de tam ekran olarak ayarla */
-                border-radius: 0;
-            }
-            #ai-assistant-button {
-                bottom: 10px;
-                right: 10px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -300,6 +285,7 @@
             <button onclick="showSection('why-us')">Neden Bizi Seçmelisiniz</button>
             <button onclick="showSection('promises')">Vaatler</button>
             <button onclick="showSection('requests')">İstek/Dilekçe Kutusu</button>
+            <button onclick="showSection('ai-assistant')">📚 AI Ödev Yardımcısı</button>
         </nav>
     </header>
 
@@ -406,29 +392,26 @@
             </form>
             <p id="formStatus" style="margin-top: 15px; font-weight: bold;"></p>
         </section>
+
+        <section id="ai-assistant" class="hidden">
+            <div id="ai-assistant-container">
+                <div id="ai-header">
+                    Mahir'in AI Yardımcısı
+                    </div>
+                <div id="ai-chat-box">
+                    <div class="ai-message">Merhaba! Ben Mahir Saruhan'ın AI asistanıyım. Hangi ders hakkında yardıma ihtiyacın var?</div>
+                </div>
+                <div id="ai-input-area">
+                    <input type="text" id="ai-user-input" placeholder="Sorunuzu buraya yazın (Örn: Pisagor teoremi nedir?)">
+                    <button id="ai-send-button">Gönder</button>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
         <p>&copy; 2025 Mahir Saruhan Okul Başkanlığı Kampanyası | #MahirKazandırır</p>
     </footer>
-
-    <div id="ai-assistant-button">
-        📚 AI Ödev Yardımcısı
-    </div>
-
-    <div id="ai-assistant-container" style="display: none;"> 
-        <div id="ai-header">
-            Mahir'in AI Yardımcısı
-            <span id="ai-close-button">X</span>
-        </div>
-        <div id="ai-chat-box">
-            <div class="ai-message">Merhaba! Ben Mahir Saruhan'ın AI asistanıyım. Hangi ders hakkında yardıma ihtiyacın var?</div>
-        </div>
-        <div id="ai-input-area">
-            <input type="text" id="ai-user-input" placeholder="Sorunuzu buraya yazın (Örn: Pisagor teoremi nedir?)">
-            <button id="ai-send-button">Gönder</button>
-        </div>
-    </div>
     
     <script>
         function showSection(sectionId) {
@@ -486,28 +469,11 @@
             // *** AI ÖDEV YARDIMCISI KODU ***
             // ==========================================================
             
-            const aiButton = document.getElementById('ai-assistant-button');
-            const aiContainer = document.getElementById('ai-assistant-container');
-            const aiClose = document.getElementById('ai-close-button');
             const chatBox = document.getElementById('ai-chat-box');
             const userInput = document.getElementById('ai-user-input');
             const sendButton = document.getElementById('ai-send-button');
 
-            // 1. Tıklama Olayları
-            aiButton.addEventListener('click', () => {
-                if (aiContainer.style.display === 'none' || aiContainer.style.display === '') {
-                    aiContainer.style.display = 'flex';
-                    userInput.focus(); 
-                } else {
-                    aiContainer.style.display = 'none';
-                }
-            });
-
-            aiClose.addEventListener('click', () => {
-                aiContainer.style.display = 'none';
-            });
-
-            // 2. Mesaj Ekleme Fonksiyonu
+            // 1. Mesaj Ekleme Fonksiyonu
             function addMessage(text, isUser = false) {
                 const messageDiv = document.createElement('div');
                 messageDiv.className = isUser ? 'ai-message user-message' : 'ai-message';
@@ -516,7 +482,7 @@
                 chatBox.scrollTop = chatBox.scrollHeight;
             }
 
-            // 3. Gönderme Fonksiyonu
+            // 2. Gönderme Fonksiyonu
             async function sendMessage() {
                 const prompt = userInput.value.trim();
                 if (prompt === "") return;
