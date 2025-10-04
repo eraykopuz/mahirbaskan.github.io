@@ -35,9 +35,9 @@ export default async function handler(req, res) {
     // GoogleGenerativeAI instance oluştur
     const genAI = new GoogleGenerativeAI(apiKey);
     
-    // Model seç (gemini-1.5-flash hızlı ve ücretsiz)
+    // Model seç - Farklı model isimleri dene
     const model = genAI.getGenerativeModel({ 
-      model: 'gemini-1.5-flash',
+      model: 'gemini-pro',
       generationConfig: {
         temperature: 0.7,
         maxOutputTokens: 1000,
