@@ -344,16 +344,26 @@
                         <tr>
                             <td>Self Id Haftalık Ödül Sistemi</td>
                             <td>Ders Çalışmayı eğlenceli hale getirmek için Self Id sisteminde haftanın en çok puan alan kişisine sürpriz hediyeler </td>
-                            <td>Planlama Aşamasında</td>
+                            <td>☐ Planlama Aşamasında</td>
                         </tr>
                         <tr>
-                            <td>Sahalara  top koyulması</td>
+                            <td>Sahalara Top Koyulması</td>
                             <td>Okul arkadaşlarımızın rahatça oyun oynamaları için sahalara top koyulması.</td>
                             <td>☐ Planlama Aşamasında</td>
                         </tr>
                         <tr>
                             <td>Okul Eşyalarının Tamiri</td>
                             <td>Okulumuzdaki başta kalorifer petekleri olmak üzere eşyaların tamir edilmesi </td>
+                            <td>☐ Planlama Aşamasında</td>
+                        </tr>
+                        <tr>
+                            <td>Geri Dönüşüm Kutuları</td>
+                            <td>Öğrencilerimizin doğaya destek vermeleri için okula geri dönüşüm kutuları koyulması.</td>
+                            <td>☐ Planlama Aşamasında</td>
+                        </tr>
+                        <tr>
+                            <td>Web Sitesi Güncellemesi</td>
+                            <td>Öğrencilerimizin daha iyi verim almaları için düzenli olarak eleştiriler doğrultusunda güncelleme getirilmesi.</td>
                             <td>☐ Planlama Aşamasında</td>
                         </tr>
                     </tbody>
@@ -420,7 +430,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             showSection('home');
             
-            // FORM SPREE KODLARI (Aynı kaldı)
+            // FORM SPREE KODLARI
             const form = document.getElementById('requestForm');
             const statusMessage = document.getElementById('formStatus');
 
@@ -456,7 +466,7 @@
 
 
             // ==========================================================
-            // *** AI ÖDEV YARDIMCISI KODU (KESİN ÇÖZÜM) ***
+            // *** AI ÖDEV YARDIMCISI KODU ***
             // ==========================================================
             
             const aiButton = document.getElementById('ai-assistant-button');
@@ -467,9 +477,7 @@
             const sendButton = document.getElementById('ai-send-button');
 
             // 1. Tıklama Olayları
-            // Açma butonu: Mevcut display durumuna bakarak toggle eder.
             aiButton.addEventListener('click', () => {
-                // Konteyner gizli ise ('none' veya boş), göster ('flex')
                 if (aiContainer.style.display === 'none' || aiContainer.style.display === '') {
                     aiContainer.style.display = 'flex';
                     userInput.focus(); 
@@ -478,11 +486,9 @@
                 }
             });
 
-            // Kapatma butonu: Direk 'display: none' ile kapatır.
             aiClose.addEventListener('click', () => {
                 aiContainer.style.display = 'none';
             });
-            // HATA ÇÖZÜMÜ BURADADIR.
 
             // 2. Mesaj Ekleme Fonksiyonu
             function addMessage(text, isUser = false) {
@@ -493,7 +499,7 @@
                 chatBox.scrollTop = chatBox.scrollHeight;
             }
 
-            // 3. Gönderme Fonksiyonu (Aynı kaldı)
+            // 3. Gönderme Fonksiyonu
             async function sendMessage() {
                 const prompt = userInput.value.trim();
                 if (prompt === "") return;
