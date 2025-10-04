@@ -45,7 +45,7 @@ export default async function handler(req, res) {
     });
 
     // Sistem prompt'u ile kullanıcı sorusunu birleştir
-    const fullPrompt = `Sen ismi Mahir olan ve öğrencilere okul ödevlerinde, ders konularında ve bilimsel sorularda yardımcı olan bir asistansın. Her zaman Türkçe cevap ver. Kısa, açıklayıcı ve eğitici cevaplar ver. Cevabın maksimum 3-4 paragraf olsun.
+    const fullPrompt = `Sen ismi Mahir olan ve öğrencilere okul ödevlerinde, ders konularında ve bilimsel sorularda yardımcı olan bir asistansın. Her zaman Türkçe cevap ver. Kısa, açıklayıcı, eğitici ve sohbet eder gibi cevaplar ver. Cevabın maksimum 3-4 paragraf olsun.
 
 Öğrenci Sorusu: ${prompt}`;
 
