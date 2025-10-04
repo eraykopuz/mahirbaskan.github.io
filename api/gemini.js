@@ -1,25 +1,22 @@
 // api/gemini.js
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-// Vercel environment variable'dan API anahtarını al
 const apiKey = process.env.GEMINI_API_KEY;
 if (!apiKey) console.error('GEMINI_API_KEY environment variable is not set!');
 
-// Basit in-memory hafıza (stateless serverlerde kalıcı olmaz, sadece demo)
+// Basit in-memory hafıza, IP adresine göre
 const conversationMemory = {};
 
-// Helper: conversation id ile hafızayı al
-function getMemory(sessionId) {
-  if (!conversationMemory[sessionId]) conversationMemory[sessionId] = [];
-  return conversationMemory[sessionId];
+function getMemory(ip) {
+  if (!conversationMemory[ip]) conversationMemory[ip] = [];
+  return conversationMemory[ip];
 }
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' });
 
-  const { prompt, sessionId } = req.body;
+  const { prompt } = req.body;
   if (!prompt || prompt.trim() === '') return res.status(400).json({ error: 'Prompt gereklidir' });
-  if (!sessionId) return res.status(400).json({ error: 'Session ID gereklidir' });
 
   if (!apiKey) {
     return res.status(500).json({ 
@@ -37,11 +34,11 @@ export default async function handler(req, res) {
       }
     });
 
-    // Hafızadan önceki konuşmaları al
-    const memory = getMemory(sessionId);
-    let memoryText = memory.map((msg, i) => `${msg.role === 'user' ? 'Öğrenci' : 'Mahir'}: ${msg.text}`).join('\n');
+    // Kullanıcının IP adresi üzerinden hafıza al
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'anonymous';
+    const memory = getMemory(ip);
+    const memoryText = memory.map(msg => `${msg.role === 'user' ? 'Öğrenci' : 'Mahir'}: ${msg.text}`).join('\n');
 
-    // Sistem prompt ve hafıza ile birleştirme
     const fullPrompt = `
 Sen ismi Mahir olan ve öğrencilere okul ödevlerinde, ders konularında ve bilimsel sorularda yardımcı olan bir asistansın. Her zaman Türkçe cevap ver. Kısa, açıklayıcı, eğitici ve sohbet eder gibi cevaplar ver. Cevabın maksimum 3-4 paragraf olsun.
 
@@ -74,4 +71,5 @@ Yeni öğrenci sorusu: ${prompt}
     });
   }
 }
+
 
