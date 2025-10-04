@@ -1,21 +1,19 @@
-return res.status(405).json({ error: 'Method Not Allowed' });
+return res.status(400).json({ error: 'Prompt gereklidir' });
 }
 
-  // Request body'den prompt'u al
-  const { prompt } = req.body;
-  // Request body'den prompt VE HISTORY'i al
-  const { prompt, history } = req.body;
+// API anahtarı yoksa hata dön
+if (!apiKey) {
+return res.status(500).json({ 
+error: 'API anahtarı yapılandırılmamış. Vercel Dashboard\'dan GEMINI_API_KEY ekleyin.' 
+});
+}
 
-if (!prompt || prompt.trim() === '') {
-return res.status(400).json({ error: 'Prompt gereklidir' });
-@@ -35,24 +35,34 @@ export default async function handler(req, res) {
+try {
 // GoogleGenerativeAI instance oluştur
 const genAI = new GoogleGenerativeAI(apiKey);
 
-    // Gemini 2.5 Pro - En güncel ve güçlü model
-    const model = genAI.getGenerativeModel({ 
-    // Model konfigürasyonu
-    const modelInstance = genAI.getGenerativeModel({ 
+// Gemini 2.5 Pro - En güncel ve güçlü model
+const model = genAI.getGenerativeModel({ 
 model: 'gemini-2.5-flash',
 generationConfig: {
 temperature: 0.7,
@@ -23,31 +21,30 @@ maxOutputTokens: 1000,
 }
 });
 
-    // Sistem prompt'u ile kullanıcı sorusunu birleştir
+// Sistem prompt'u ile kullanıcı sorusunu birleştir
+    const fullPrompt = `Sen ismi Mahir olan ve öğrencilere okul ödevlerinde, ders konularında ve bilimsel sorularda yardımcı olan bir asistansın. Her zaman Türkçe cevap ver. Kısa, açıklayıcı ve eğitici cevaplar ver. Cevabın maksimum 3-4 paragraf olsun.
     const fullPrompt = `Sen ismi Mahir olan ve öğrencilere okul ödevlerinde, ders konularında ve bilimsel sorularda yardımcı olan bir asistansın. Her zaman Türkçe cevap ver. Kısa, açıklayıcı, eğitici ve sohbet eder gibi cevaplar ver. Cevabın maksimum 3-4 paragraf olsun.
-    // Sistem Prompt'u (Burası modelin nasıl davranacağını belirleyen kısımdır)
-    const systemInstruction = `Sen ismi Mahir olan ve öğrencilere okul ödevlerinde, ders konularında ve bilimsel sorularda yardımcı olan bir asistansın. Her zaman Türkçe cevap ver. Kısa, açıklayıcı, eğitici ve sohbet eder gibi cevaplar ver. Cevabın maksimum 3-4 paragraf olsun.`;
 
 Öğrenci Sorusu: ${prompt}`;
-    // Yeni bir sohbet oturumu başlat (history'yi ve systemInstruction'ı dahil et)
-    const chat = modelInstance.startChat({
-      history: history || [], // Gelen geçmişi kullan, yoksa boş array kullan
-      config: {
-        systemInstruction: systemInstruction, // Sistem talimatını buraya taşıdık
-      }
-    });
 
-
-    // API'ye YENİ MESAJI gönder
-    const result = await chat.sendMessage({
-      message: prompt
-    });
-
-    // API'ye istek gönder
-    const result = await model.generateContent(fullPrompt);
+// API'ye istek gönder
+const result = await model.generateContent(fullPrompt);
 const response = result.response;
-    const text = response.text();
-    const text = response.text;
+const text = response.text();
 
 // Başarılı cevabı döndür
 return res.status(200).json({ 
+answer: text 
+});
+
+} catch (error) {
+console.error('Gemini API Error:', error);
+
+// Detaylı hata mesajı (production'da kaldırılabilir)
+let errorMessage = 'Yapay zeka servisine erişilemiyor.';
+
+if (error.message?.includes('API_KEY')) {
+errorMessage = 'API anahtarı geçersiz. Vercel Dashboard\'dan kontrol edin.';
+} else if (error.message?.includes('quota')) {
+errorMessage = 'API kotası doldu. Lütfen daha sonra tekrar deneyin.';
+} else if (error.message?.includes('model')) {
