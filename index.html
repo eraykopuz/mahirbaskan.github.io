@@ -105,10 +105,7 @@
 
         /* AI Asistanı Bölümü */
         #ai-assistant {
-            /* Diğer sekmeler gibi başlangıçta gizli */
             display: none; 
-            
-            /* AI Asistanı aktif olduğunda bu stiller uygulanacak */
             position: fixed;
             top: 0; 
             left: 0;
@@ -124,14 +121,10 @@
         /* AI Asistanı Aktif olduğunda, tüm ekranı kaplaması */
         #ai-assistant.active {
             display: flex;
-            /* Header yüksekliği kadar boşluk bırakıyoruz ki, chat kutusu header'ın hemen altından başlasın. */
-            padding-top: 170px; /* Bu değeri, header'ın toplam yüksekliğine göre ayarlayın */
+            padding-top: 170px; /* Header yüksekliği kadar boşluk bırakıyoruz */
             box-sizing: border-box;
         }
         
-        /* Ana İçerik bölümü (Main) AI aktifken gizlenmeli. */
-        /* Bunu JS ile 'main' yerine diğer sekmeleri gizleyerek yapıyoruz. */
-
 
         #ai-chat-box {
             flex-grow: 1;
@@ -140,7 +133,6 @@
             background-color: #f9f9f9;
             display: flex;
             flex-direction: column;
-            /* Yüksekliği hesaplamak için */
             height: calc(100% - 70px); 
         }
 
@@ -335,18 +327,44 @@
 
             form.addEventListener('submit', async function(e) {
                 e.preventDefault(); 
-                // ... (Formspree logic) ...
+                
+                const data = new FormData(e.target);
+                
+                try {
+                    const response = await fetch(e.target.action, {
+                        method: form.method,
+                        body: data,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        statusMessage.style.color = 'green';
+                        statusMessage.textContent = 'Mesajınız Mahir Saruhan’a başarıyla iletildi! Teşekkür ederiz.';
+                        form.reset(); 
+                    } else {
+                        statusMessage.style.color = 'red';
+                        statusMessage.textContent = 'Gönderimde bir hata oluştu. Lütfen bağlantınızı kontrol edin.';
+                    }
+                } catch (error) {
+                    statusMessage.style.color = 'red';
+                    statusMessage.textContent = 'Bağlantı hatası.';
+                }
+
+                setTimeout(() => { statusMessage.textContent = ''; }, 6000);
             });
 
 
             // ==========================================================
-            // *** AI ÖDEV YARDIMCISI KODU (Aynı Kaldı) ***
+            // *** AI ÖDEV YARDIMCISI KODU (API Bağlantısı Geri Getirildi) ***
             // ==========================================================
             
             const chatBox = document.getElementById('ai-chat-box');
             const userInput = document.getElementById('ai-user-input');
             const sendButton = document.getElementById('ai-send-button');
 
+            // 1. Mesaj Ekleme Fonksiyonu
             function addMessage(text, isUser = false) {
                 const messageDiv = document.createElement('div');
                 messageDiv.className = isUser ? 'ai-message user-message' : 'ai-message';
@@ -355,6 +373,7 @@
                 chatBox.scrollTop = chatBox.scrollHeight;
             }
 
+            // 2. Gönderme Fonksiyonu
             async function sendMessage() {
                 const prompt = userInput.value.trim();
                 if (prompt === "") return;
@@ -367,15 +386,27 @@
                 const loadingMessage = chatBox.lastChild;
 
                 try {
-                    // Bu kısım sunucu tarafı bir API'ye bağlanacağı için deneme amaçlı bekletme kodu
-                    await new Promise(resolve => setTimeout(resolve, 1500)); 
-                    
+                    // VERCEL SERVERLESS FUNCTION çağrısı geri getirildi: /api/gemini
+                    const response = await fetch('/api/gemini', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ prompt: prompt }),
+                    });
+
+                    const data = await response.json();
+
                     chatBox.removeChild(loadingMessage);
-                    addMessage("Cevap buraya gelecek. (Gerçek bir AI servisine bağlandığınızda)", false);
-                    
+                    if (response.ok) {
+                        // Cevabı Markdown'dan düz metne çevirip ekle
+                        addMessage(data.answer, false);
+                    } else {
+                        addMessage(`Hata: ${data.error || 'Cevap alınamadı. (API Anahtarını kontrol edin.)'}`, false);
+                    }
                 } catch (error) {
                     chatBox.removeChild(loadingMessage);
-                    addMessage("Sunucu hatası. Bağlantınızı kontrol edin.", false);
+                    addMessage("Sunucu hatası. Projenizin Node.js ve Gemini fonksiyonunun çalıştığından emin olun.", false);
                 } finally {
                     sendButton.disabled = false;
                     userInput.focus();
