@@ -11,10 +11,10 @@
     <style>
         /* Modern Renk Paleti ve Temel Stiller */
         :root {
-            --primary-color: #1A237E; /* Koyu Lacivert */
-            --accent-color: #FFC107; /* Canlı Sarı */
-            --secondary-color: #ECEFF1; /* Açık Gri Arka Plan */
-            --text-color: #263238; /* Koyu Gri Metin */
+            --primary-color: #1A237E; 
+            --accent-color: #FFC107; 
+            --secondary-color: #ECEFF1; 
+            --text-color: #263238; 
             --light-bg: #FFFFFF;
         }
 
@@ -93,15 +93,6 @@
         .hidden { display: none !important; }
         .active { display: block; }
 
-        /* Ana Sayfa Hero Section */
-        #home h2 {
-            font-size: 2em;
-            text-align: center;
-            border-bottom: 3px solid var(--accent-color);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-        
         /* Vaatler - Kart Görünümü */
         .card-container {
             display: grid;
@@ -118,21 +109,6 @@
             display: flex;
             flex-direction: column;
         }
-        .promise-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-        .promise-card h3 {
-            font-size: 1.25em;
-            margin-top: 0;
-            display: flex;
-            align-items: center;
-        }
-        .promise-card i {
-            color: var(--accent-color);
-            margin-right: 10px;
-            font-size: 1.5em;
-        }
         .status-badge {
             background-color: #FF9800; 
             color: white;
@@ -143,71 +119,68 @@
             margin-top: 10px;
             align-self: flex-start;
         }
-
-        /* Form Stilleri */
-        #requestForm {
-            max-width: 650px;
-            margin: 0 auto;
-        }
-        .form-group input,
-        .form-group textarea {
-            border-radius: 25px; 
-            padding: 12px 20px 12px 50px; 
-            border: 1px solid #ddd;
-            background-color: var(--light-bg);
-        }
-        .form-group i {
-            left: 20px;
-            color: var(--primary-color);
-        }
-        #requestForm button {
-            background-color: var(--accent-color);
-            color: var(--primary-color);
-            border-radius: 50px;
-            padding: 15px 25px;
-            font-weight: 900;
-        }
-
-        /* AI Asistanı - Tam Ekran Sekme */
+        
+        /* AI Asistanı - TEMEL DÜZELTMELER BURADA */
         #ai-assistant {
             display: none; 
             position: fixed;
             top: 0; 
             left: 0;
             width: 100%;
-            height: 100vh;
-            background: white;
-            z-index: 40; 
-            padding: 0;
-            margin: 0;
+            /* Ekranın tam yüksekliğini kullan, overflow sorunlarını yönetmek için */
+            height: 100%; 
+            background: var(--light-bg);
+            z-index: 90; 
             flex-direction: column;
             
-            /* Header yüksekliğine göre ayarlanmış boşluk */
-            padding-top: 180px; 
-            box-sizing: border-box;
+            /* Başlık yüksekliğini JS ile dinamik olarak alacağız */
+            padding-top: 0; 
         }
         
         #ai-assistant.active {
             display: flex;
         }
         
+        /* Sohbet Kutusu (Kaydırılabilir Alan) */
         #ai-chat-box {
             flex-grow: 1;
             padding: 15px;
             overflow-y: auto;
             background-color: #f9f9f9;
-            display: flex;
-            flex-direction: column;
+            /* Header ve alt kontrol alanı hariç tüm alanı kaplar */
+            min-height: calc(100% - 180px); 
+            padding-top: 180px; /* Header boşluğunu tekrar chatbox'a verdik */
         }
+        
+        /* Kontrol Alanı (Sohbeti Temizle) */
+        .ai-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: #f0f0f0;
+            border-top: 1px solid #ddd;
+            z-index: 95; /* Giriş alanının altında kalır */
+        }
+        
+        /* GİRİŞ ALANI - MOBİL İÇİN SABİTLENDİ */
         #ai-input-area {
+            position: fixed; /* Ekranın altından kaybolmasını engeller */
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            box-sizing: border-box;
+            
             display: flex;
             border-top: 1px solid #ddd;
             padding: 10px;
             background: white;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
             align-items: center;
             min-height: 70px;
+            z-index: 100; /* Her zaman en üstte */
         }
+        
         #ai-user-input {
             flex-grow: 1;
             padding: 10px;
@@ -226,6 +199,7 @@
             transition: background-color 0.3s;
         }
         
+        /* Mesaj Balonları */
         .ai-message {
             background-color: #E3F2FD; 
             padding: 10px 15px;
@@ -243,47 +217,11 @@
             text-align: right;
             border-radius: 15px 15px 5px 15px;
         }
-        .ai-controls {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            background: #f0f0f0;
-            border-top: 1px solid #ddd;
-        }
-        .clear-btn {
-            background-color: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-weight: 600;
-        }
         
-        .memory-indicator {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: #ccc;
-        }
-
-        .memory-indicator.active {
-            background-color: #4caf50;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
         /* Mobil Uyumlu Düzenlemeler */
         @media (max-width: 768px) {
             header h1 {
                 font-size: 2.2em;
-            }
-            nav {
-                padding: 10px 0;
             }
             nav button {
                 max-width: 48%; 
@@ -296,8 +234,11 @@
                 padding: 20px;
                 border-radius: 15px;
             }
-            #ai-assistant {
-                padding-top: 200px; /* Mobil başlığa göre boşluk */
+            
+            /* Mobil cihazlarda chatbox'ın üst padding'ini düzenle */
+            #ai-chat-box {
+                padding-top: 200px; /* Mobil başlığın altında başlar */
+                min-height: calc(100% - 200px); 
             }
         }
     </style>
@@ -404,6 +345,7 @@
         <div id="ai-chat-box">
             <div class="ai-message">Merhaba! Ben Mahir. Sana okul ödevlerinde ve ders konularında yardımcı olmak için buradayım. Ne öğrenmek istersin?</div>
         </div>
+        
         <div class="ai-controls">
             <div class="memory-status">
                 <span class="memory-indicator" id="memory-indicator"></span>
@@ -411,6 +353,7 @@
             </div>
             <button class="clear-btn" onclick="clearChat()">🗑️ Sohbeti Temizle</button>
         </div>
+        
         <div id="ai-input-area">
             <input type="text" id="ai-user-input" placeholder="Sorunuzu buraya yazın (Örn: Pisagor teoremi nedir?)">
             <button id="ai-send-button">Gönder</button>
@@ -424,7 +367,8 @@
     <script>
         // HAFIZA SİSTEMİ
         let conversationHistory = [];
-        
+        const CHATBOX_PADDINGS = 200; // Mobil: 200px (header yüksekliği)
+
         function updateMemoryStatus() {
             const indicator = document.getElementById('memory-indicator');
             const text = document.getElementById('memory-text');
@@ -457,13 +401,23 @@
 
             const mainContent = document.getElementById('main-content');
             const aiSection = document.getElementById('ai-assistant');
+            const headerHeight = document.querySelector('header').offsetHeight;
+            
+            // AI Asistanı giriş alanını ayarla
+            const aiInputArea = document.getElementById('ai-input-area');
+            const aiControls = document.querySelector('.ai-controls');
 
             if (sectionId === 'ai-assistant_toggle') {
                 // AI Asistanı'nı göster (main'i gizle)
                 mainContent.classList.add('hidden');
                 aiSection.classList.remove('hidden');
                 aiSection.classList.add('active');
-                // document.body.style.overflow = 'hidden'; // Kaydırmayı kapatmak opsiyoneldir
+                document.body.style.overflow = 'hidden'; 
+
+                // AI arayüzündeki bileşenlerin konumunu dinamik olarak ayarla
+                document.getElementById('ai-chat-box').style.paddingTop = `${headerHeight}px`;
+                aiControls.style.bottom = `${aiInputArea.offsetHeight}px`; // Kontrolleri input alanının hemen üstüne taşı
+
             } else {
                 // Normal bir sayfayı göster (AI'ı gizle)
                 mainContent.classList.remove('hidden');
@@ -503,20 +457,6 @@
                 document.getElementById('message').value = '';
                 setTimeout(() => { statusMessage.textContent = ''; }, 6000);
             }, 1500);
-            
-            /* Gerçek form gönderimi için bu kod kullanılabilir:
-            const data = new FormData();
-            data.append('Ad', name);
-            data.append('Gonderen_Mail_Adresi', email);
-            data.append('Dilekce_Metni', message);
-            fetch('https://formspree.io/f/xdkwzjgn', {
-                method: 'POST',
-                body: data,
-                headers: { 'Accept': 'application/json' }
-            }).then(response => {
-                 // ... başarılı/başarısız durumlarını yönetin
-            });
-            */
         }
 
         document.addEventListener('DOMContentLoaded', () => {
