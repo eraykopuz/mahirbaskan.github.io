@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
-        /* Genel CSS kodunuz */
         body {
             font-family: 'Montserrat', sans-serif;
             line-height: 1.6;
@@ -24,7 +23,6 @@
             font-weight: 700;
         }
 
-        /* Başlık ve Navigasyon Alanı (SABİT) */
         header {
             background: #004d99;
             color: white;
@@ -42,7 +40,6 @@
             font-size: 2.5em;
         }
 
-        /* Navigasyon Butonları */
         nav {
             display: flex;
             flex-wrap: wrap;
@@ -72,7 +69,6 @@
             box-shadow: 0 6px 12px rgba(0,0,0,0.2);
         }
 
-        /* Ana İçerik Alanı */
         main {
             padding: 30px;
             max-width: 960px;
@@ -84,7 +80,6 @@
             position: relative; 
         }
 
-        /* Ana içerik section'ları */
         section {
             padding: 25px 0;
             border-bottom: 1px solid #ddd;
@@ -96,7 +91,6 @@
         .hidden { display: none !important; }
         .active { display: block; }
         
-        /* Tablo Stilleri */
         .table-container { 
             overflow-x: auto; 
         }
@@ -125,7 +119,6 @@
         
         footer { text-align: center; padding: 1.5em 0; background: #333; color: white; margin-top: 30px; }
         
-        /* --- DİLEKÇE KUTUSU (YENİ) --- */
         #requests h2, #requests p {
             text-align: center;
         }
@@ -161,7 +154,7 @@
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 12px 12px 12px 45px; /* İkon için ekstra boşluk */
+            padding: 12px 12px 12px 45px;
             border: 1px solid #ccc;
             border-radius: 10px;
             font-family: inherit;
@@ -172,7 +165,7 @@
         }
 
         .form-group textarea {
-            padding-left: 15px; /* Textarea için ikon yok, boşluk düzeltildi */
+            padding-left: 15px;
             min-height: 150px;
             resize: vertical;
         }
@@ -207,7 +200,6 @@
             text-align: center;
         }
 
-        /* --- AI ASSISTANT STİLLERİ --- */
         #ai-assistant {
             display: none; 
             position: fixed;
@@ -235,7 +227,7 @@
             background-color: #f9f9f9;
             display: flex;
             flex-direction: column;
-            height: calc(100% - 70px); 
+            height: calc(100% - 140px); 
         }
 
         #ai-input-area {
@@ -266,15 +258,21 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
+
+        #ai-send-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
         
         .ai-message {
             background-color: #e6e6fa; 
-            padding: 10px;
+            padding: 10px 15px;
             border-radius: 15px 15px 15px 0;
             margin-bottom: 10px;
             max-width: 80%;
             align-self: flex-start;
             text-align: left;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .user-message {
@@ -285,7 +283,58 @@
             border-radius: 15px 15px 0 15px;
         }
 
-        /* Mobil Cihazlar için Düzenleme */
+        .ai-controls {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: #f0f0f0;
+            border-top: 1px solid #ddd;
+        }
+
+        .ai-controls button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .clear-btn {
+            background-color: #ff6b6b;
+            color: white;
+        }
+
+        .clear-btn:hover {
+            background-color: #ff5252;
+        }
+
+        .memory-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .memory-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+        }
+
+        .memory-indicator.active {
+            background-color: #4caf50;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
         @media (max-width: 768px) {
             #ai-assistant.active {
                 padding-top: 200px;
@@ -355,7 +404,7 @@
             <h2>İsteklerinizi Doğrudan Mahir'e Ulaştırın</h2>
             <p>Görüş, öneri veya şikayetlerinizi bizimle paylaşın. Tüm mesajlar bizzat Mahir Saruhan tarafından incelenecektir.</p>
             
-            <form id="requestForm" action="https://formspree.io/f/xdkwzjgn" method="POST">
+            <div id="requestForm">
                 <div class="form-group">
                     <i class="fas fa-user"></i>
                     <label for="name">Adınız (İsteğe Bağlı):</label>
@@ -373,8 +422,8 @@
                     <textarea id="message" name="Dilekce_Metni" rows="6" required placeholder="Tüm dilek ve önerilerinizi buraya yazabilirsiniz."></textarea>
                 </div>
 
-                <button type="submit">Gönder</button>
-            </form>
+                <button onclick="submitForm()">Gönder</button>
+            </div>
             <p id="formStatus" style="margin-top: 15px; font-weight: bold;"></p>
         </section>
 
@@ -382,7 +431,14 @@
     
     <section id="ai-assistant" class="hidden">
         <div id="ai-chat-box">
-            <div class="ai-message">Merhaba! Ben Mahir Saruhan'ın AI asistanıyım. Hangi ders hakkında yardıma ihtiyacın var?</div>
+            <div class="ai-message">Merhaba! Ben Mahir. Sana okul ödevlerinde ve ders konularında yardımcı olmak için buradayım. Ne öğrenmek istersin?</div>
+        </div>
+        <div class="ai-controls">
+            <div class="memory-status">
+                <span class="memory-indicator" id="memory-indicator"></span>
+                <span id="memory-text">Hafıza: Boş</span>
+            </div>
+            <button class="clear-btn" onclick="clearChat()">🗑️ Sohbeti Temizle</button>
         </div>
         <div id="ai-input-area">
             <input type="text" id="ai-user-input" placeholder="Sorunuzu buraya yazın (Örn: Pisagor teoremi nedir?)">
@@ -395,6 +451,32 @@
     </footer>
     
     <script>
+        // HAFIZA SİSTEMİ - ÖNEMLĐ!
+        let conversationHistory = [];
+
+        function updateMemoryStatus() {
+            const indicator = document.getElementById('memory-indicator');
+            const text = document.getElementById('memory-text');
+            const messageCount = conversationHistory.length / 2;
+            
+            if (conversationHistory.length > 0) {
+                indicator.classList.add('active');
+                text.textContent = `Hafıza: ${messageCount} sohbet`;
+            } else {
+                indicator.classList.remove('active');
+                text.textContent = 'Hafıza: Boş';
+            }
+        }
+
+        function clearChat() {
+            if (confirm('Tüm sohbet geçmişi silinecek. Emin misiniz?')) {
+                conversationHistory = [];
+                const chatBox = document.getElementById('ai-chat-box');
+                chatBox.innerHTML = '<div class="ai-message">Merhaba! Ben Mahir. Sana okul ödevlerinde ve ders konularında yardımcı olmak için buradayım. Ne öğrenmek istersin?</div>';
+                updateMemoryStatus();
+            }
+        }
+
         function showSection(sectionId) {
             document.querySelectorAll('main section').forEach(section => {
                 section.classList.add('hidden');
@@ -423,42 +505,52 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            showSection('home');
-            
-            const form = document.getElementById('requestForm');
+        function submitForm() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
             const statusMessage = document.getElementById('formStatus');
 
-            form.addEventListener('submit', async function(e) {
-                e.preventDefault(); 
-                
-                const data = new FormData(e.target);
-                
-                try {
-                    const response = await fetch(e.target.action, {
-                        method: form.method,
-                        body: data,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    });
+            if (!message.trim()) {
+                statusMessage.style.color = 'red';
+                statusMessage.textContent = 'Lütfen mesajınızı yazın!';
+                return;
+            }
 
-                    if (response.ok) {
-                        statusMessage.style.color = 'green';
-                        statusMessage.textContent = 'Mesajınız Mahir Saruhan’a başarıyla iletildi! Teşekkür ederiz.';
-                        form.reset(); 
-                    } else {
-                        statusMessage.style.color = 'red';
-                        statusMessage.textContent = 'Gönderimde bir hata oluştu. Lütfen bağlantınızı kontrol edin.';
-                    }
-                } catch (error) {
-                    statusMessage.style.color = 'red';
-                    statusMessage.textContent = 'Bağlantı hatası.';
+            const data = new FormData();
+            data.append('Ad', name);
+            data.append('Gonderen_Mail_Adresi', email);
+            data.append('Dilekce_Metni', message);
+
+            fetch('https://formspree.io/f/xdkwzjgn', {
+                method: 'POST',
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
                 }
-
-                setTimeout(() => { statusMessage.textContent = ''; }, 6000);
+            })
+            .then(response => {
+                if (response.ok) {
+                    statusMessage.style.color = 'green';
+                    statusMessage.textContent = 'Mesajınız Mahir Saruhan\'a başarıyla iletildi! Teşekkür ederiz.';
+                    document.getElementById('name').value = '';
+                    document.getElementById('email').value = '';
+                    document.getElementById('message').value = '';
+                } else {
+                    statusMessage.style.color = 'red';
+                    statusMessage.textContent = 'Gönderimde bir hata oluştu.';
+                }
+            })
+            .catch(error => {
+                statusMessage.style.color = 'red';
+                statusMessage.textContent = 'Bağlantı hatası.';
             });
 
+            setTimeout(() => { statusMessage.textContent = ''; }, 6000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('home');
 
             const chatBox = document.getElementById('ai-chat-box');
             const userInput = document.getElementById('ai-user-input');
@@ -480,7 +572,7 @@
                 userInput.value = "";
                 sendButton.disabled = true; 
                 
-                addMessage("Yapay zeka düşünüyor...", false); 
+                addMessage("Mahir düşünüyor...", false); 
                 const loadingMessage = chatBox.lastChild;
 
                 try {
@@ -489,20 +581,32 @@
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ prompt: prompt }),
+                        body: JSON.stringify({ 
+                            prompt: prompt,
+                            conversationHistory: conversationHistory  // HAFIZA GÖNDERİLİYOR
+                        }),
                     });
 
                     const data = await response.json();
 
                     chatBox.removeChild(loadingMessage);
+                    
                     if (response.ok) {
                         addMessage(data.answer, false);
+                        
+                        // HAFIZA GÜNCELLENİYOR - ÇOK ÖNEMLİ!
+                        if (data.conversationHistory) {
+                            conversationHistory = data.conversationHistory;
+                            updateMemoryStatus();
+                            console.log('Hafıza güncellendi:', conversationHistory.length, 'mesaj');
+                        }
                     } else {
-                        addMessage(`Hata: ${data.error || 'Cevap alınamadı. (API Anahtarını kontrol edin.)'}`, false);
+                        addMessage(`Hata: ${data.error || 'Cevap alınamadı.'}`, false);
                     }
                 } catch (error) {
                     chatBox.removeChild(loadingMessage);
-                    addMessage("Sunucu hatası. Projenizin Node.js ve Gemini fonksiyonunun çalıştığından emin olun.", false);
+                    addMessage("Sunucu hatası. API'nin çalıştığından emin olun.", false);
+                    console.error('Fetch error:', error);
                 } finally {
                     sendButton.disabled = false;
                     userInput.focus();
