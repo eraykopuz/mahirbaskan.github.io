@@ -1,278 +1,626 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mahir Saruhan - Okul Başkanlığı Adayı</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap"
-    rel="stylesheet"
-  />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-  />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahir Saruhan - Okul Başkanlığı Adayı</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #EFEFEF; 
+            color: #333;
+        }
+        
+        h1, h2, h3 {
+            color: #004d99;
+            font-weight: 700;
+        }
 
-  <style>
-    :root {
-      --primary-color: #1A237E;
-      --accent-color: #FFC107;
-      --secondary-color: #ECEFF1;
-      --text-color: #263238;
-      --light-bg: #FFFFFF;
-    }
+        header {
+            background: #004d99;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 50; 
+        }
 
-    body {
-      font-family: "Poppins", sans-serif;
-      margin: 0;
-      background: var(--secondary-color);
-      color: var(--text-color);
-    }
+        header h1 {
+            color: white;
+            margin-bottom: 0.2em;
+            font-size: 2.5em;
+        }
 
-    header {
-      background: var(--primary-color);
-      color: var(--light-bg);
-      text-align: center;
-      padding: 20px 0;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 10px 5px 0 5px;
+        }
 
-    header h1 {
-      color: var(--accent-color);
-      font-size: 2.6em;
-      margin: 0.2em 0;
-      font-weight: 900;
-    }
+        nav button {
+            background: #FFB300;
+            color: #004d99;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+            font-weight: 600;
+            font-size: 0.9em;
+            flex-grow: 1;
+            max-width: 45%; 
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
 
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 10px;
-    }
+        nav button:hover {
+            background-color: #e6a200;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
 
-    nav button {
-      background: var(--accent-color);
-      color: var(--primary-color);
-      border: none;
-      padding: 10px 18px;
-      border-radius: 40px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+        main {
+            padding: 30px;
+            max-width: 960px;
+            margin: 30px auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            min-height: 60vh; 
+            position: relative; 
+        }
 
-    nav button:hover {
-      background-color: #e6a200;
-      transform: translateY(-2px);
-    }
+        section {
+            padding: 25px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        section:last-child {
+            border-bottom: none;
+        }
 
-    main {
-      background: var(--light-bg);
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-      min-height: 60vh;
-    }
+        .hidden { display: none !important; }
+        .active { display: block; }
+        
+        .table-container { 
+            overflow-x: auto; 
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse; 
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+        }
+        th, td {
+            border: 1px solid #e0e0e0;
+            padding: 15px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #004d99;
+            color: white;
+            font-weight: 600;
+            border-color: #003366; 
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        footer { text-align: center; padding: 1.5em 0; background: #333; color: white; margin-top: 30px; }
+        
+        #requests h2, #requests p {
+            text-align: center;
+        }
 
-    section {
-      display: none;
-      padding: 20px 0;
-    }
+        #requestForm {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
 
-    section.active {
-      display: block;
-    }
+        .form-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+            transition: color 0.3s;
+        }
 
-    /* AI Asistanı Stilleri */
-    #ai-assistant h2 {
-      text-align: center;
-      color: var(--primary-color);
-    }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 12px 12px 45px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1em;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            box-sizing: border-box;
+            background-color: #f8f8f8;
+        }
 
-    #ai-chat-box {
-      border: 1px solid #ddd;
-      border-radius: 15px;
-      height: 350px;
-      overflow-y: auto;
-      padding: 10px;
-      background-color: #f9f9f9;
-      margin-bottom: 15px;
-    }
+        .form-group textarea {
+            padding-left: 15px;
+            min-height: 150px;
+            resize: vertical;
+        }
 
-    .ai-message {
-      background-color: #E3F2FD;
-      padding: 10px 15px;
-      border-radius: 15px 15px 15px 5px;
-      margin-bottom: 10px;
-      width: fit-content;
-      max-width: 80%;
-    }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #004d99;
+            box-shadow: 0 0 8px rgba(0, 77, 153, 0.2);
+        }
 
-    .user-message {
-      background-color: #DCEDC8;
-      border-radius: 15px 15px 5px 15px;
-      align-self: flex-end;
-      margin-left: auto;
-    }
+        #requestForm button {
+            background-color: #FFB300;
+            color: #004d99;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
 
-    #ai-input-area {
-      display: flex;
-      gap: 10px;
-    }
+        #requestForm button:hover {
+            background-color: #e6a200;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
 
-    #ai-user-input {
-      flex-grow: 1;
-      border: 1px solid #ccc;
-      border-radius: 25px;
-      padding: 10px 15px;
-      font-size: 1em;
-    }
+        #formStatus {
+            text-align: center;
+        }
 
-    #ai-send-button {
-      background: var(--accent-color);
-      color: var(--primary-color);
-      border: none;
-      border-radius: 25px;
-      padding: 10px 20px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
+        #ai-assistant {
+            display: none; 
+            position: fixed;
+            top: 0; 
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: white;
+            z-index: 40; 
+            padding: 0;
+            margin: 0;
+            flex-direction: column;
+        }
+        
+        #ai-assistant.active {
+            display: flex;
+            padding-top: 170px;
+            box-sizing: border-box;
+        }
+        
+        #ai-chat-box {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            height: calc(100% - 140px); 
+        }
 
-    #ai-send-button:hover {
-      background: #e6a200;
-    }
+        #ai-input-area {
+            display: flex;
+            border-top: 1px solid #ddd;
+            padding: 10px;
+            background: white;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            align-items: center;
+            min-height: 70px;
+        }
 
-    footer {
-      text-align: center;
-      background: var(--primary-color);
-      color: var(--secondary-color);
-      padding: 20px 0;
-      margin-top: 30px;
-    }
+        #ai-user-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            margin-right: 10px;
+            font-size: 1em;
+        }
 
-    @media (max-width: 768px) {
-      nav button {
-        flex: 1 1 45%;
-      }
-    }
-  </style>
+        #ai-send-button {
+            background-color: #004d99;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #ai-send-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .ai-message {
+            background-color: #e6e6fa; 
+            padding: 10px 15px;
+            border-radius: 15px 15px 15px 0;
+            margin-bottom: 10px;
+            max-width: 80%;
+            align-self: flex-start;
+            text-align: left;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .user-message {
+            background-color: #d1f7c4; 
+            margin-left: auto;
+            align-self: flex-end;
+            text-align: right;
+            border-radius: 15px 15px 0 15px;
+        }
+
+        .ai-controls {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: #f0f0f0;
+            border-top: 1px solid #ddd;
+        }
+
+        .ai-controls button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .clear-btn {
+            background-color: #ff6b6b;
+            color: white;
+        }
+
+        .clear-btn:hover {
+            background-color: #ff5252;
+        }
+
+        .memory-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .memory-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+        }
+
+        .memory-indicator.active {
+            background-color: #4caf50;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            #ai-assistant.active {
+                padding-top: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>MAHİR SARUHAN</h1>
-    <h3>Okul Başkanlığı Adayı | #DeğişimMahir</h3>
-    <nav>
-      <button onclick="showSection('home')"><i class="fas fa-home"></i> Ana Sayfa</button>
-      <button onclick="showSection('why-us')"><i class="fas fa-handshake"></i> Neden Biz?</button>
-      <button onclick="showSection('promises')"><i class="fas fa-list-check"></i> Vaatler</button>
-      <button onclick="showSection('requests')"><i class="fas fa-paper-plane"></i> İstek Kutusu</button>
-      <button onclick="showSection('ai-assistant')"><i class="fas fa-robot"></i> AI Asistanı</button>
-    </nav>
-  </header>
 
-  <main>
-    <section id="home" class="active">
-      <h2>Okulumuzun Geleceği İçin Güçlü Bir Liderlik!</h2>
-      <p>
-        Mahir Saruhan'ın vizyonu, okulumuzu daha iyi, daha öğrenci dostu bir yer yapmak.
-      </p>
-    </section>
+    <header>
+        <h1>Mahir Saruhan</h1>
+        <h3>Okul Başkanlığı Adayı</h3>
+        <nav>
+            <button onclick="showSection('home')">Ana Sayfa</button>
+            <button onclick="showSection('why-us')">Neden Bizi Seçmelisiniz</button>
+            <button onclick="showSection('promises')">Vaatler</button>
+            <button onclick="showSection('requests')">İstek/Dilekçe Kutusu</button>
+            <button onclick="showSection('ai-assistant')">📚 AI Ödev Yardımcısı</button>
+        </nav>
+    </header>
 
-    <section id="why-us">
-      <h2>Neden Mahir Saruhan?</h2>
-      <ul>
-        <li>Takım çalışmasına önem verir.</li>
-        <li>Gerçekçi ve uygulanabilir vaatler sunar.</li>
-        <li>Şeffaf ve adil yönetim anlayışı.</li>
-      </ul>
-    </section>
+    <main>
+        <section id="home" class="active">
+            <h2>Okulumuzun Geleceği İçin Mahir Saruhan!</h2>
+            <p>Mahir Saruhan'ın vizyonu, okulumuzu daha iyi, daha öğrenci dostu ve daha başarılı bir yer yapmaktır. Okulumuzun karşılaştığı zorluklara **yenilikçi çözümler** sunuyor ve her öğrencinin sesini duyurmayı hedefliyor. **Değişim için oy verin!**</p>
+            <hr>
+            <h3>Kısa Özet: Neden Mahir?</h3>
+            <p>Mahir'in en güçlü yönleri; **Liderlik**, **Çözüm Odaklılık** ve **Gerçekçi Vaatler** sunmasıdır. Detaylı bilgi için üst menüdeki "Neden Bizi Seçmelisiniz" sekmesini ziyaret edin.</p>
+        </section>
 
-    <section id="promises">
-      <h2>Vaatler</h2>
-      <p>Okulun her alanında iyileştirme çalışmaları yapılacak.</p>
-    </section>
+        <section id="why-us" class="hidden">
+            <h2>Neden Mahir Saruhan'ı Desteklemelisiniz?</h2>
+            <p>Mahir Saruhan, okul topluluğuna değer katan ve başarılı bir başkan olmasını sağlayacak kanıtlanmış özelliklere sahiptir:</p>
+            <ul>
+                <li><strong>Takım Çalışması İle Hareket Eder:</strong> Okul idaresi, öğretmenler ve öğrencilerle iş birliği yaparak ortak çözümler üretmeyi hedefler.</li>
+                <li><strong>Gerçekçi Vaatler Sunar:</strong> Hayata geçirilebilir, somut ve ölçülebilir projelerle öğrencilerin güvenini kazanır.</li>
+                <li><strong>Dürüst ve Saygılı Biridir:</strong> Tüm okul paydaşlarına eşit ve saygılı davranır, şeffaf bir yönetim anlayışı benimser.</li>
+                <li><strong>Öğrenci Görüşlerine Önem Verir:</strong> Düzenli anketler ve toplantılarla öğrencilerin sesini yönetime taşır.</li>
+                <li><strong>Sosyal Etkinliklere Önem Verir:</strong> Okul hayatını daha keyifli hale getirecek, kültürel ve sportif etkinlikleri destekler.</li>
+                <li><strong>Liderlik Yeteneği Gelişmiştir:</strong> Sorumluluk almaktan çekinmez, doğru kararları hızla alır ve ekibine ilham verir.</li>
+            </ul>
+        </section>
 
-    <section id="requests">
-      <h2>İstek Kutusu</h2>
-      <p>Fikirlerinizi Mahir Saruhan’a ulaştırın!</p>
-    </section>
+        <section id="promises" class="hidden">
+            <h2>Mahir Saruhan'ın Temel Vaatleri</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr><th>Vaat</th><th>Detay</th><th>Durum</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Suya Kolay Ulaşım</td><td>Suların ucuzlaması veya bedava olması</td><td>☐ Planlama Aşamasında</td></tr>
+                        <tr><td>Self Id Haftalık Ödül Sistemi</td><td>Ders Çalışmayı eğlenceli hale getirmek için Self Id sisteminde haftanın en çok puan alan kişisine sürpriz hediyeler </td><td>☐ Planlama Aşamasında</td></tr>
+                        <tr><td>Sahalara Top Koyulması</td><td>Okul arkadaşlarımızın rahatça oyun oynamaları için sahalara top koyulması.</td><td>☐ Planlama Aşamasında</td></tr>
+                        <tr><td>Okul Eşyalarının Tamiri</td><td>Okulumuzdaki başta kalorifer petekleri olmak üzere eşyaların tamir edilmesi </td><td>☐ Planlama Aşamasında</td></tr>
+                        <tr><td>Geri Dönüşüm Kutuları</td><td>Öğrencilerimizin doğaya destek vermeleri için okula geri dönüşüm kutuları koyulması.</td><td>☐ Planlama Aşamasında</td></tr>
+                        <tr><td>Web Sitesi Güncellemesi</td><td>Öğrencilerimizin daha iyi verim almaları için düzenli olarak eleştiriler doğrultusunda güncelleme getirilmesi.</td><td>☐ Planlama Aşamasında</td></tr>
+                        <tr><td>Tahtalara Format Atılması</td><td>Akıllı tahtaların yavaş olması nedeniyle tahtalara format atılacak ve hızlandırılacak.</td><td>☐ Planlama Aşamasında</td></tr>
+                        <tr><td>Doğum Günü Panosu</td><td>Her ay doğum günü olan öğrencilerin yazdığı bir liste yapılacak.</td><td>☐ Planlama Aşamasında</td></tr>
+                        <tr><td>Oyun ve Resim Turnuvaları</td><td>Öğrencilerin eğlenmesi için turnuva(lar) düzenlenecek.</td><td>☐ Planlama Aşamasında</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
-    <!-- 💬 AI Asistan Sekmesi -->
-    <section id="ai-assistant">
-      <h2><i class="fas fa-robot"></i> Mahir AI Asistanı</h2>
-      <div id="ai-chat-box">
-        <div class="ai-message">
-          Merhaba! Ben Mahir’in yapay zekâ destekli asistanıyım. Size okul projelerinde veya derslerde yardımcı olabilirim. 💡
+        <section id="requests" class="hidden">
+            <h2>İsteklerinizi Doğrudan Mahir'e Ulaştırın</h2>
+            <p>Görüş, öneri veya şikayetlerinizi bizimle paylaşın. Tüm mesajlar bizzat Mahir Saruhan tarafından incelenecektir.</p>
+            
+            <div id="requestForm">
+                <div class="form-group">
+                    <i class="fas fa-user"></i>
+                    <label for="name">Adınız (İsteğe Bağlı):</label>
+                    <input type="text" id="name" name="Ad" placeholder="Adınız Soyadınız">
+                </div>
+
+                <div class="form-group">
+                    <i class="fas fa-envelope"></i>
+                    <label for="email">E-posta Adresiniz (Zorunlu Değil):</label>
+                    <input type="email" id="email" name="Gonderen_Mail_Adresi" placeholder="ornek@mail.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Mesajınız (Zorunlu):</label>
+                    <textarea id="message" name="Dilekce_Metni" rows="6" required placeholder="Tüm dilek ve önerilerinizi buraya yazabilirsiniz."></textarea>
+                </div>
+
+                <button onclick="submitForm()">Gönder</button>
+            </div>
+            <p id="formStatus" style="margin-top: 15px; font-weight: bold;"></p>
+        </section>
+
+    </main>
+    
+    <section id="ai-assistant" class="hidden">
+        <div id="ai-chat-box">
+            <div class="ai-message">Merhaba! Ben Mahir. Sana okul ödevlerinde ve ders konularında yardımcı olmak için buradayım. Ne öğrenmek istersin?</div>
         </div>
-      </div>
-
-      <div id="ai-input-area">
-        <input type="text" id="ai-user-input" placeholder="Bir soru yazın..." />
-        <button id="ai-send-button">Gönder</button>
-      </div>
+        <div class="ai-controls">
+            <div class="memory-status">
+                <span class="memory-indicator" id="memory-indicator"></span>
+                <span id="memory-text">Hafıza: Boş</span>
+            </div>
+            <button class="clear-btn" onclick="clearChat()">🗑️ Sohbeti Temizle</button>
+        </div>
+        <div id="ai-input-area">
+            <input type="text" id="ai-user-input" placeholder="Sorunuzu buraya yazın (Örn: Pisagor teoremi nedir?)">
+            <button id="ai-send-button">Gönder</button>
+        </div>
     </section>
-  </main>
 
-  <footer>
-    <p>&copy; 2025 Mahir Saruhan Kampanyası | #MahirKazandırır</p>
-  </footer>
+    <footer>
+        <p>&copy; 2025 Mahir Saruhan Okul Başkanlığı Kampanyası | #MahirKazandırır</p>
+    </footer>
+    
+    <script>
+        // HAFIZA SİSTEMİ - ÖNEMLĐ!
+        let conversationHistory = [];
 
-  <script>
-    function showSection(id) {
-      document.querySelectorAll("main section").forEach((sec) => sec.classList.remove("active"));
-      document.getElementById(id).classList.add("active");
-    }
+        function updateMemoryStatus() {
+            const indicator = document.getElementById('memory-indicator');
+            const text = document.getElementById('memory-text');
+            const messageCount = conversationHistory.length / 2;
+            
+            if (conversationHistory.length > 0) {
+                indicator.classList.add('active');
+                text.textContent = `Hafıza: ${messageCount} sohbet`;
+            } else {
+                indicator.classList.remove('active');
+                text.textContent = 'Hafıza: Boş';
+            }
+        }
 
-    const chatBox = document.getElementById("ai-chat-box");
-    const userInput = document.getElementById("ai-user-input");
-    const sendButton = document.getElementById("ai-send-button");
+        function clearChat() {
+            if (confirm('Tüm sohbet geçmişi silinecek. Emin misiniz?')) {
+                conversationHistory = [];
+                const chatBox = document.getElementById('ai-chat-box');
+                chatBox.innerHTML = '<div class="ai-message">Merhaba! Ben Mahir. Sana okul ödevlerinde ve ders konularında yardımcı olmak için buradayım. Ne öğrenmek istersin?</div>';
+                updateMemoryStatus();
+            }
+        }
 
-    function addMessage(text, isUser = false) {
-      const div = document.createElement("div");
-      div.className = isUser ? "ai-message user-message" : "ai-message";
-      div.textContent = text;
-      chatBox.appendChild(div);
-      chatBox.scrollTop = chatBox.scrollHeight;
-    }
+        function showSection(sectionId) {
+            document.querySelectorAll('main section').forEach(section => {
+                section.classList.add('hidden');
+                section.classList.remove('active');
+            });
+            
+            const aiSection = document.getElementById('ai-assistant');
 
-    async function sendMessage() {
-      const prompt = userInput.value.trim();
-      if (!prompt) return;
+            if (sectionId === 'ai-assistant') {
+                document.querySelector('main').classList.add('hidden');
+                aiSection.classList.remove('hidden');
+                aiSection.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+            } else {
+                document.querySelector('main').classList.remove('hidden');
+                aiSection.classList.add('hidden');
+                aiSection.classList.remove('active');
+                
+                const activeSection = document.getElementById(sectionId);
+                if (activeSection) {
+                    activeSection.classList.remove('hidden');
+                    activeSection.classList.add('active');
+                }
+                document.body.style.overflow = 'auto';
+            }
+        }
 
-      addMessage(prompt, true);
-      userInput.value = "";
-      addMessage("Asistan yazıyor...", false);
-      const loading = chatBox.lastChild;
+        function submitForm() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            const statusMessage = document.getElementById('formStatus');
 
-      try {
-        const res = await fetch("/api/gemini", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: prompt }),
+            if (!message.trim()) {
+                statusMessage.style.color = 'red';
+                statusMessage.textContent = 'Lütfen mesajınızı yazın!';
+                return;
+            }
+
+            const data = new FormData();
+            data.append('Ad', name);
+            data.append('Gonderen_Mail_Adresi', email);
+            data.append('Dilekce_Metni', message);
+
+            fetch('https://formspree.io/f/xdkwzjgn', {
+                method: 'POST',
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    statusMessage.style.color = 'green';
+                    statusMessage.textContent = 'Mesajınız Mahir Saruhan\'a başarıyla iletildi! Teşekkür ederiz.';
+                    document.getElementById('name').value = '';
+                    document.getElementById('email').value = '';
+                    document.getElementById('message').value = '';
+                } else {
+                    statusMessage.style.color = 'red';
+                    statusMessage.textContent = 'Gönderimde bir hata oluştu.';
+                }
+            })
+            .catch(error => {
+                statusMessage.style.color = 'red';
+                statusMessage.textContent = 'Bağlantı hatası.';
+            });
+
+            setTimeout(() => { statusMessage.textContent = ''; }, 6000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('home');
+
+            const chatBox = document.getElementById('ai-chat-box');
+            const userInput = document.getElementById('ai-user-input');
+            const sendButton = document.getElementById('ai-send-button');
+
+            function addMessage(text, isUser = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = isUser ? 'ai-message user-message' : 'ai-message';
+                messageDiv.textContent = text;
+                chatBox.appendChild(messageDiv);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+
+            async function sendMessage() {
+                const prompt = userInput.value.trim();
+                if (prompt === "") return;
+
+                addMessage(prompt, true); 
+                userInput.value = "";
+                sendButton.disabled = true; 
+                
+                addMessage("Mahir düşünüyor...", false); 
+                const loadingMessage = chatBox.lastChild;
+
+                try {
+                    const response = await fetch('/api/gemini', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ 
+                            prompt: prompt,
+                            conversationHistory: conversationHistory  // HAFIZA GÖNDERİLİYOR
+                        }),
+                    });
+
+                    const data = await response.json();
+
+                    chatBox.removeChild(loadingMessage);
+                    
+                    if (response.ok) {
+                        addMessage(data.answer, false);
+                        
+                        // HAFIZA GÜNCELLENİYOR - ÇOK ÖNEMLİ!
+                        if (data.conversationHistory) {
+                            conversationHistory = data.conversationHistory;
+                            updateMemoryStatus();
+                            console.log('Hafıza güncellendi:', conversationHistory.length, 'mesaj');
+                        }
+                    } else {
+                        addMessage(`Hata: ${data.error || 'Cevap alınamadı.'}`, false);
+                    }
+                } catch (error) {
+                    chatBox.removeChild(loadingMessage);
+                    addMessage("Sunucu hatası. API'nin çalıştığından emin olun.", false);
+                    console.error('Fetch error:', error);
+                } finally {
+                    sendButton.disabled = false;
+                    userInput.focus();
+                }
+            }
+
+            sendButton.addEventListener('click', sendMessage);
+            userInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
         });
-
-        if (!res.ok) throw new Error("Sunucu hatası.");
-
-        const data = await res.json();
-        chatBox.removeChild(loading);
-        addMessage(data.reply || "Yanıt alınamadı.", false);
-      } catch (err) {
-        chatBox.removeChild(loading);
-        addMessage("❌ Bir hata oluştu. Lütfen tekrar deneyin.", false);
-        console.error(err);
-      }
-    }
-
-    sendButton.addEventListener("click", sendMessage);
-    userInput.addEventListener("keypress", (e) => e.key === "Enter" && sendMessage());
-  </script>
+    </script>
 </body>
 </html>
