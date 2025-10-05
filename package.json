@@ -1,14 +1,12 @@
-"name": "mahir-ai-assistant",
-"version": "1.0.0",
-"description": "Mahir Saruhan'ın kampanya sitesi için yapay zeka asistanı backend yapılandırması",
-  "main": "api/gemini.js",
+{
+  "name": "mahir-ai-assistant",
+  "version": "1.0.0",
+  "description": "Mahir Saruhan'ın kampanya sitesi için yapay zeka asistanı backend yapılandırması",
   "type": "module",
-"dependencies": {
-    "node-fetch": "^3.3.2",
-    "@google/generative-ai": "^0.1.0"
+  "engines": {
+    "node": ">=22.0.0"
   },
-  "scripts": {
-    "start": "echo 'Sadece statik dosyalar ve API fonksiyonları çalışacak.'"
+  "dependencies": {
     "@google/generative-ai": "^0.21.0"
-}
+  }
 }
