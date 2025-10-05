@@ -127,13 +127,10 @@
             top: 0; 
             left: 0;
             width: 100%;
-            /* Ekranın tam yüksekliğini kullan, overflow sorunlarını yönetmek için */
             height: 100%; 
             background: var(--light-bg);
             z-index: 90; 
             flex-direction: column;
-            
-            /* Başlık yüksekliğini JS ile dinamik olarak alacağız */
             padding-top: 0; 
         }
         
@@ -149,7 +146,8 @@
             background-color: #f9f9f9;
             /* Header ve alt kontrol alanı hariç tüm alanı kaplar */
             min-height: calc(100% - 180px); 
-            padding-top: 180px; /* Header boşluğunu tekrar chatbox'a verdik */
+            padding-top: 180px; 
+            padding-bottom: 120px; /* Kontrol ve input alanı için boşluk bırakıldı */
         }
         
         /* Kontrol Alanı (Sohbeti Temizle) */
@@ -160,12 +158,16 @@
             padding: 10px;
             background: #f0f0f0;
             border-top: 1px solid #ddd;
-            z-index: 95; /* Giriş alanının altında kalır */
+            z-index: 95; 
+            position: fixed;
+            bottom: 80px; /* Giriş alanının üstüne konumlandırıldı */
+            width: 100%;
+            box-sizing: border-box;
         }
         
-        /* GİRİŞ ALANI - MOBİL İÇİN SABİTLENDİ */
+        /* GİRİŞ ALANI - SABİT */
         #ai-input-area {
-            position: fixed; /* Ekranın altından kaybolmasını engeller */
+            position: fixed; 
             bottom: 0;
             left: 0;
             width: 100%;
@@ -178,7 +180,7 @@
             box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
             align-items: center;
             min-height: 70px;
-            z-index: 100; /* Her zaman en üstte */
+            z-index: 100; 
         }
         
         #ai-user-input {
@@ -235,10 +237,13 @@
                 border-radius: 15px;
             }
             
-            /* Mobil cihazlarda chatbox'ın üst padding'ini düzenle */
             #ai-chat-box {
-                padding-top: 200px; /* Mobil başlığın altında başlar */
-                min-height: calc(100% - 200px); 
+                padding-top: 200px; 
+                padding-bottom: 120px; /* Mobil cihazlarda da alt boşluk korundu */
+            }
+            
+            .ai-controls {
+                bottom: 80px; 
             }
         }
     </style>
@@ -367,8 +372,7 @@
     <script>
         // HAFIZA SİSTEMİ
         let conversationHistory = [];
-        const CHATBOX_PADDINGS = 200; // Mobil: 200px (header yüksekliği)
-
+        
         function updateMemoryStatus() {
             const indicator = document.getElementById('memory-indicator');
             const text = document.getElementById('memory-text');
@@ -401,22 +405,16 @@
 
             const mainContent = document.getElementById('main-content');
             const aiSection = document.getElementById('ai-assistant');
-            const headerHeight = document.querySelector('header').offsetHeight;
             
-            // AI Asistanı giriş alanını ayarla
-            const aiInputArea = document.getElementById('ai-input-area');
-            const aiControls = document.querySelector('.ai-controls');
-
+            // "ai-assistant_toggle" özel durumunu ele al
             if (sectionId === 'ai-assistant_toggle') {
                 // AI Asistanı'nı göster (main'i gizle)
                 mainContent.classList.add('hidden');
                 aiSection.classList.remove('hidden');
                 aiSection.classList.add('active');
-                document.body.style.overflow = 'hidden'; 
-
-                // AI arayüzündeki bileşenlerin konumunu dinamik olarak ayarla
-                document.getElementById('ai-chat-box').style.paddingTop = `${headerHeight}px`;
-                aiControls.style.bottom = `${aiInputArea.offsetHeight}px`; // Kontrolleri input alanının hemen üstüne taşı
+                
+                // AI açıldığında sayfa kaydırmayı engelleme kaldırıldı, sadece AI bileşenlerini doğru konumlandırdık.
+                document.body.style.overflow = 'auto'; 
 
             } else {
                 // Normal bir sayfayı göster (AI'ı gizle)
