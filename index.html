@@ -1,553 +1,284 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahir Saruhan - Okul Başkanlığı Adayı | Değişim için Oy Verin</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <style>
-        /* Modern Renk Paleti ve Temel Stiller */
-        :root {
-            --primary-color: #1A237E; /* Koyu Lacivert */
-            --accent-color: #FFC107; /* Canlı Sarı */
-            --secondary-color: #ECEFF1; /* Açık Gri Arka Plan */
-            --text-color: #263238; /* Koyu Gri Metin */
-            --light-bg: #FFFFFF;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mahir Saruhan - Okul Başkanlığı Adayı | Değişim için Oy Verin</title>
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-            transition: all 0.3s ease;
-        }
-        
-        h1, h2, h3 {
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-        
-        /* Header ve Navigasyon Stilleri */
-        header {
-            background: var(--primary-color);
-            color: var(--light-bg);
-            padding: 20px 0;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            position: sticky;
-            top: 0;
-            z-index: 50; 
-        }
-        header h1 {
-            color: var(--accent-color);
-            margin-bottom: 0.1em;
-            font-size: 2.8em;
-            font-weight: 900;
-        }
-        nav {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 10px 10px 0 10px;
-        }
-        nav button {
-            background: var(--accent-color);
-            color: var(--primary-color);
-            border: none;
-            padding: 10px 18px;
-            margin: 5px;
-            cursor: pointer;
-            border-radius: 50px; /* Daha yuvarlak butonlar */
-            transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
-            font-weight: 700;
-            font-size: 0.95em;
-            flex-grow: 1;
-            max-width: 200px; 
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-        }
-        nav button:hover {
-            background-color: #e6a200;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-        }
-        
-        /* Main İçerik Alanı */
-        main {
-            padding: 30px;
-            max-width: 1000px;
-            margin: 40px auto;
-            background: var(--light-bg);
-            border-radius: 20px; /* Daha belirgin yuvarlak kenarlar */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            min-height: 60vh; 
-        }
-        section {
-            padding: 25px 0;
-        }
-        .hidden { display: none !important; }
-        .active { display: block; }
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
-        /* Ana Sayfa Hero Section */
-        #home h2 {
-            font-size: 2em;
-            text-align: center;
-            border-bottom: 3px solid var(--accent-color);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-        #home p {
-            font-size: 1.1em;
-            text-align: center;
-        }
-        
-        /* Vaatler - Kart Görünümü */
-        .card-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            padding-top: 15px;
-        }
-        .promise-card {
-            background-color: var(--secondary-color);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        .promise-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-        .promise-card h3 {
-            color: var(--primary-color);
-            font-size: 1.25em;
-            margin-top: 0;
-            display: flex;
-            align-items: center;
-        }
-        .promise-card i {
-            color: var(--accent-color);
-            margin-right: 10px;
-            font-size: 1.5em;
-        }
-        .status-badge {
-            background-color: #4CAF50; /* Yeşil */
-            color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            font-weight: 600;
-            margin-top: 10px;
-            align-self: flex-end;
-        }
+  <style>
+    :root {
+      --primary-color: #1a237e;
+      --accent-color: #ffc107;
+      --secondary-color: #eceff1;
+      --text-color: #263238;
+      --light-bg: #ffffff;
+    }
 
-        /* Form Stilleri */
-        #requestForm {
-            max-width: 650px;
-            margin: 0 auto;
-        }
-        .form-group input,
-        .form-group textarea {
-            border-radius: 25px; 
-            padding: 12px 20px 12px 50px; /* Sol boşluk artırıldı */
-            border: 1px solid #ddd;
-            background-color: var(--light-bg);
-        }
-        .form-group i {
-            left: 20px;
-            color: var(--primary-color);
-        }
-        #requestForm button {
-            background-color: var(--accent-color);
-            color: var(--primary-color);
-            border-radius: 50px;
-            padding: 15px 25px;
-            font-weight: 900;
-        }
-        #requestForm button:hover {
-            background-color: #e6a200;
-        }
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      background: var(--secondary-color);
+      color: var(--text-color);
+    }
 
-        /* Footer */
-        footer { 
-            background: var(--primary-color); 
-            color: var(--secondary-color); 
-        }
+    header {
+      background: var(--primary-color);
+      color: var(--light-bg);
+      text-align: center;
+      padding: 20px 0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
 
-        /* AI Asistanı Stilleri - Full Ekran Kapatıldı, Sabit Buton Yapıldı */
-        #ai-assistant-button {
-            position: fixed;
-            right: 30px;
-            bottom: 30px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: #008CBA; /* Farklı bir canlı mavi */
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            z-index: 1000;
-            transition: transform 0.3s ease;
-        }
-        #ai-assistant-button:hover {
-            transform: scale(1.1);
-        }
+    header h1 {
+      color: var(--accent-color);
+      font-weight: 900;
+      margin: 0;
+      font-size: 2.5em;
+    }
 
-        /* Sohbet Kutusu Modalı */
-        #ai-assistant {
-            display: none; 
-            position: fixed;
-            right: 30px;
-            bottom: 100px; /* Butonun üstünde çıkması için */
-            width: 350px;
-            height: 450px;
-            background: var(--light-bg);
-            border-radius: 15px;
-            box-shadow: 0 5px 30px rgba(0,0,0,0.25);
-            z-index: 999; 
-            flex-direction: column;
-            overflow: hidden;
-        }
-        
-        #ai-assistant.active {
-            display: flex;
-        }
-        
-        #ai-chat-box {
-            flex-grow: 1;
-            padding: 15px;
-            overflow-y: auto;
-            background-color: #f9f9f9;
-        }
-        #ai-input-area {
-            min-height: 70px;
-        }
-        .ai-message {
-            background-color: #E3F2FD; /* Açık mavi */
-            border-radius: 15px 15px 15px 5px;
-        }
-        .user-message {
-            background-color: #DCEDC8; /* Açık yeşil */
-            border-radius: 15px 15px 5px 15px;
-        }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding-top: 10px;
+    }
 
-        /* Mobil Uyumlu Düzenlemeler */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.2em;
-            }
-            nav button {
-                max-width: 48%; /* Mobil görünümde yan yana 2 buton */
-                font-size: 0.85em;
-            }
-            main {
-                margin: 20px;
-                padding: 20px;
-                border-radius: 15px;
-            }
-            #ai-assistant {
-                width: 90%;
-                height: 70%;
-                right: 5%;
-                bottom: 90px;
-            }
-        }
-    </style>
+    nav button {
+      background: var(--accent-color);
+      color: var(--primary-color);
+      border: none;
+      margin: 5px;
+      padding: 10px 18px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: 0.3s;
+    }
+
+    nav button:hover {
+      background: #e6a200;
+      transform: translateY(-2px);
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 40px auto;
+      background: var(--light-bg);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    section {
+      display: none;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .promise-card {
+      background: var(--secondary-color);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .status-badge {
+      display: inline-block;
+      background: #ff9800;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 0.8em;
+      margin-top: 10px;
+    }
+
+    footer {
+      background: var(--primary-color);
+      color: var(--secondary-color);
+      text-align: center;
+      padding: 15px;
+    }
+
+    /* AI Asistanı Sekmesi */
+    #ai-assistant {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    #ai-chat-box {
+      background: #f9f9f9;
+      border-radius: 15px;
+      padding: 15px;
+      height: 400px;
+      overflow-y: auto;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .ai-message {
+      background: #e3f2fd;
+      padding: 10px 15px;
+      border-radius: 15px 15px 15px 5px;
+      margin: 5px 0;
+      max-width: 85%;
+    }
+
+    .user-message {
+      background: #dcedc8;
+      border-radius: 15px 15px 5px 15px;
+      align-self: flex-end;
+    }
+
+    #ai-input-area {
+      display: flex;
+      gap: 10px;
+    }
+
+    #ai-user-input {
+      flex-grow: 1;
+      padding: 10px;
+      border-radius: 25px;
+      border: 1px solid #ccc;
+    }
+
+    #ai-send-button {
+      background: var(--accent-color);
+      color: var(--primary-color);
+      border: none;
+      border-radius: 25px;
+      padding: 10px 20px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    #ai-send-button:hover {
+      background: #e6a200;
+    }
+
+    @media (max-width: 768px) {
+      main {
+        margin: 20px;
+        padding: 20px;
+      }
+    }
+  </style>
 </head>
-<body>
-    <header>
-        <h1>MAHİR SARUHAN</h1>
-        <h3>Okul Başkanlığı Adayı | #DeğişimMahir</h3>
-        <nav>
-            <button onclick="showSection('home')"><i class="fas fa-home"></i> Ana Sayfa</button>
-            <button onclick="showSection('why-us')"><i class="fas fa-handshake"></i> Neden Biz?</button>
-            <button onclick="showSection('promises')"><i class="fas fa-list-check"></i> Vaatler</button>
-            <button onclick="showSection('requests')"><i class="fas fa-paper-plane"></i> İstek Kutusu</button>
-        </nav>
-    </header>
-    <main>
-        <section id="home" class="active">
-            <h2>Okulumuzun Geleceği İçin **Güçlü Bir Liderlik**!</h2>
-            <p>Mahir Saruhan'ın vizyonu, okulumuzu daha iyi, daha öğrenci dostu ve daha başarılı bir yer yapmaktır. Okulumuzun karşılaştığı zorluklara **yenilikçi çözümler** sunuyor ve her öğrencinin sesini duyurmayı hedefliyor. **Değişim için oy verin!**</p>
-            <hr style="border-top: 1px solid #ddd; margin: 30px 0;">
-            <h3>Kısa Özet: Neden Mahir?</h3>
-            <p>Mahir'in en güçlü yönleri; **Takım Oyuncusu** olması, **Çözüm Odaklılık** ve **Gerçekçi Vaatler** sunmasıdır. Detaylı bilgi için üst menüdeki "Neden Bizi Seçmelisiniz" sekmesini ziyaret edin.</p>
-        </section>
-        <section id="why-us" class="hidden">
-            <h2>Neden Mahir Saruhan'ı Desteklemelisiniz?</h2>
-            <p>Mahir, sadece vaat vermez; onları gerçekleştirecek **kanıtlanmış yeteneklere** sahiptir:</p>
-            <ul>
-                <li><strong>Takım Çalışması İle Hareket Eder:</strong> İdare, öğretmen ve öğrencilerle iş birliği yaparak ortak çözümler üretir.</li>
-                <li><strong>Gerçekçi Vaatler Sunar:</strong> Hayata geçirilebilir, somut ve ölçülebilir projelerle öğrencilerin güvenini kazanır.</li>
-                <li><strong>Şeffaf Yönetim:</strong> Tüm okul paydaşlarına eşit ve saygılı davranır, şeffaf bir yönetim anlayışı benimser.</li>
-                <li><strong>Öğrenci Görüşlerine Önem Verir:</strong> Düzenli anketler ve toplantılarla öğrencilerin sesini yönetime taşır.</li>
-                <li><strong>Sosyal Etkinlik Odaklı:</strong> Okul hayatını daha keyifli hale getirecek, kültürel ve sportif etkinlikleri destekler.</li>
-                <li><strong>Liderlik Yeteneği Gelişmiştir:</strong> Sorumluluk almaktan çekinmez, doğru kararları hızla alır ve ekibine ilham verir.</li>
-            </ul>
-        </section>
-        <section id="promises" class="hidden">
-            <h2>Mahir Saruhan'ın Temel Vaatleri</h2>
-            <p>Tüm vaatlerimiz, okul idaresi ile görüşülmüş ve hayata geçirilebilir niteliktedir.</p>
-            <div class="card-container">
-                <div class="promise-card">
-                    <h3><i class="fas fa-droplet"></i> Suya Kolay Ulaşım</h3>
-                    <p>Okul kantininde suların maliyetinin düşürülmesi veya ücretsiz temin edilmesi için çalışmalar başlatılacak.</p>
-                    <span class="status-badge" style="background-color: #FF9800;">Planlama Aşamasında</span>
-                </div>
-                <div class="promise-card">
-                    <h3><i class="fas fa-trophy"></i> Haftalık Ödül Sistemi</h3>
-                    <p>Ders çalışmayı teşvik etmek için Self Id sisteminde haftanın en çok puan alan öğrencilerine sürpriz ödüller.</p>
-                    <span class="status-badge" style="background-color: #FF9800;">Planlama Aşamasında</span>
-                </div>
-                <div class="promise-card">
-                    <h3><i class="fas fa-futbol"></i> Sahalara Top Desteği</h3>
-                    <p>Teneffüslerde ve beden eğitimi derslerinde rahatça oyun oynanması için sahalara yeterli sayıda spor topu sağlanması.</p>
-                    <span class="status-badge" style="background-color: #FF9800;">Planlama Aşamasında</span>
-                </div>
-                <div class="promise-card">
-                    <h3><i class="fas fa-wrench"></i> Okul Eşyalarının Tamiri</h3>
-                    <p>Başta kalorifer petekleri ve kütüphane malzemeleri olmak üzere, tüm arızalı okul eşyalarının öncelikli olarak tamir edilmesi.</p>
-                    <span class="status-badge" style="background-color: #FF9800;">Planlama Aşamasında</span>
-                </div>
-                <div class="promise-card">
-                    <h3><i class="fas fa-recycle"></i> Geri Dönüşüm Kutuları</h3>
-                    <p>Öğrencilerin çevre bilincini artırmak amacıyla okulun tüm katlarına geri dönüşüm kutuları koyulması.</p>
-                    <span class="status-badge" style="background-color: #FF9800;">Planlama Aşamasında</span>
-                </div>
-                <div class="promise-card">
-                    <h3><i class="fas fa-birthday-cake"></i> Doğum Günü Panosu</h3>
-                    <p>Her ay doğum günü olan öğrencilerin kutlandığı, okulun dikkat çeken bir yerinde özel bir pano oluşturulması.</p>
-                    <span class="status-badge" style="background-color: #FF9800;">Planlama Aşamasında</span>
-                </div>
-            </div>
-        </section>
-        <section id="requests" class="hidden">
-            <h2>İsteklerinizi Doğrudan Mahir'e Ulaştırın</h2>
-            <p style="text-align: center;">Görüş, öneri veya şikayetlerinizi bizimle paylaşın. Tüm mesajlar bizzat Mahir Saruhan tarafından incelenecektir.</p>
-            
-            <div id="requestForm">
-                <div class="form-group">
-                    <i class="fas fa-user"></i>
-                    <label for="name">Adınız (İsteğe Bağlı):</label>
-                    <input type="text" id="name" name="Ad" placeholder="Adınız Soyadınız">
-                </div>
-                <div class="form-group">
-                    <i class="fas fa-envelope"></i>
-                    <label for="email">E-posta Adresiniz (Zorunlu Değil):</label>
-                    <input type="email" id="email" name="Gonderen_Mail_Adresi" placeholder="ornek@mail.com">
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">Mesajınız (Zorunlu):</label>
-                    <textarea id="message" name="Dilekce_Metni" rows="6" required placeholder="Tüm dilek ve önerilerinizi buraya yazabilirsiniz."></textarea>
-                </div>
-                <button onclick="submitForm()">Görüşümü Gönder</button>
-            </div>
-            <p id="formStatus" style="margin-top: 15px; font-weight: bold; text-align: center;"></p>
-        </section>
-    </main>
-    
-    <div id="ai-assistant-button" onclick="toggleAIChat()">
-        <i class="fas fa-robot fa-2x"></i>
-    </div>
 
-    <section id="ai-assistant" class="hidden">
-        <div id="ai-chat-box">
-            <div class="ai-message">Merhaba! Ben Mahir. Sana okul ödevlerinde ve ders konularında yardımcı olmak için buradayım. Ne öğrenmek istersin?</div>
-        </div>
-        <div class="ai-controls">
-            <div class="memory-status">
-                <span class="memory-indicator" id="memory-indicator"></span>
-                <span id="memory-text">Hafıza: Boş</span>
-            </div>
-            <button class="clear-btn" onclick="clearChat()">🗑️ Sohbeti Temizle</button>
-        </div>
-        <div id="ai-input-area">
-            <input type="text" id="ai-user-input" placeholder="Sorunuzu buraya yazın (Örn: Pisagor teoremi nedir?)">
-            <button id="ai-send-button">Gönder</button>
-        </div>
+<body>
+  <header>
+    <h1>MAHİR SARUHAN</h1>
+    <h3>Okul Başkanlığı Adayı | #DeğişimMahir</h3>
+    <nav>
+      <button onclick="showSection('home')"><i class='fas fa-home'></i> Ana Sayfa</button>
+      <button onclick="showSection('why-us')"><i class='fas fa-handshake'></i> Neden Biz?</button>
+      <button onclick="showSection('promises')"><i class='fas fa-list-check'></i> Vaatler</button>
+      <button onclick="showSection('requests')"><i class='fas fa-paper-plane'></i> İstek Kutusu</button>
+      <button onclick="showSection('ai-assistant')"><i class='fas fa-robot'></i> AI Asistanı</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="active">
+      <h2>Okulumuzun Geleceği İçin Güçlü Bir Liderlik!</h2>
+      <p>Mahir Saruhan, okulun geleceğini yenilikçi fikirlerle şekillendirmek için yola çıktı.</p>
     </section>
 
-    <footer>
-        <p>&copy; 2025 Mahir Saruhan Okul Başkanlığı Kampanyası | #MahirKazandırır</p>
-    </footer>
-    
-    <script>
-        // HAFIZA SİSTEMİ - ÖNEMLİ!
-        let conversationHistory = [];
-        
-        function updateMemoryStatus() {
-            const indicator = document.getElementById('memory-indicator');
-            const text = document.getElementById('memory-text');
-            const messageCount = conversationHistory.length / 2;
-            
-            if (conversationHistory.length > 0) {
-                indicator.classList.add('active');
-                text.textContent = `Hafıza: ${messageCount} sohbet`;
-            } else {
-                indicator.classList.remove('active');
-                text.textContent = 'Hafıza: Boş';
-            }
-        }
+    <section id="why-us">
+      <h2>Neden Mahir?</h2>
+      <ul>
+        <li>Gerçekçi vaatler</li>
+        <li>Şeffaf yönetim</li>
+        <li>Öğrenci odaklı çözümler</li>
+      </ul>
+    </section>
 
-        function clearChat() {
-            if (confirm('Tüm sohbet geçmişi silinecek. Emin misiniz?')) {
-                conversationHistory = [];
-                const chatBox = document.getElementById('ai-chat-box');
-                chatBox.innerHTML = '<div class="ai-message">Merhaba! Ben Mahir. Sana okul ödevlerinde ve ders konularında yardımcı olmak için buradayım. Ne öğrenmek istersin?</div>';
-                updateMemoryStatus();
-            }
-        }
-        
-        function toggleAIChat() {
-            const aiSection = document.getElementById('ai-assistant');
-            aiSection.classList.toggle('active');
+    <section id="promises">
+      <h2>Vaatlerimiz</h2>
+      <div class="card-container">
+        <div class="promise-card">
+          <h3><i class="fas fa-futbol"></i> Spor Malzemeleri Artışı</h3>
+          <p>Her sınıfa spor topu sağlanacak.</p>
+          <span class="status-badge">Planlama Aşamasında</span>
+        </div>
+      </div>
+    </section>
 
-            // Eğer sohbet açılırsa, diğer bölümler gizlenmeli
-            if (aiSection.classList.contains('active')) {
-                document.querySelectorAll('main section').forEach(section => {
-                    section.classList.add('hidden');
-                    section.classList.remove('active');
-                });
-                document.querySelector('main').classList.add('hidden');
-                document.body.style.overflow = 'hidden'; // Sayfa kaydırmasını engelle
-            } else {
-                // Sohbet kapanırsa Ana Sayfa'yı göster
-                document.querySelector('main').classList.remove('hidden');
-                document.getElementById('home').classList.remove('hidden');
-                document.getElementById('home').classList.add('active');
-                document.body.style.overflow = 'auto';
-            }
-        }
+    <section id="requests">
+      <h2>İstek Kutusu</h2>
+      <p>Önerilerinizi paylaşın!</p>
+      <textarea rows="4" style="width:100%; border-radius:10px;"></textarea>
+      <button style="margin-top:10px;">Gönder</button>
+    </section>
 
-        function showSection(sectionId) {
-            document.querySelectorAll('main section').forEach(section => {
-                section.classList.add('hidden');
-                section.classList.remove('active');
-            });
-            
-            // AI asistanı açıksa kapat
-            const aiSection = document.getElementById('ai-assistant');
-            if (aiSection.classList.contains('active')) {
-                aiSection.classList.remove('active');
-            }
-            document.querySelector('main').classList.remove('hidden');
-            document.body.style.overflow = 'auto';
+    <!-- AI Asistan Sekmesi -->
+    <section id="ai-assistant">
+      <h2>🤖 AI Asistanı</h2>
+      <div id="ai-chat-box">
+        <div class="ai-message">
+          Merhaba! Ben Mahir'in yapay zeka asistanıyım. Derslerinde ya da fikirlerinde sana yardımcı olabilirim.
+        </div>
+      </div>
 
-            const activeSection = document.getElementById(sectionId);
-            if (activeSection) {
-                activeSection.classList.remove('hidden');
-                activeSection.classList.add('active');
-            }
-        }
+      <div id="ai-input-area">
+        <input type="text" id="ai-user-input" placeholder="Sorunuzu yazın..." />
+        <button id="ai-send-button">Gönder</button>
+      </div>
+    </section>
+  </main>
 
-        function submitForm() {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            const statusMessage = document.getElementById('formStatus');
-            
-            if (!message.trim()) {
-                statusMessage.style.color = 'red';
-                statusMessage.textContent = 'Lütfen mesajınızı yazın!';
-                return;
-            }
+  <footer>
+    <p>&copy; 2025 Mahir Saruhan | #MahirKazandırır</p>
+  </footer>
 
-            // Basit bir POST simülasyonu
-            statusMessage.style.color = '#FF9800';
-            statusMessage.textContent = 'Mesajınız gönderiliyor...';
+  <script>
+    function showSection(id) {
+      document.querySelectorAll("main section").forEach(sec => {
+        sec.classList.remove("active");
+      });
+      document.getElementById(id).classList.add("active");
+    }
 
-            setTimeout(() => {
-                statusMessage.style.color = '#4CAF50';
-                statusMessage.textContent = 'Mesajınız Mahir Saruhan\'a başarıyla iletildi! Teşekkür ederiz.';
-                document.getElementById('name').value = '';
-                document.getElementById('email').value = '';
-                document.getElementById('message').value = '';
+    // Basit AI Simülasyonu
+    document.getElementById("ai-send-button").addEventListener("click", sendMessage);
+    document.getElementById("ai-user-input").addEventListener("keypress", e => {
+      if (e.key === "Enter") sendMessage();
+    });
 
-                setTimeout(() => { statusMessage.textContent = ''; }, 6000);
-            }, 1500);
+    function addMessage(text, isUser = false) {
+      const div = document.createElement("div");
+      div.className = "ai-message" + (isUser ? " user-message" : "");
+      div.textContent = text;
+      document.getElementById("ai-chat-box").appendChild(div);
+      const box = document.getElementById("ai-chat-box");
+      box.scrollTop = box.scrollHeight;
+    }
 
-            // Gerçek form gönderimi için Formspree API'yi kullanabilirsiniz.
-            /*
-            const data = new FormData(document.getElementById('requestForm'));
-            fetch('https://formspree.io/f/xdkwzjgn', {
-                method: 'POST',
-                body: data,
-                headers: { 'Accept': 'application/json' }
-            })...
-            */
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            showSection('home');
-            const chatBox = document.getElementById('ai-chat-box');
-            const userInput = document.getElementById('ai-user-input');
-            const sendButton = document.getElementById('ai-send-button');
-
-            function addMessage(text, isUser = false) {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = isUser ? 'ai-message user-message' : 'ai-message';
-                messageDiv.textContent = text;
-                chatBox.appendChild(messageDiv);
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }
-
-            async function sendMessage() {
-                const prompt = userInput.value.trim();
-                if (prompt === "") return;
-
-                addMessage(prompt, true); 
-                userInput.value = "";
-                sendButton.disabled = true; 
-                
-                addMessage("Mahir düşünüyor...", false); 
-                const loadingMessage = chatBox.lastChild;
-
-                try {
-                    // Simülasyon: Gerçek bir API olmadığı için yapay zeka cevabını simüle ediyoruz.
-                    await new Promise(resolve => setTimeout(resolve, 1500)); 
-
-                    const simulatedResponse = `Bu, AI Asistanı'nın simülasyon cevabıdır: "${prompt}" konusuna yardımcı olabilirim. Lütfen daha detaylı bir soru sor.`;
-
-                    chatBox.removeChild(loadingMessage);
-                    addMessage(simulatedResponse, false);
-
-                    // HAFIZA GÜNCELLENİYOR - ÇOK ÖNEMLİ! (Simülasyon amaçlı)
-                    conversationHistory.push({ role: 'user', content: prompt });
-                    conversationHistory.push({ role: 'assistant', content: simulatedResponse });
-                    updateMemoryStatus();
-
-                } catch (error) {
-                    chatBox.removeChild(loadingMessage);
-                    addMessage("Sunucu hatası. (Gerçek bir API bağlantısı kurmanız gerekiyor.)", false);
-                    console.error('Fetch error:', error);
-                } finally {
-                    sendButton.disabled = false;
-                    userInput.focus();
-                }
-            }
-
-            sendButton.addEventListener('click', sendMessage);
-            userInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    sendMessage();
-                }
-            });
-
-            updateMemoryStatus(); // Sayfa yüklendiğinde hafıza durumunu ayarla
-        });
-    </script>
+    async function sendMessage() {
+      const input = document.getElementById("ai-user-input");
+      const text = input.value.trim();
+      if (!text) return;
+      addMessage(text, true);
+      input.value = "";
+      addMessage("Düşünüyorum...");
+      await new Promise(r => setTimeout(r, 1000));
+      document.querySelector("#ai-chat-box .ai-message:last-child").remove();
+      addMessage(`"${text}" hakkında sana yardımcı olabilirim! Şu anda demo modundayım.`);
+    }
+  </script>
 </body>
 </html>
+
