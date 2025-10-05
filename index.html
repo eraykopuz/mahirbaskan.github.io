@@ -1,149 +1,359 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mahir Saruhan - Okul Başkanlığı Adayı</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahir Saruhan - Okul Başkanlığı Adayı</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4ff; 
+            color: #003366;
+        }
 
-<style>
-    body {
-        font-family: 'Montserrat', sans-serif;
-        line-height: 1.6;
-        margin: 0;
-        padding: 0;
-        background-color: #e8f0ff;
-        color: #222;
-    }
+        h1, h2, h3 {
+            color: #003366;
+            font-weight: 700;
+        }
 
-    h1,h2,h3 { color:#0055cc; font-weight:700; }
+        header {
+            background: #0055cc; 
+            color: white; 
+            padding: 25px 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
 
-    header {
-        background: #0055cc;
-        color: white;
-        padding: 25px 0;
-        text-align: center;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        position: sticky;
-        top:0;
-        z-index:50;
-    }
+        header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            font-weight: 700;
+            color: white;
+        }
 
-    header h1 { margin-bottom:0.2em; font-size:2.5em; }
+        header h3 {
+            margin: 5px 0 0 0;
+            font-weight: 600;
+            font-size: 1.3em;
+            color: #e6f0ff;
+        }
 
-    nav {
-        display:flex;
-        flex-wrap:wrap;
-        justify-content:center;
-        padding:10px 5px 0 5px;
-    }
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 15px 5px 0 5px;
+        }
 
-    nav button {
-        background:white;
-        color:#0055cc;
-        border:2px solid #0055cc;
-        padding:10px 15px;
-        margin:5px;
-        cursor:pointer;
-        border-radius:25px;
-        transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
-        font-weight:600;
-        font-size:0.9em;
-        flex-grow:1;
-        max-width:45%;
-        box-shadow:0 3px 6px rgba(0,0,0,0.1);
-    }
+        nav button {
+            background: #0073e6;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+            font-weight: 600;
+            font-size: 0.9em;
+            flex-grow: 1;
+            max-width: 45%;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
 
-    nav button:hover {
-        background:#0077ff;
-        color:white;
-        transform:translateY(-3px);
-        box-shadow:0 6px 12px rgba(0,0,0,0.2);
-    }
+        nav button:hover {
+            background-color: #005bb5;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
 
-    main {
-        padding:30px;
-        max-width:960px;
-        margin:30px auto;
-        background:white;
-        border-radius:12px;
-        box-shadow:0 8px 25px rgba(0,0,0,0.15);
-        min-height:60vh;
-        position:relative;
-    }
+        main {
+            padding: 30px;
+            max-width: 960px;
+            margin: 30px auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            min-height: 60vh;
+            position: relative;
+        }
 
-    section { padding:25px 0; border-bottom:1px solid #d0d8ff; }
-    section:last-child { border-bottom:none; }
+        section {
+            padding: 25px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        section:last-child {
+            border-bottom: none;
+        }
 
-    .hidden { display:none !important; }
-    .active { display:block; }
+        .hidden { display: none !important; }
+        .active { display: block; }
 
-    .table-container { overflow-x:auto; }
+        .table-container {
+            overflow-x: auto;
+        }
 
-    table {
-        width:100%;
-        border-collapse:collapse;
-        border-radius:8px;
-        overflow:hidden;
-        border:1px solid #cfd8ff;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+        }
+        th, td {
+            border: 1px solid #e0e0e0;
+            padding: 15px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #0055cc;
+            color: white;
+            font-weight: 600;
+            border-color: #004080;
+        }
+        tr:nth-child(even) {
+            background-color: #f0f4ff;
+        }
 
-    th, td { border:1px solid #d0d8ff; padding:15px 12px; text-align:left; }
-    th { background-color:#0055cc; color:white; font-weight:600; }
-    tr:nth-child(even) { background-color:#f5f9ff; }
+        footer {
+            text-align: center;
+            padding: 1.5em 0;
+            background: #003366;
+            color: white;
+            margin-top: 30px;
+        }
 
-    footer { text-align:center; padding:1.5em 0; background:#0055cc; color:white; margin-top:30px; }
+        #requests h2, #requests p {
+            text-align: center;
+        }
 
-    #requests h2, #requests p { text-align:center; }
+        #requestForm {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
-    #requestForm { display:flex; flex-direction:column; gap:20px; max-width:600px; margin:0 auto; }
-    .form-group label { display:block; margin-bottom:8px; font-weight:600; color:#333; }
-    .form-group input, .form-group textarea {
-        width:100%;
-        padding:12px;
-        border:1px solid #aac4ff;
-        border-radius:10px;
-        font-family:inherit;
-        font-size:1em;
-        transition:border-color 0.3s, box-shadow 0.3s;
-        background-color:#f9fbff;
-    }
-    .form-group input:focus, .form-group textarea:focus {
-        outline:none;
-        border-color:#0055cc;
-        box-shadow:0 0 8px rgba(0,85,204,0.3);
-    }
-    #requestForm button {
-        background-color:#0055cc;
-        color:white;
-        border:none;
-        padding:15px 25px;
-        font-size:1.1em;
-        font-weight:700;
-        cursor:pointer;
-        border-radius:30px;
-        transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
-    }
-    #requestForm button:hover { background-color:#0077ff; transform:translateY(-2px); }
+        .form-group {
+            position: relative;
+        }
 
-    #ai-assistant { display:none; position:fixed; top:0; left:0; width:100%; height:100vh; background:white; z-index:40; flex-direction:column; }
-    #ai-assistant.active { display:flex; padding-top:170px; box-sizing:border-box; }
-    #ai-chat-box { flex-grow:1; padding:15px; overflow-y:auto; background-color:#e8f0ff; display:flex; flex-direction:column; height:calc(100% - 140px); }
-    #ai-input-area { display:flex; border-top:1px solid #ccc; padding:10px; background:white; align-items:center; }
-    #ai-user-input { flex-grow:1; padding:10px; border:1px solid #aac4ff; border-radius:20px; margin-right:10px; font-size:1em; }
-    #ai-send-button { background-color:#0055cc; color:white; border:none; border-radius:20px; padding:10px 15px; cursor:pointer; transition: background-color 0.3s; }
-    #ai-send-button:hover { background-color:#0077ff; }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #003366;
+        }
 
-    .ai-message { background-color:#f0f5ff; padding:10px 15px; border-radius:15px 15px 15px 0; margin-bottom:10px; max-width:80%; align-self:flex-start; text-align:left; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
-    .user-message { background-color:#cfe3ff; margin-left:auto; align-self:flex-end; text-align:right; border-radius:15px 15px 0 15px; }
-    .clear-btn { background-color:#ff6b6b; color:white; border:none; border-radius:15px; padding:8px 16px; cursor:pointer; font-weight:600; transition: all 0.3s; }
-    .clear-btn:hover { background-color:#ff5252; }
+        .form-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+            transition: color 0.3s;
+        }
 
-    @media(max-width:768px) { #ai-assistant.active { padding-top:200px; } }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 12px 12px 45px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1em;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            box-sizing: border-box;
+            background-color: #f0f4ff;
+        }
 
-</style>
+        .form-group textarea {
+            padding-left: 15px;
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0055cc;
+            box-shadow: 0 0 8px rgba(0, 85, 204, 0.2);
+        }
+
+        #requestForm button {
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        #requestForm button:hover {
+            background-color: #005bb5;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        #formStatus {
+            text-align: center;
+        }
+
+        #ai-assistant {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: white;
+            z-index: 40;
+            padding: 0;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        #ai-assistant.active {
+            display: flex;
+            padding-top: 170px;
+            box-sizing: border-box;
+        }
+
+        #ai-chat-box {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: #f0f4ff;
+            display: flex;
+            flex-direction: column;
+            height: calc(100% - 140px);
+        }
+
+        #ai-input-area {
+            display: flex;
+            border-top: 1px solid #ddd;
+            padding: 10px;
+            background: white;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            align-items: center;
+            min-height: 70px;
+        }
+
+        #ai-user-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            margin-right: 10px;
+            font-size: 1em;
+        }
+
+        #ai-send-button {
+            background-color: #0055cc;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #ai-send-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .ai-message {
+            background-color: #cce0ff;
+            padding: 10px 15px;
+            border-radius: 15px 15px 15px 0;
+            margin-bottom: 10px;
+            max-width: 80%;
+            align-self: flex-start;
+            text-align: left;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .user-message {
+            background-color: #99ccff;
+            margin-left: auto;
+            align-self: flex-end;
+            text-align: right;
+            border-radius: 15px 15px 0 15px;
+        }
+
+        .ai-controls {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: #f0f4ff;
+            border-top: 1px solid #ddd;
+        }
+
+        .ai-controls button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .clear-btn {
+            background-color: #ff6b6b;
+            color: white;
+        }
+
+        .clear-btn:hover {
+            background-color: #ff5252;
+        }
+
+        .memory-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .memory-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+        }
+
+        .memory-indicator.active {
+            background-color: #4caf50;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            #ai-assistant.active {
+                padding-top: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -162,163 +372,145 @@
 <main>
     <section id="home" class="active">
         <h2>Okulumuzun Geleceği İçin Mahir Saruhan!</h2>
-        <p>Mahir Saruhan'ın vizyonu, okulumuzu daha iyi, daha öğrenci dostu ve başarılı bir yer yapmaktır. **Değişim için oy verin!**</p>
+        <p>Mahir Saruhan'ın vizyonu, okulumuzu daha iyi, daha öğrenci dostu ve daha başarılı bir yer yapmaktır. Okulumuzun karşılaştığı zorluklara <strong>yenilikçi çözümler</strong> sunuyor ve her öğrencinin sesini duyurmayı hedefliyor. <strong>Değişim için oy verin!</strong></p>
+        <hr>
+        <h3>Kısa Özet: Neden Mahir?</h3>
+        <p>Mahir'in en güçlü yönleri; <strong>Liderlik</strong>, <strong>Çözüm Odaklılık</strong> ve <strong>Gerçekçi Vaatler</strong> sunmasıdır. Detaylı bilgi için üst menüdeki "Neden Bizi Seçmelisiniz" sekmesini ziyaret edin.</p>
     </section>
 
     <section id="why-us" class="hidden">
-        <h2>Neden Mahir Saruhan?</h2>
+        <h2>Neden Mahir Saruhan'ı Desteklemelisiniz?</h2>
+        <p>Mahir Saruhan, okul topluluğuna değer katan ve başarılı bir başkan olmasını sağlayacak kanıtlanmış özelliklere sahiptir:</p>
         <ul>
-            <li><strong>Takım Çalışması:</strong> İş birliği ile ortak çözümler üretir.</li>
-            <li><strong>Gerçekçi Vaatler:</strong> Hayata geçirilebilir projeler sunar.</li>
-            <li><strong>Dürüst ve Saygılı:</strong> Şeffaf ve eşit yönetim.</li>
-            <li><strong>Öğrenci Görüşlerine Önem Verir:</strong> Anket ve toplantılarla sesinizi duyurur.</li>
-            <li><strong>Sosyal Etkinlikleri Destekler:</strong> Kültürel ve sportif etkinlikler.</li>
-            <li><strong>Liderlik Yeteneği:</strong> Doğru karar alır ve ekibine ilham verir.</li>
+            <li><strong>Takım Çalışması İle Hareket Eder:</strong> Okul idaresi, öğretmenler ve öğrencilerle iş birliği yaparak ortak çözümler üretir.</li>
+            <li><strong>Gerçekçi Vaatler Sunar:</strong> Hayata geçirilebilir, somut ve ölçülebilir projelerle öğrencilerin güvenini kazanır.</li>
+            <li><strong>Dürüst ve Saygılı Biridir:</strong> Tüm okul paydaşlarına eşit ve saygılı davranır, şeffaf bir yönetim anlayışı benimser.</li>
+            <li><strong>Öğrenci Görüşlerine Önem Verir:</strong> Düzenli anketler ve toplantılarla öğrencilerin sesini yönetime taşır.</li>
+            <li><strong>Sosyal Etkinliklere Önem Verir:</strong> Kültürel ve sportif etkinlikleri destekler.</li>
+            <li><strong>Liderlik Yeteneği Gelişmiştir:</strong> Sorumluluk almaktan çekinmez ve ekibine ilham verir.</li>
         </ul>
     </section>
 
     <section id="promises" class="hidden">
-        <h2>Vaatler</h2>
+        <h2>Mahir Saruhan'ın Temel Vaatleri</h2>
         <div class="table-container">
             <table>
-                <thead><tr><th>Vaat</th><th>Detay</th><th>Durum</th></tr></thead>
+                <thead>
+                    <tr><th>Vaat</th><th>Detay</th><th>Durum</th></tr>
+                </thead>
                 <tbody>
-                    <tr><td>Suya Kolay Ulaşım</td><td>Su fiyatları düşürülecek veya ücretsiz olacak</td><td>☐ Planlama Aşamasında</td></tr>
-                    <tr><td>Self Id Ödül Sistemi</td><td>Haftanın en çok puan alanına sürpriz hediyeler</td><td>☐ Planlama Aşamasında</td></tr>
-                    <tr><td>Top Sahaları</td><td>Sahalar oyun için kullanıma hazır olacak</td><td>☐ Planlama Aşamasında</td></tr>
-                    <tr><td>Okul Eşyalarının Tamiri</td><td>Kalorifer ve diğer eşyalar tamir edilecek</td><td>☐ Planlama Aşamasında</td></tr>
-                    <tr><td>Geri Dönüşüm Kutuları</td><td>Doğaya destek için okula kutular konulacak</td><td>☐ Planlama Aşamasında</td></tr>
-                    <tr><td>Web Sitesi Güncellemesi</td><td>Düzenli güncellemelerle öğrenciler bilgilendirilecek</td><td>☐ Planlama Aşamasında</td></tr>
-                    <tr><td>Tahtalara Format</td><td>Akıllı tahtalar hızlandırılacak</td><td>☐ Planlama Aşamasında</td></tr>
-                    <tr><td>Doğum Günü Panosu</td><td>Her ay doğum günü olan öğrenciler listelenecek</td><td>☐ Planlama Aşamasında</td></tr>
-                    <tr><td>Oyun ve Resim Turnuvaları</td><td>Eğlenceli turnuvalar düzenlenecek</td><td>☐ Planlama Aşamasında</td></tr>
+                    <tr><td>Suya Kolay Ulaşım</td><td>Suların ucuzlaması veya bedava olması</td><td>☐ Planlama Aşamasında</td></tr>
+                    <tr><td>Self Id Haftalık Ödül Sistemi</td><td>Ders çalışmayı eğlenceli hale getirmek için haftanın en çok puan alan kişisine sürpriz hediyeler</td><td>☐ Planlama Aşamasında</td></tr>
+                    <tr><td>Sahalara Top Koyulması</td><td>Oyun sahalarına toplar yerleştirilmesi</td><td>☐ Planlama Aşamasında</td></tr>
+                    <tr><td>Okul Eşyalarının Tamiri</td><td>Kalorifer petekleri ve diğer okul eşyalarının tamir edilmesi</td><td>☐ Planlama Aşamasında</td></tr>
+                    <tr><td>Geri Dönüşüm Kutuları</td><td>Okula geri dönüşüm kutuları yerleştirilmesi</td><td>☐ Planlama Aşamasında</td></tr>
+                    <tr><td>Web Sitesi Güncellemesi</td><td>Düzenli olarak siteyi öğrencilerin geri bildirimleri doğrultusunda güncelleme</td><td>☐ Planlama Aşamasında</td></tr>
+                    <tr><td>Tahtalara Format Atılması</td><td>Akıllı tahtaların yavaş olması nedeniyle hızlandırılması</td><td>☐ Planlama Aşamasında</td></tr>
+                    <tr><td>Doğum Günü Panosu</td><td>Her ay doğum günü olan öğrenciler için pano hazırlanması</td><td>☐ Planlama Aşamasında</td></tr>
+                    <tr><td>Oyun ve Resim Turnuvaları</td><td>Öğrencilerin eğlenmesi için turnuvalar düzenlenmesi</td><td>☐ Planlama Aşamasında</td></tr>
                 </tbody>
             </table>
         </div>
     </section>
 
     <section id="requests" class="hidden">
-        <h2>İstek/Dilekçe Kutusu</h2>
-        <p>Öneri veya şikayetlerinizi Mahir'e iletin.</p>
+        <h2>İsteklerinizi Doğrudan Mahir'e Ulaştırın</h2>
+        <p>Görüş, öneri veya şikayetlerinizi bizimle paylaşın. Tüm mesajlar bizzat Mahir Saruhan tarafından incelenecektir.</p>
+        
         <div id="requestForm">
             <div class="form-group">
                 <i class="fas fa-user"></i>
-                <label for="name">Adınız:</label>
-                <input type="text" id="name" placeholder="Adınız Soyadınız">
+                <label for="name">Adınız (İsteğe Bağlı):</label>
+                <input type="text" id="name" name="Ad" placeholder="Adınız Soyadınız">
             </div>
+
             <div class="form-group">
                 <i class="fas fa-envelope"></i>
-                <label for="email">E-posta:</label>
-                <input type="email" id="email" placeholder="ornek@mail.com">
+                <label for="email">E-posta Adresiniz (Zorunlu Değil):</label>
+                <input type="email" id="email" name="Gonderen_Mail_Adresi" placeholder="ornek@mail.com">
             </div>
+            
             <div class="form-group">
-                <label for="message">Mesajınız:</label>
-                <textarea id="message" required placeholder="Dilek veya öneriniz"></textarea>
+                <label for="message">Mesajınız (Zorunlu):</label>
+                <textarea id="message" name="Dilekce_Metni" rows="6" required placeholder="Tüm dilek ve önerilerinizi buraya yazabilirsiniz."></textarea>
             </div>
+
             <button onclick="submitForm()">Gönder</button>
         </div>
-        <p id="formStatus" style="margin-top:15px;font-weight:bold;"></p>
+        <p id="formStatus" style="margin-top: 15px; font-weight: bold;"></p>
     </section>
 </main>
 
 <section id="ai-assistant" class="hidden">
     <div id="ai-chat-box">
-        <div class="ai-message">Merhaba! Ben Mahir. Ödevlerde ve derslerde yardımcı olabilirim.</div>
+        <div class="ai-message">Merhaba! Ben Mahir. Sana okul ödevlerinde ve ders konularında yardımcı olmak için buradayım. Ne öğrenmek istersin?</div>
     </div>
     <div class="ai-controls">
+        <div class="memory-status">
+            <span class="memory-indicator" id="memory-indicator"></span>
+            <span id="memory-text">Hafıza: Boş</span>
+        </div>
         <button class="clear-btn" onclick="clearChat()">🗑️ Sohbeti Temizle</button>
     </div>
     <div id="ai-input-area">
         <input type="text" id="ai-user-input" placeholder="Sorunuzu yazın...">
-        <button id="ai-send-button">Gönder</button>
+        <button id="ai-send-button" onclick="sendMessage()">Gönder</button>
     </div>
 </section>
 
 <footer>
-    <p>&copy; 2025 Mahir Saruhan Okul Başkanlığı Kampanyası | #MahirKazandırır</p>
+    &copy; 2025 Mahir Saruhan | Okul Başkanlığı Adayı
 </footer>
 
 <script>
-let conversationHistory = [];
+function showSection(sectionId) {
+    const sections = document.querySelectorAll('main section, #ai-assistant');
+    sections.forEach(s => s.classList.add('hidden'));
+    const selected = document.getElementById(sectionId);
+    if (selected) selected.classList.remove('hidden');
+}
 
-function updateMemoryStatus() { /* opsiyonel */ }
+// Basit dilekçe formu simülasyonu
+function submitForm() {
+    const name = document.getElementById('name').value || "Anonim";
+    const email = document.getElementById('email').value || "E-posta yok";
+    const message = document.getElementById('message').value;
+    if (!message) {
+        alert("Lütfen mesajınızı yazın!");
+        return;
+    }
+    document.getElementById('formStatus').textContent = "Mesajınız gönderildi, teşekkürler!";
+    console.log({ name, email, message });
+    document.getElementById('message').value = "";
+}
+
+// Basit AI simülasyonu
+const chatBox = document.getElementById('ai-chat-box');
+function sendMessage() {
+    const input = document.getElementById('ai-user-input');
+    if(!input.value) return;
+    const msg = document.createElement('div');
+    msg.classList.add('user-message');
+    msg.textContent = input.value;
+    chatBox.appendChild(msg);
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    setTimeout(() => {
+        const reply = document.createElement('div');
+        reply.classList.add('ai-message');
+        reply.textContent = "Bu özellik simüle edilmiştir: " + input.value;
+        chatBox.appendChild(reply);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }, 700);
+
+    input.value = "";
+}
 
 function clearChat() {
-    if(confirm('Sohbet temizlensin mi?')) {
-        conversationHistory = [];
-        document.getElementById('ai-chat-box').innerHTML='<div class="ai-message">Merhaba! Ben Mahir. Ödevlerde ve derslerde yardımcı olabilirim.</div>';
-    }
+    chatBox.innerHTML = '<div class="ai-message">Merhaba! Ben Mahir. Sana okul ödevlerinde ve ders konularında yardımcı olmak için buradayım. Ne öğrenmek istersin?</div>';
+    document.getElementById('memory-text').textContent = "Hafıza: Boş";
+    document.getElementById('memory-indicator').classList.remove('active');
 }
-
-function showSection(id) {
-    document.querySelectorAll('main section').forEach(s=>s.classList.add('hidden'));
-    document.getElementById('ai-assistant').classList.add('hidden');
-    document.getElementById('ai-assistant').classList.remove('active');
-    document.querySelector('main').classList.remove('hidden');
-
-    if(id==='ai-assistant'){
-        document.getElementById('ai-assistant').classList.add('active');
-        document.getElementById('ai-assistant').classList.remove('hidden');
-        document.querySelector('main').classList.add('hidden');
-    } else {
-        const s=document.getElementById(id);
-        if(s){ s.classList.remove('hidden'); s.classList.add('active'); }
-    }
-}
-
-function submitForm(){
-    const name=document.getElementById('name').value;
-    const email=document.getElementById('email').value;
-    const msg=document.getElementById('message').value;
-    const status=document.getElementById('formStatus');
-    if(!msg.trim()){ status.style.color='red'; status.textContent='Mesaj boş olamaz!'; return; }
-
-    const data=new FormData();
-    data.append('Ad',name); data.append('Gonderen_Mail_Adresi',email); data.append('Dilekce_Metni',msg);
-
-    fetch('https://formspree.io/f/xdkwzjgn',{method:'POST', body:data, headers:{'Accept':'application/json'}})
-    .then(r=>{ if(r.ok){ status.style.color='green'; status.textContent='Mesaj iletildi!'; document.getElementById('name').value=''; document.getElementById('email').value=''; document.getElementById('message').value=''; } else{ status.style.color='red'; status.textContent='Hata oluştu.';} })
-    .catch(e=>{status.style.color='red'; status.textContent='Bağlantı hatası.';});
-
-    setTimeout(()=>{ status.textContent=''; },6000);
-}
-
-document.addEventListener('DOMContentLoaded',()=>{
-    showSection('home');
-
-    const chatBox=document.getElementById('ai-chat-box');
-    const userInput=document.getElementById('ai-user-input');
-    const sendButton=document.getElementById('ai-send-button');
-
-    function addMessage(text,isUser=false){
-        const div=document.createElement('div');
-        div.className=isUser?'ai-message user-message':'ai-message';
-        div.textContent=text;
-        chatBox.appendChild(div);
-        chatBox.scrollTop=chatBox.scrollHeight;
-    }
-
-    async function sendMessage(){
-        const prompt=userInput.value.trim(); if(prompt==='') return;
-        addMessage(prompt,true);
-        userInput.value='';
-        sendButton.disabled=true;
-        addMessage("Mahir düşünüyor...");
-        const loading=chatBox.lastChild;
-
-        try{
-            const res=await fetch('/api/gemini',{method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({prompt,conversationHistory})});
-            const data=await res.json();
-            chatBox.removeChild(loading);
-            if(res.ok){ addMessage(data.answer,false); if(data.conversationHistory){ conversationHistory=data.conversationHistory; } }
-            else{ addMessage('Hata: '+(data.error||'Cevap alınamadı'),false);}
-        } catch(err){ chatBox.removeChild(loading); addMessage("Sunucu hatası.",false); console.error(err);}
-        finally{ sendButton.disabled=false; userInput.focus(); }
-    }
-
-    sendButton.addEventListener('click',sendMessage);
-    userInput.addEventListener('keypress',e=>{if(e.key==='Enter'){sendMessage();}});
-});
 </script>
 
 </body>
