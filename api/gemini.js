@@ -1,91 +1,68 @@
-import { useState } from 'react';
+import { GoogleGenerativeAI } from '@google/generative-ai';
+export default async function handler(req, res) {
+  // CORS headers (gerekirse)
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Sadece POST istekleri kabul edilir' });
+  }
+  const { prompt } = req.body;
+  const apiKey = process.env.GEMINI_API_KEY;
+  // Prompt yoksa hata dön
+  if (!prompt) {
+    return res.status(400).json({ error: 'Prompt gereklidir' });
+  }
+  // API anahtarı yoksa hata dön
+  if (!apiKey) {
+    return res.status(500).json({ 
+      error: 'API anahtarı yapılandırılmamış. Vercel Dashboard\'dan GEMINI_API_KEY ekleyin.' 
+    });
+  }
+  try {
+    // GoogleGenerativeAI instance oluştur
+    const genAI = new GoogleGenerativeAI(apiKey);
 
-function Chat() {
-  const [messages, setMessages] = useState([]);
-  const [history, setHistory] = useState([]);
-  const [input, setInput] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const sendMessage = async () => {
-    if (!input.trim()) return;
-
-    const userMessage = input;
-    setInput('');
-    setLoading(true);
-
-    // Kullanıcı mesajını göster
-    setMessages(prev => [...prev, { role: 'user', text: userMessage }]);
-
-    try {
-      const response = await fetch('/api/gemini', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          prompt: userMessage,
-          history: history  // Geçmişi gönder
-        })
-      });
-
-      const data = await response.json();
-
-      if (data.error) {
-        throw new Error(data.error);
+    // Gemini 2.5 Flash modeli
+    const model = genAI.getGenerativeModel({ 
+      model: 'gemini-2.5-flash', // Güncel model adı
+      generationConfig: {
+        temperature: 0.7,
+        maxOutputTokens: 1000,
       }
+    });
+    // Sistem prompt'u ile kullanıcı sorusunu birleştir
+    const fullPrompt = Sen ismi Mahir olan ve öğrencilere okul ödevlerinde, ders konularında ve bilimsel sorularda yardımcı olan bir asistansın. Her zaman Türkçe cevap ver. Kısa, açıklayıcı, eğitici ve sohbet eder gibi cevaplar ver. Cevabın maksimum 3-4 paragraf olsun.
+Öğrenci Sorusu: ${prompt};
+    // API'ye istek gönder
+    const result = await model.generateContent(fullPrompt);
+    const response = result.response;
+    const text = response.text();
+    // Başarılı cevabı döndür
+    return res.status(200).json({ 
+      answer: text 
+    });
+  } catch (error) {
+    console.error('Gemini API Error:', error);
 
-      // AI cevabını göster
-      setMessages(prev => [...prev, { role: 'model', text: data.answer }]);
-      
-      // Geçmişi güncelle
-      setHistory(data.history);
+    // Detaylı hata mesajı
+    let errorMessage = 'Yapay zeka servisine erişilemiyor.';
 
-    } catch (error) {
-      console.error('Error:', error);
-      setMessages(prev => [...prev, { 
-        role: 'model', 
-        text: 'Üzgünüm, bir hata oluştu.' 
-      }]);
-    } finally {
-      setLoading(false);
+    if (error.message?.includes('API_KEY') || error.message?.includes('API key')) {
+      errorMessage = 'API anahtarı geçersiz. Vercel Dashboard\'dan kontrol edin.';
+    } else if (error.message?.includes('quota') || error.message?.includes('RESOURCE_EXHAUSTED')) {
+      errorMessage = 'API kotası doldu. Lütfen daha sonra tekrar deneyin.';
+    } else if (error.message?.includes('model')) {
+      errorMessage = 'Model bulunamadı. Model adını kontrol edin.';
+    } else if (error.message?.includes('SAFETY')) {
+      errorMessage = 'İçerik güvenlik filtresi tarafından engellendi.';
     }
-  };
-
-  const clearChat = () => {
-    setMessages([]);
-    setHistory([]);
-  };
-
-  return (
-    <div className="chat-container">
-      <div className="messages">
-        {messages.map((msg, idx) => (
-          <div key={idx} className={`message ${msg.role}`}>
-            <strong>{msg.role === 'user' ? 'Sen' : 'Mahir'}:</strong>
-            <p>{msg.text}</p>
-          </div>
-        ))}
-        {loading && <div className="loading">Mahir düşünüyor...</div>}
-      </div>
-
-      <div className="input-area">
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyPress={(e) => e.key === 'Enter' && !loading && sendMessage()}
-          placeholder="Bir soru sor..."
-          disabled={loading}
-        />
-        <button onClick={sendMessage} disabled={loading || !input.trim()}>
-          Gönder
-        </button>
-        <button onClick={clearChat} disabled={loading}>
-          Temizle
-        </button>
-      </div>
-    </div>
-  );
+    return res.status(500).json({ 
+      error: errorMessage,
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
+  }
 }
-
-export default Chat;
