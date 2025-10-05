@@ -3,18 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mahir Saruhan - Okul Başkanlığı Adayı | Değişim için Oy Verin</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <title>Mahir Saruhan - Okul Başkanlığı Adayı</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
 
   <style>
     :root {
-      --primary-color: #1a237e;
-      --accent-color: #ffc107;
-      --secondary-color: #eceff1;
+      --primary-color: #1A237E;
+      --accent-color: #FFC107;
+      --secondary-color: #ECEFF1;
       --text-color: #263238;
-      --light-bg: #ffffff;
+      --light-bg: #FFFFFF;
     }
 
     body {
@@ -32,115 +37,89 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 100;
     }
 
     header h1 {
       color: var(--accent-color);
+      font-size: 2.6em;
+      margin: 0.2em 0;
       font-weight: 900;
-      margin: 0;
-      font-size: 2.5em;
     }
 
     nav {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      padding-top: 10px;
+      gap: 8px;
+      margin-top: 10px;
     }
 
     nav button {
       background: var(--accent-color);
       color: var(--primary-color);
       border: none;
-      margin: 5px;
       padding: 10px 18px;
-      border-radius: 50px;
-      cursor: pointer;
+      border-radius: 40px;
       font-weight: 700;
-      transition: 0.3s;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
 
     nav button:hover {
-      background: #e6a200;
+      background-color: #e6a200;
       transform: translateY(-2px);
     }
 
     main {
+      background: var(--light-bg);
       max-width: 1000px;
       margin: 40px auto;
-      background: var(--light-bg);
-      border-radius: 20px;
       padding: 30px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      min-height: 60vh;
     }
 
     section {
       display: none;
+      padding: 20px 0;
     }
 
     section.active {
       display: block;
     }
 
-    .card-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-
-    .promise-card {
-      background: var(--secondary-color);
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .status-badge {
-      display: inline-block;
-      background: #ff9800;
-      color: #fff;
-      padding: 5px 10px;
-      border-radius: 15px;
-      font-size: 0.8em;
-      margin-top: 10px;
-    }
-
-    footer {
-      background: var(--primary-color);
-      color: var(--secondary-color);
+    /* AI Asistanı Stilleri */
+    #ai-assistant h2 {
       text-align: center;
-      padding: 15px;
-    }
-
-    /* AI Asistanı Sekmesi */
-    #ai-assistant {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      color: var(--primary-color);
     }
 
     #ai-chat-box {
-      background: #f9f9f9;
+      border: 1px solid #ddd;
       border-radius: 15px;
-      padding: 15px;
-      height: 400px;
+      height: 350px;
       overflow-y: auto;
-      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      background-color: #f9f9f9;
+      margin-bottom: 15px;
     }
 
     .ai-message {
-      background: #e3f2fd;
+      background-color: #E3F2FD;
       padding: 10px 15px;
       border-radius: 15px 15px 15px 5px;
-      margin: 5px 0;
-      max-width: 85%;
+      margin-bottom: 10px;
+      width: fit-content;
+      max-width: 80%;
     }
 
     .user-message {
-      background: #dcedc8;
+      background-color: #DCEDC8;
       border-radius: 15px 15px 5px 15px;
       align-self: flex-end;
+      margin-left: auto;
     }
 
     #ai-input-area {
@@ -150,9 +129,10 @@
 
     #ai-user-input {
       flex-grow: 1;
-      padding: 10px;
-      border-radius: 25px;
       border: 1px solid #ccc;
+      border-radius: 25px;
+      padding: 10px 15px;
+      font-size: 1em;
     }
 
     #ai-send-button {
@@ -163,122 +143,136 @@
       padding: 10px 20px;
       font-weight: 700;
       cursor: pointer;
+      transition: all 0.3s;
     }
 
     #ai-send-button:hover {
       background: #e6a200;
     }
 
+    footer {
+      text-align: center;
+      background: var(--primary-color);
+      color: var(--secondary-color);
+      padding: 20px 0;
+      margin-top: 30px;
+    }
+
     @media (max-width: 768px) {
-      main {
-        margin: 20px;
-        padding: 20px;
+      nav button {
+        flex: 1 1 45%;
       }
     }
   </style>
 </head>
-
 <body>
   <header>
     <h1>MAHİR SARUHAN</h1>
     <h3>Okul Başkanlığı Adayı | #DeğişimMahir</h3>
     <nav>
-      <button onclick="showSection('home')"><i class='fas fa-home'></i> Ana Sayfa</button>
-      <button onclick="showSection('why-us')"><i class='fas fa-handshake'></i> Neden Biz?</button>
-      <button onclick="showSection('promises')"><i class='fas fa-list-check'></i> Vaatler</button>
-      <button onclick="showSection('requests')"><i class='fas fa-paper-plane'></i> İstek Kutusu</button>
-      <button onclick="showSection('ai-assistant')"><i class='fas fa-robot'></i> AI Asistanı</button>
+      <button onclick="showSection('home')"><i class="fas fa-home"></i> Ana Sayfa</button>
+      <button onclick="showSection('why-us')"><i class="fas fa-handshake"></i> Neden Biz?</button>
+      <button onclick="showSection('promises')"><i class="fas fa-list-check"></i> Vaatler</button>
+      <button onclick="showSection('requests')"><i class="fas fa-paper-plane"></i> İstek Kutusu</button>
+      <button onclick="showSection('ai-assistant')"><i class="fas fa-robot"></i> AI Asistanı</button>
     </nav>
   </header>
 
   <main>
     <section id="home" class="active">
       <h2>Okulumuzun Geleceği İçin Güçlü Bir Liderlik!</h2>
-      <p>Mahir Saruhan, okulun geleceğini yenilikçi fikirlerle şekillendirmek için yola çıktı.</p>
+      <p>
+        Mahir Saruhan'ın vizyonu, okulumuzu daha iyi, daha öğrenci dostu bir yer yapmak.
+      </p>
     </section>
 
     <section id="why-us">
-      <h2>Neden Mahir?</h2>
+      <h2>Neden Mahir Saruhan?</h2>
       <ul>
-        <li>Gerçekçi vaatler</li>
-        <li>Şeffaf yönetim</li>
-        <li>Öğrenci odaklı çözümler</li>
+        <li>Takım çalışmasına önem verir.</li>
+        <li>Gerçekçi ve uygulanabilir vaatler sunar.</li>
+        <li>Şeffaf ve adil yönetim anlayışı.</li>
       </ul>
     </section>
 
     <section id="promises">
-      <h2>Vaatlerimiz</h2>
-      <div class="card-container">
-        <div class="promise-card">
-          <h3><i class="fas fa-futbol"></i> Spor Malzemeleri Artışı</h3>
-          <p>Her sınıfa spor topu sağlanacak.</p>
-          <span class="status-badge">Planlama Aşamasında</span>
-        </div>
-      </div>
+      <h2>Vaatler</h2>
+      <p>Okulun her alanında iyileştirme çalışmaları yapılacak.</p>
     </section>
 
     <section id="requests">
       <h2>İstek Kutusu</h2>
-      <p>Önerilerinizi paylaşın!</p>
-      <textarea rows="4" style="width:100%; border-radius:10px;"></textarea>
-      <button style="margin-top:10px;">Gönder</button>
+      <p>Fikirlerinizi Mahir Saruhan’a ulaştırın!</p>
     </section>
 
-    <!-- AI Asistan Sekmesi -->
+    <!-- 💬 AI Asistan Sekmesi -->
     <section id="ai-assistant">
-      <h2>🤖 AI Asistanı</h2>
+      <h2><i class="fas fa-robot"></i> Mahir AI Asistanı</h2>
       <div id="ai-chat-box">
         <div class="ai-message">
-          Merhaba! Ben Mahir'in yapay zeka asistanıyım. Derslerinde ya da fikirlerinde sana yardımcı olabilirim.
+          Merhaba! Ben Mahir’in yapay zekâ destekli asistanıyım. Size okul projelerinde veya derslerde yardımcı olabilirim. 💡
         </div>
       </div>
 
       <div id="ai-input-area">
-        <input type="text" id="ai-user-input" placeholder="Sorunuzu yazın..." />
+        <input type="text" id="ai-user-input" placeholder="Bir soru yazın..." />
         <button id="ai-send-button">Gönder</button>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Mahir Saruhan | #MahirKazandırır</p>
+    <p>&copy; 2025 Mahir Saruhan Kampanyası | #MahirKazandırır</p>
   </footer>
 
   <script>
     function showSection(id) {
-      document.querySelectorAll("main section").forEach(sec => {
-        sec.classList.remove("active");
-      });
+      document.querySelectorAll("main section").forEach((sec) => sec.classList.remove("active"));
       document.getElementById(id).classList.add("active");
     }
 
-    // Basit AI Simülasyonu
-    document.getElementById("ai-send-button").addEventListener("click", sendMessage);
-    document.getElementById("ai-user-input").addEventListener("keypress", e => {
-      if (e.key === "Enter") sendMessage();
-    });
+    const chatBox = document.getElementById("ai-chat-box");
+    const userInput = document.getElementById("ai-user-input");
+    const sendButton = document.getElementById("ai-send-button");
 
     function addMessage(text, isUser = false) {
       const div = document.createElement("div");
-      div.className = "ai-message" + (isUser ? " user-message" : "");
+      div.className = isUser ? "ai-message user-message" : "ai-message";
       div.textContent = text;
-      document.getElementById("ai-chat-box").appendChild(div);
-      const box = document.getElementById("ai-chat-box");
-      box.scrollTop = box.scrollHeight;
+      chatBox.appendChild(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
     }
 
     async function sendMessage() {
-      const input = document.getElementById("ai-user-input");
-      const text = input.value.trim();
-      if (!text) return;
-      addMessage(text, true);
-      input.value = "";
-      addMessage("Düşünüyorum...");
-      await new Promise(r => setTimeout(r, 1000));
-      document.querySelector("#ai-chat-box .ai-message:last-child").remove();
-      addMessage(`"${text}" hakkında sana yardımcı olabilirim! Şu anda demo modundayım.`);
+      const prompt = userInput.value.trim();
+      if (!prompt) return;
+
+      addMessage(prompt, true);
+      userInput.value = "";
+      addMessage("Asistan yazıyor...", false);
+      const loading = chatBox.lastChild;
+
+      try {
+        const res = await fetch("/api/gemini", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: prompt }),
+        });
+
+        if (!res.ok) throw new Error("Sunucu hatası.");
+
+        const data = await res.json();
+        chatBox.removeChild(loading);
+        addMessage(data.reply || "Yanıt alınamadı.", false);
+      } catch (err) {
+        chatBox.removeChild(loading);
+        addMessage("❌ Bir hata oluştu. Lütfen tekrar deneyin.", false);
+        console.error(err);
+      }
     }
+
+    sendButton.addEventListener("click", sendMessage);
+    userInput.addEventListener("keypress", (e) => e.key === "Enter" && sendMessage());
   </script>
 </body>
 </html>
-
