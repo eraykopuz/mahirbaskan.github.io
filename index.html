@@ -67,8 +67,8 @@
             transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
             font-weight: 700;
             font-size: 0.95em;
-            flex-grow: 1; /* Esnekliği korur */
-            max-width: 200px; /* Geniş ekranlarda boyut sınırı */
+            flex-grow: 1; 
+            max-width: 200px; 
             box-shadow: 0 3px 6px rgba(0,0,0,0.1);
         }
         nav button:hover {
@@ -141,7 +141,7 @@
             font-size: 0.8em;
             font-weight: 600;
             margin-top: 10px;
-            align-self: flex-start; /* Başlık ile hizalı */
+            align-self: flex-start;
         }
 
         /* Form Stilleri */
@@ -168,7 +168,7 @@
             font-weight: 900;
         }
 
-        /* AI Asistanı - Tam Ekran Sekme (Eskisi gibi) */
+        /* AI Asistanı - Tam Ekran Sekme */
         #ai-assistant {
             display: none; 
             position: fixed;
@@ -182,7 +182,7 @@
             margin: 0;
             flex-direction: column;
             
-            /* Başlık yüksekliği kadar boşluk bırak */
+            /* Header yüksekliğine göre ayarlanmış boşluk */
             padding-top: 180px; 
             box-sizing: border-box;
         }
@@ -260,6 +260,14 @@
             font-weight: 600;
         }
         
+        .memory-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+        }
+
         .memory-indicator.active {
             background-color: #4caf50;
             animation: pulse 2s infinite;
@@ -455,7 +463,7 @@
                 mainContent.classList.add('hidden');
                 aiSection.classList.remove('hidden');
                 aiSection.classList.add('active');
-                document.body.style.overflow = 'hidden'; 
+                // document.body.style.overflow = 'hidden'; // Kaydırmayı kapatmak opsiyoneldir
             } else {
                 // Normal bir sayfayı göster (AI'ı gizle)
                 mainContent.classList.remove('hidden');
@@ -483,7 +491,7 @@
                 return;
             }
 
-            // Simülasyon
+            // Form Gönderim Simülasyonu
             statusMessage.style.color = '#FF9800';
             statusMessage.textContent = 'Mesajınız gönderiliyor...';
 
@@ -495,6 +503,20 @@
                 document.getElementById('message').value = '';
                 setTimeout(() => { statusMessage.textContent = ''; }, 6000);
             }, 1500);
+            
+            /* Gerçek form gönderimi için bu kod kullanılabilir:
+            const data = new FormData();
+            data.append('Ad', name);
+            data.append('Gonderen_Mail_Adresi', email);
+            data.append('Dilekce_Metni', message);
+            fetch('https://formspree.io/f/xdkwzjgn', {
+                method: 'POST',
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                 // ... başarılı/başarısız durumlarını yönetin
+            });
+            */
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -523,21 +545,36 @@
                 const loadingMessage = chatBox.lastChild;
 
                 try {
-                    // Simülasyon: Gerçek API bağlantısı için burayı 'fetch' ile değiştirin.
-                    await new Promise(resolve => setTimeout(resolve, 1500)); 
-                    const simulatedResponse = `Bu, AI Asistanı'nın simülasyon cevabıdır: "${prompt}" konusuna yardımcı olabilirim. Lütfen daha detaylı bir soru sor.`;
+                    // GERÇEK API ÇAĞRISI
+                    const response = await fetch('/api/gemini', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ 
+                            prompt: prompt,
+                            conversationHistory: conversationHistory  // HAFIZA GÖNDERİLİYOR
+                        }),
+                    });
 
-                    chatBox.removeChild(loadingMessage);
-                    addMessage(simulatedResponse, false);
+                    const data = await response.json();
+                    chatBox.removeChild(loadingMessage); // "Mahir düşünüyor..." mesajını kaldır
 
-                    // HAFIZA GÜNCELLENİYOR (Simülasyon amaçlı)
-                    conversationHistory.push({ role: 'user', content: prompt });
-                    conversationHistory.push({ role: 'assistant', content: simulatedResponse });
-                    updateMemoryStatus();
+                    if (response.ok) {
+                        addMessage(data.answer, false);
+                        
+                        // HAFIZA GÜNCELLENİYOR
+                        if (data.conversationHistory) {
+                            conversationHistory = data.conversationHistory;
+                            updateMemoryStatus();
+                        }
+                    } else {
+                        addMessage(`Hata: ${data.error || 'Cevap alınamadı.'} Sunucu yanıtı: ${response.status}`, false);
+                    }
 
                 } catch (error) {
                     chatBox.removeChild(loadingMessage);
-                    addMessage("Sunucu hatası. (Gerçek bir API bağlantısı kurmanız gerekiyor.)", false);
+                    addMessage("Bağlantı hatası. Sunucunuzun (/api/gemini) çalıştığından emin olun.", false);
                     console.error('Fetch error:', error);
                 } finally {
                     sendButton.disabled = false;
@@ -557,4 +594,3 @@
     </script>
 </body>
 </html>
-
