@@ -63,12 +63,12 @@
             padding: 10px 18px;
             margin: 5px;
             cursor: pointer;
-            border-radius: 50px; /* Daha yuvarlak butonlar */
+            border-radius: 50px; 
             transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
             font-weight: 700;
             font-size: 0.95em;
-            flex-grow: 1;
-            max-width: 200px; 
+            flex-grow: 1; /* Esnekliği korur */
+            max-width: 200px; /* Geniş ekranlarda boyut sınırı */
             box-shadow: 0 3px 6px rgba(0,0,0,0.1);
         }
         nav button:hover {
@@ -83,7 +83,7 @@
             max-width: 1000px;
             margin: 40px auto;
             background: var(--light-bg);
-            border-radius: 20px; /* Daha belirgin yuvarlak kenarlar */
+            border-radius: 20px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             min-height: 60vh; 
         }
@@ -100,10 +100,6 @@
             border-bottom: 3px solid var(--accent-color);
             padding-bottom: 10px;
             margin-bottom: 20px;
-        }
-        #home p {
-            font-size: 1.1em;
-            text-align: center;
         }
         
         /* Vaatler - Kart Görünümü */
@@ -127,7 +123,6 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
         .promise-card h3 {
-            color: var(--primary-color);
             font-size: 1.25em;
             margin-top: 0;
             display: flex;
@@ -139,14 +134,14 @@
             font-size: 1.5em;
         }
         .status-badge {
-            background-color: #4CAF50; /* Yeşil */
+            background-color: #FF9800; 
             color: white;
             padding: 4px 10px;
             border-radius: 20px;
             font-size: 0.8em;
             font-weight: 600;
             margin-top: 10px;
-            align-self: flex-end;
+            align-self: flex-start; /* Başlık ile hizalı */
         }
 
         /* Form Stilleri */
@@ -157,7 +152,7 @@
         .form-group input,
         .form-group textarea {
             border-radius: 25px; 
-            padding: 12px 20px 12px 50px; /* Sol boşluk artırıldı */
+            padding: 12px 20px 12px 50px; 
             border: 1px solid #ddd;
             background-color: var(--light-bg);
         }
@@ -172,52 +167,24 @@
             padding: 15px 25px;
             font-weight: 900;
         }
-        #requestForm button:hover {
-            background-color: #e6a200;
-        }
 
-        /* Footer */
-        footer { 
-            background: var(--primary-color); 
-            color: var(--secondary-color); 
-        }
-
-        /* AI Asistanı Stilleri - Full Ekran Kapatıldı, Sabit Buton Yapıldı */
-        #ai-assistant-button {
-            position: fixed;
-            right: 30px;
-            bottom: 30px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: #008CBA; /* Farklı bir canlı mavi */
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            z-index: 1000;
-            transition: transform 0.3s ease;
-        }
-        #ai-assistant-button:hover {
-            transform: scale(1.1);
-        }
-
-        /* Sohbet Kutusu Modalı */
+        /* AI Asistanı - Tam Ekran Sekme (Eskisi gibi) */
         #ai-assistant {
             display: none; 
             position: fixed;
-            right: 30px;
-            bottom: 100px; /* Butonun üstünde çıkması için */
-            width: 350px;
-            height: 450px;
-            background: var(--light-bg);
-            border-radius: 15px;
-            box-shadow: 0 5px 30px rgba(0,0,0,0.25);
-            z-index: 999; 
+            top: 0; 
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: white;
+            z-index: 40; 
+            padding: 0;
+            margin: 0;
             flex-direction: column;
-            overflow: hidden;
+            
+            /* Başlık yüksekliği kadar boşluk bırak */
+            padding-top: 180px; 
+            box-sizing: border-box;
         }
         
         #ai-assistant.active {
@@ -229,17 +196,77 @@
             padding: 15px;
             overflow-y: auto;
             background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
         }
         #ai-input-area {
+            display: flex;
+            border-top: 1px solid #ddd;
+            padding: 10px;
+            background: white;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            align-items: center;
             min-height: 70px;
         }
+        #ai-user-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            margin-right: 10px;
+            font-size: 1em;
+        }
+        #ai-send-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
         .ai-message {
-            background-color: #E3F2FD; /* Açık mavi */
+            background-color: #E3F2FD; 
+            padding: 10px 15px;
             border-radius: 15px 15px 15px 5px;
+            margin-bottom: 10px;
+            max-width: 80%;
+            align-self: flex-start;
+            text-align: left;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .user-message {
-            background-color: #DCEDC8; /* Açık yeşil */
+            background-color: #DCEDC8; 
+            margin-left: auto;
+            align-self: flex-end;
+            text-align: right;
             border-radius: 15px 15px 5px 15px;
+        }
+        .ai-controls {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: #f0f0f0;
+            border-top: 1px solid #ddd;
+        }
+        .clear-btn {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .memory-indicator.active {
+            background-color: #4caf50;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
         /* Mobil Uyumlu Düzenlemeler */
@@ -247,20 +274,22 @@
             header h1 {
                 font-size: 2.2em;
             }
+            nav {
+                padding: 10px 0;
+            }
             nav button {
-                max-width: 48%; /* Mobil görünümde yan yana 2 buton */
-                font-size: 0.85em;
+                max-width: 48%; 
+                font-size: 0.8em;
+                margin: 4px;
+                padding: 8px 10px;
             }
             main {
-                margin: 20px;
+                margin: 20px 10px;
                 padding: 20px;
                 border-radius: 15px;
             }
             #ai-assistant {
-                width: 90%;
-                height: 70%;
-                right: 5%;
-                bottom: 90px;
+                padding-top: 200px; /* Mobil başlığa göre boşluk */
             }
         }
     </style>
@@ -274,9 +303,11 @@
             <button onclick="showSection('why-us')"><i class="fas fa-handshake"></i> Neden Biz?</button>
             <button onclick="showSection('promises')"><i class="fas fa-list-check"></i> Vaatler</button>
             <button onclick="showSection('requests')"><i class="fas fa-paper-plane"></i> İstek Kutusu</button>
+            <button onclick="showSection('ai-assistant_toggle')"><i class="fas fa-robot"></i> AI Ödev Yardımcısı</button>
         </nav>
     </header>
-    <main>
+
+    <main id="main-content">
         <section id="home" class="active">
             <h2>Okulumuzun Geleceği İçin **Güçlü Bir Liderlik**!</h2>
             <p>Mahir Saruhan'ın vizyonu, okulumuzu daha iyi, daha öğrenci dostu ve daha başarılı bir yer yapmaktır. Okulumuzun karşılaştığı zorluklara **yenilikçi çözümler** sunuyor ve her öğrencinin sesini duyurmayı hedefliyor. **Değişim için oy verin!**</p>
@@ -284,6 +315,7 @@
             <h3>Kısa Özet: Neden Mahir?</h3>
             <p>Mahir'in en güçlü yönleri; **Takım Oyuncusu** olması, **Çözüm Odaklılık** ve **Gerçekçi Vaatler** sunmasıdır. Detaylı bilgi için üst menüdeki "Neden Bizi Seçmelisiniz" sekmesini ziyaret edin.</p>
         </section>
+        
         <section id="why-us" class="hidden">
             <h2>Neden Mahir Saruhan'ı Desteklemelisiniz?</h2>
             <p>Mahir, sadece vaat vermez; onları gerçekleştirecek **kanıtlanmış yeteneklere** sahiptir:</p>
@@ -296,6 +328,7 @@
                 <li><strong>Liderlik Yeteneği Gelişmiştir:</strong> Sorumluluk almaktan çekinmez, doğru kararları hızla alır ve ekibine ilham verir.</li>
             </ul>
         </section>
+        
         <section id="promises" class="hidden">
             <h2>Mahir Saruhan'ın Temel Vaatleri</h2>
             <p>Tüm vaatlerimiz, okul idaresi ile görüşülmüş ve hayata geçirilebilir niteliktedir.</p>
@@ -303,35 +336,36 @@
                 <div class="promise-card">
                     <h3><i class="fas fa-droplet"></i> Suya Kolay Ulaşım</h3>
                     <p>Okul kantininde suların maliyetinin düşürülmesi veya ücretsiz temin edilmesi için çalışmalar başlatılacak.</p>
-                    <span class="status-badge" style="background-color: #FF9800;">Planlama Aşamasında</span>
+                    <span class="status-badge">Planlama Aşamasında</span>
                 </div>
                 <div class="promise-card">
                     <h3><i class="fas fa-trophy"></i> Haftalık Ödül Sistemi</h3>
                     <p>Ders çalışmayı teşvik etmek için Self Id sisteminde haftanın en çok puan alan öğrencilerine sürpriz ödüller.</p>
-                    <span class="status-badge" style="background-color: #FF9800;">Planlama Aşamasında</span>
+                    <span class="status-badge">Planlama Aşamasında</span>
                 </div>
                 <div class="promise-card">
                     <h3><i class="fas fa-futbol"></i> Sahalara Top Desteği</h3>
                     <p>Teneffüslerde ve beden eğitimi derslerinde rahatça oyun oynanması için sahalara yeterli sayıda spor topu sağlanması.</p>
-                    <span class="status-badge" style="background-color: #FF9800;">Planlama Aşamasında</span>
+                    <span class="status-badge">Planlama Aşamasında</span>
                 </div>
                 <div class="promise-card">
                     <h3><i class="fas fa-wrench"></i> Okul Eşyalarının Tamiri</h3>
                     <p>Başta kalorifer petekleri ve kütüphane malzemeleri olmak üzere, tüm arızalı okul eşyalarının öncelikli olarak tamir edilmesi.</p>
-                    <span class="status-badge" style="background-color: #FF9800;">Planlama Aşamasında</span>
+                    <span class="status-badge">Planlama Aşamasında</span>
                 </div>
                 <div class="promise-card">
                     <h3><i class="fas fa-recycle"></i> Geri Dönüşüm Kutuları</h3>
                     <p>Öğrencilerin çevre bilincini artırmak amacıyla okulun tüm katlarına geri dönüşüm kutuları koyulması.</p>
-                    <span class="status-badge" style="background-color: #FF9800;">Planlama Aşamasında</span>
+                    <span class="status-badge">Planlama Aşamasında</span>
                 </div>
                 <div class="promise-card">
                     <h3><i class="fas fa-birthday-cake"></i> Doğum Günü Panosu</h3>
                     <p>Her ay doğum günü olan öğrencilerin kutlandığı, okulun dikkat çeken bir yerinde özel bir pano oluşturulması.</p>
-                    <span class="status-badge" style="background-color: #FF9800;">Planlama Aşamasında</span>
+                    <span class="status-badge">Planlama Aşamasında</span>
                 </div>
             </div>
         </section>
+        
         <section id="requests" class="hidden">
             <h2>İsteklerinizi Doğrudan Mahir'e Ulaştırın</h2>
             <p style="text-align: center;">Görüş, öneri veya şikayetlerinizi bizimle paylaşın. Tüm mesajlar bizzat Mahir Saruhan tarafından incelenecektir.</p>
@@ -358,10 +392,6 @@
         </section>
     </main>
     
-    <div id="ai-assistant-button" onclick="toggleAIChat()">
-        <i class="fas fa-robot fa-2x"></i>
-    </div>
-
     <section id="ai-assistant" class="hidden">
         <div id="ai-chat-box">
             <div class="ai-message">Merhaba! Ben Mahir. Sana okul ödevlerinde ve ders konularında yardımcı olmak için buradayım. Ne öğrenmek istersin?</div>
@@ -384,7 +414,7 @@
     </footer>
     
     <script>
-        // HAFIZA SİSTEMİ - ÖNEMLİ!
+        // HAFIZA SİSTEMİ
         let conversationHistory = [];
         
         function updateMemoryStatus() {
@@ -410,45 +440,34 @@
             }
         }
         
-        function toggleAIChat() {
-            const aiSection = document.getElementById('ai-assistant');
-            aiSection.classList.toggle('active');
-
-            // Eğer sohbet açılırsa, diğer bölümler gizlenmeli
-            if (aiSection.classList.contains('active')) {
-                document.querySelectorAll('main section').forEach(section => {
-                    section.classList.add('hidden');
-                    section.classList.remove('active');
-                });
-                document.querySelector('main').classList.add('hidden');
-                document.body.style.overflow = 'hidden'; // Sayfa kaydırmasını engelle
-            } else {
-                // Sohbet kapanırsa Ana Sayfa'yı göster
-                document.querySelector('main').classList.remove('hidden');
-                document.getElementById('home').classList.remove('hidden');
-                document.getElementById('home').classList.add('active');
-                document.body.style.overflow = 'auto';
-            }
-        }
-
         function showSection(sectionId) {
+            // Tüm ana bölümleri gizle
             document.querySelectorAll('main section').forEach(section => {
                 section.classList.add('hidden');
                 section.classList.remove('active');
             });
-            
-            // AI asistanı açıksa kapat
-            const aiSection = document.getElementById('ai-assistant');
-            if (aiSection.classList.contains('active')) {
-                aiSection.classList.remove('active');
-            }
-            document.querySelector('main').classList.remove('hidden');
-            document.body.style.overflow = 'auto';
 
-            const activeSection = document.getElementById(sectionId);
-            if (activeSection) {
-                activeSection.classList.remove('hidden');
-                activeSection.classList.add('active');
+            const mainContent = document.getElementById('main-content');
+            const aiSection = document.getElementById('ai-assistant');
+
+            if (sectionId === 'ai-assistant_toggle') {
+                // AI Asistanı'nı göster (main'i gizle)
+                mainContent.classList.add('hidden');
+                aiSection.classList.remove('hidden');
+                aiSection.classList.add('active');
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                // Normal bir sayfayı göster (AI'ı gizle)
+                mainContent.classList.remove('hidden');
+                aiSection.classList.remove('active');
+                aiSection.classList.add('hidden');
+                
+                const activeSection = document.getElementById(sectionId);
+                if (activeSection) {
+                    activeSection.classList.remove('hidden');
+                    activeSection.classList.add('active');
+                }
+                document.body.style.overflow = 'auto';
             }
         }
 
@@ -464,7 +483,7 @@
                 return;
             }
 
-            // Basit bir POST simülasyonu
+            // Simülasyon
             statusMessage.style.color = '#FF9800';
             statusMessage.textContent = 'Mesajınız gönderiliyor...';
 
@@ -474,19 +493,8 @@
                 document.getElementById('name').value = '';
                 document.getElementById('email').value = '';
                 document.getElementById('message').value = '';
-
                 setTimeout(() => { statusMessage.textContent = ''; }, 6000);
             }, 1500);
-
-            // Gerçek form gönderimi için Formspree API'yi kullanabilirsiniz.
-            /*
-            const data = new FormData(document.getElementById('requestForm'));
-            fetch('https://formspree.io/f/xdkwzjgn', {
-                method: 'POST',
-                body: data,
-                headers: { 'Accept': 'application/json' }
-            })...
-            */
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -515,15 +523,14 @@
                 const loadingMessage = chatBox.lastChild;
 
                 try {
-                    // Simülasyon: Gerçek bir API olmadığı için yapay zeka cevabını simüle ediyoruz.
+                    // Simülasyon: Gerçek API bağlantısı için burayı 'fetch' ile değiştirin.
                     await new Promise(resolve => setTimeout(resolve, 1500)); 
-
                     const simulatedResponse = `Bu, AI Asistanı'nın simülasyon cevabıdır: "${prompt}" konusuna yardımcı olabilirim. Lütfen daha detaylı bir soru sor.`;
 
                     chatBox.removeChild(loadingMessage);
                     addMessage(simulatedResponse, false);
 
-                    // HAFIZA GÜNCELLENİYOR - ÇOK ÖNEMLİ! (Simülasyon amaçlı)
+                    // HAFIZA GÜNCELLENİYOR (Simülasyon amaçlı)
                     conversationHistory.push({ role: 'user', content: prompt });
                     conversationHistory.push({ role: 'assistant', content: simulatedResponse });
                     updateMemoryStatus();
@@ -545,7 +552,7 @@
                 }
             });
 
-            updateMemoryStatus(); // Sayfa yüklendiğinde hafıza durumunu ayarla
+            updateMemoryStatus();
         });
     </script>
 </body>
